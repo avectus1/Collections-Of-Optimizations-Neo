@@ -19,6 +19,8 @@ public final class CoOMixinPlugin implements IMixinConfigPlugin {
             "com.misanthropy.collections_of_optimizations.mixin.ftbchunks.MixinFTBChunksClient";
     private static final String CURIOS_PREFIX =
             "com.misanthropy.collections_of_optimizations.mixin.curios.";
+    private static final String TERRABLENDER_PREFIX =
+            "com.misanthropy.collections_of_optimizations.mixin.terrablender.";
 
     @Override
     public void onLoad(String mixinPackage) {
@@ -45,6 +47,9 @@ public final class CoOMixinPlugin implements IMixinConfigPlugin {
         }
         if (mixinClassName.startsWith(CURIOS_PREFIX)) {
             return LoadingModList.get().getModFileById("curios") != null;
+        }
+        if (mixinClassName.startsWith(TERRABLENDER_PREFIX)) {
+            return LoadingModList.get().getModFileById("terrablender") != null;
         }
         return true;
     }

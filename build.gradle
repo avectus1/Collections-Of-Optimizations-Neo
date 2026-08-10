@@ -58,18 +58,24 @@ repositories {
         name = 'Curios Maven'
         url = 'https://maven.theillusivec4.top/'
     }
+    maven {
+        name = 'MinecraftForge Maven'
+        url = 'https://maven.minecraftforge.net/'
+    }
 }
 
 dependencies {
     implementation 'curse.maven:xaeros-minimap-263420:8449819'
     implementation 'curse.maven:lootr-361276:8580031'
     implementation 'curse.maven:artifacts-312353:7875426'
+    implementation "curse.maven:architectury-api-419699:8492726"
     implementation 'curse.maven:ftb-chunks-forge-314906:8520252'
     implementation 'curse.maven:ftb-library-forge-404465:8569579'
     implementation 'curse.maven:ftb-ranks-forge-314905:8519426'
     implementation 'curse.maven:ftb-teams-forge-404468:7878281'
     implementation 'vazkii.patchouli:Patchouli:1.21.1-93-NEOFORGE'
     implementation 'top.theillusivec4.curios:curios-neoforge:9.5.1+1.21.1'
+    implementation 'com.github.glitchfiend:TerraBlender-neoforge:1.21.1-4.1.0.8'
 
     compileOnly 'org.spongepowered:mixin:0.8.7'
     annotationProcessor 'org.spongepowered:mixin:0.8.7:processor'

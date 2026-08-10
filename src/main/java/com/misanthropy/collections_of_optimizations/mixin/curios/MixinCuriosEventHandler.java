@@ -24,18 +24,18 @@ public abstract class MixinCuriosEventHandler {
         if (entity instanceof Player) {
             return;
         }
-        if (CoOConfig.CURIOS_SKIP_CLIENT_TICK_ON_NON_PLAYERS.get() && entity.level().isClientSide()) {
+        if (CoOConfig.curiosSkipClientTickOnNonPlayers && entity.level().isClientSide()) {
             ci.cancel();
             return;
         }
-        if (CoOConfig.CURIOS_SKIP_SLOTLESS_ENTITIES.get() && !coo$hasCurioSlots(entity)) {
+        if (CoOConfig.curiosSkipSlotlessEntities && !coo$hasCurioSlots(entity)) {
             ci.cancel();
         }
     }
 
     @Unique
     private static boolean coo$hasCurioSlots(LivingEntity entity) {
-        if (!CoOConfig.CURIOS_CACHE_ENTITY_SLOT_LOOKUP.get() || !(entity instanceof EntitySlotCacheHolder holder)) {
+        if (!CoOConfig.curiosCacheEntitySlotLookup || !(entity instanceof EntitySlotCacheHolder holder)) {
             return !CuriosApi.getEntitySlots(entity).isEmpty();
         }
 

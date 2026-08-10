@@ -11,7 +11,9 @@
     "curios.MixinCuriosEventHandler",
     "curios.MixinCuriosHelperFastMiss",
     "curios.MixinLivingEntityCurioPresence",
-    "curios.MixinLivingEntitySlotCache"
+    "curios.MixinLivingEntitySlotCache",
+    "terrablender.MixinNamespacedRule",
+    "terrablender.SurfaceContextAccessor"
   ],
   "client": [
     "xaerominimap.MixinMinimapFBORenderer",

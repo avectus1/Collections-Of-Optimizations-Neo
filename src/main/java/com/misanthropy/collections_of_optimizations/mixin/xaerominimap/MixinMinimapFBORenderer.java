@@ -28,7 +28,7 @@ public abstract class MixinMinimapFBORenderer {
                                            int viewW, float partial, int level, boolean useWorldMap,
                                            boolean lockedNorth, int shape, double ps, double pc,
                                            boolean cave, CustomVertexConsumers cvc, CallbackInfo ci) {
-        int cap = CoOConfig.XAERO_MINIMAP_RENDER_FPS_CAP.get();
+        int cap = CoOConfig.xaeroMinimapRenderFpsCap;
         if (cap <= 0) {
             return;
         }

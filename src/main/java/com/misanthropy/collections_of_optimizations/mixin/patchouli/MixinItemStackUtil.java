@@ -15,7 +15,7 @@ import vazkii.patchouli.common.util.ItemStackUtil;
 public abstract class MixinItemStackUtil {
     @Inject(method = "getBookFromStack", at = @At("HEAD"), cancellable = true, require = 0)
     private static void coo$cachedBookLookup(ItemStack stack, CallbackInfoReturnable<Book> cir) {
-        if (!CoOConfig.PATCHOULI_CACHE_BOOK_ITEM_LOOKUP.get() || stack.getItem() instanceof ItemModBook) {
+        if (!CoOConfig.patchouliCacheBookItemLookup || stack.getItem() instanceof ItemModBook) {
             return;
         }
         cir.setReturnValue(PatchouliBookLookup.forItem(stack.getItem()));

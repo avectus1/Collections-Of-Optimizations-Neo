@@ -4,6 +4,7 @@ import com.misanthropy.collections_of_optimizations.CoOConfig;
 import com.misanthropy.collections_of_optimizations.core.CurioPresenceCache;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import org.apache.commons.lang3.tuple.ImmutableTriple;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -22,8 +23,8 @@ public abstract class MixinCuriosHelperFastMiss {
             require = 0
     )
     private void coo$fastEquippedMiss(Item item, LivingEntity livingEntity,
-                                      CallbackInfoReturnable<Optional<ImmutableTriple<String, Integer, net.minecraft.world.item.ItemStack>>> cir) {
-        if (CoOConfig.CURIOS_FAST_EQUIPPED_ITEM_MISS.get()
+                                      CallbackInfoReturnable<Optional<ImmutableTriple<String, Integer, ItemStack>>> cir) {
+        if (CoOConfig.curiosFastEquippedItemMiss
                 && !CurioPresenceCache.mayHaveEquipped(livingEntity, item)) {
             cir.setReturnValue(Optional.empty());
         }

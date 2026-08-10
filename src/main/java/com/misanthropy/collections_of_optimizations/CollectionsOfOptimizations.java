@@ -5,6 +5,8 @@ import com.misanthropy.collections_of_optimizations.core.CuriosSlotCache;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.ModList;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.fml.loading.FMLEnvironment;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
 
@@ -14,6 +16,11 @@ public final class CollectionsOfOptimizations {
 
     public CollectionsOfOptimizations(IEventBus modEventBus, ModContainer modContainer) {
         modContainer.registerConfig(ModConfig.Type.COMMON, CoOConfig.SPEC);
+        modEventBus.addListener(CoOConfig::onLoad);
+        modEventBus.addListener(CoOConfig::onReload);
+        if (FMLEnvironment.dist == Dist.CLIENT) {
+            ClientConfigScreen.register(modContainer);
+        }
         if (ModList.get().isLoaded("curios")) {
             CuriosSlotCache.register();
             CurioPresenceCache.register();

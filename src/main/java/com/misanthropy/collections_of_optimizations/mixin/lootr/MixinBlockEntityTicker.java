@@ -28,7 +28,7 @@ public abstract class MixinBlockEntityTicker {
 
     @Inject(method = "onServerLevelTick", at = @At("HEAD"), cancellable = true, require = 0)
     private void coo$skipIdlePass(CallbackInfo ci) {
-        if (!CoOConfig.LOOTR_SKIP_IDLE_BLOCK_ENTITY_TICKER.get() || !this.blockEntityEntries.isEmpty()) {
+        if (!CoOConfig.lootrSkipIdleBlockEntityTicker || !this.blockEntityEntries.isEmpty()) {
             return;
         }
         synchronized (this.pendingEntries) {
@@ -44,7 +44,7 @@ public abstract class MixinBlockEntityTicker {
             require = 0
     )
     private static Iterator<?> coo$limitConversionCandidates(Collection<?> entries, Operation<Iterator<?>> original) {
-        int budget = CoOConfig.LOOTR_BLOCK_ENTITY_TICKER_BUDGET.get();
+        int budget = CoOConfig.lootrBlockEntityTickerBudget;
         Iterator<?> delegate = original.call(entries);
         if (budget <= 0 || entries.size() <= budget) {
             return delegate;

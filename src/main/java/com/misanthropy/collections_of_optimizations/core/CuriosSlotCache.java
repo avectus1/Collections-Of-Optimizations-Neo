@@ -2,6 +2,7 @@ package com.misanthropy.collections_of_optimizations.core;
 
 import net.neoforged.neoforge.event.OnDatapackSyncEvent;
 import net.neoforged.neoforge.event.AddReloadListenerEvent;
+import net.neoforged.neoforge.common.NeoForge;
 import net.minecraft.server.packs.resources.SimplePreparableReloadListener;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.util.profiling.ProfilerFiller;
@@ -23,8 +24,8 @@ public final class CuriosSlotCache {
     }
 
     public static void register() {
-        net.neoforged.neoforge.common.NeoForge.EVENT_BUS.addListener(CuriosSlotCache::onAddReloadListener);
-        net.neoforged.neoforge.common.NeoForge.EVENT_BUS.addListener(CuriosSlotCache::onDatapackSync);
+        NeoForge.EVENT_BUS.addListener(CuriosSlotCache::onAddReloadListener);
+        NeoForge.EVENT_BUS.addListener(CuriosSlotCache::onDatapackSync);
     }
 
     private static void onAddReloadListener(AddReloadListenerEvent event) {

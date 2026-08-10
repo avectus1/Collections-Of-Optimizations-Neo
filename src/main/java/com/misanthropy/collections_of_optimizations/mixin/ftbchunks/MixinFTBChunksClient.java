@@ -21,7 +21,7 @@ public abstract class MixinFTBChunksClient {
             require = 0
     )
     private void coo$skipHiddenMinimapWork(GuiGraphics graphics, DeltaTracker tickDelta, CallbackInfo ci) {
-        if (!CoOConfig.FTBCHUNKS_SKIP_HIDDEN_MINIMAP_WORK.get()) {
+        if (!CoOConfig.ftbchunksSkipHiddenMinimapWork) {
             return;
         }
 
