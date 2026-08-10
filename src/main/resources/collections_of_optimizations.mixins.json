@@ -6,7 +6,12 @@
   "compatibilityLevel": "JAVA_21",
   "mixins": [
     "lootr.MixinBlockEntityTicker",
-    "patchouli.MixinItemStackUtil"
+    "patchouli.MixinItemStackUtil",
+    "curios.MixinCuriosEntityManager",
+    "curios.MixinCuriosEventHandler",
+    "curios.MixinCuriosHelperFastMiss",
+    "curios.MixinLivingEntityCurioPresence",
+    "curios.MixinLivingEntitySlotCache"
   ],
   "client": [
     "xaerominimap.MixinMinimapFBORenderer",

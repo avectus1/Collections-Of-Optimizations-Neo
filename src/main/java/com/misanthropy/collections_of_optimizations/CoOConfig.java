@@ -9,6 +9,10 @@ public final class CoOConfig {
     public static final ModConfigSpec.IntValue LOOTR_BLOCK_ENTITY_TICKER_BUDGET;
     public static final ModConfigSpec.BooleanValue PATCHOULI_CACHE_BOOK_ITEM_LOOKUP;
     public static final ModConfigSpec.BooleanValue FTBCHUNKS_SKIP_HIDDEN_MINIMAP_WORK;
+    public static final ModConfigSpec.BooleanValue CURIOS_SKIP_SLOTLESS_ENTITIES;
+    public static final ModConfigSpec.BooleanValue CURIOS_SKIP_CLIENT_TICK_ON_NON_PLAYERS;
+    public static final ModConfigSpec.BooleanValue CURIOS_CACHE_ENTITY_SLOT_LOOKUP;
+    public static final ModConfigSpec.BooleanValue CURIOS_FAST_EQUIPPED_ITEM_MISS;
 
     static {
         ModConfigSpec.Builder builder = new ModConfigSpec.Builder();
@@ -37,6 +41,21 @@ public final class CoOConfig {
         FTBCHUNKS_SKIP_HIDDEN_MINIMAP_WORK = builder
                 .comment("Skip rebuilding the minimap texture when the minimap is not visible.")
                 .define("skipHiddenMinimapWork", true);
+        builder.pop();
+
+        builder.comment("Curios patches.").push("curios");
+        CURIOS_SKIP_SLOTLESS_ENTITIES = builder
+                .comment("Skip Curios ticking for entities that have no Curios slots.")
+                .define("skipSlotlessEntities", true);
+        CURIOS_SKIP_CLIENT_TICK_ON_NON_PLAYERS = builder
+                .comment("Skip Curios client ticking for non-player entities.")
+                .define("skipClientTickOnNonPlayers", true);
+        CURIOS_CACHE_ENTITY_SLOT_LOOKUP = builder
+                .comment("Cache whether an entity type has Curios slots.")
+                .define("cacheEntitySlotLookup", true);
+        CURIOS_FAST_EQUIPPED_ITEM_MISS = builder
+                .comment("Avoid scanning Curios slots when an entity cannot contain the requested item.")
+                .define("fastEquippedItemMiss", true);
         builder.pop();
 
         SPEC = builder.build();

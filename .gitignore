@@ -3,6 +3,7 @@ build/
 out/
 .idea/
 .vscode/
+.tmp*/
 *.iml
 *.ipr
 *.iws

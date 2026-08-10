@@ -8,6 +8,8 @@ NeoForge 1.21.1 port
 - Lootr
 - Patchouli
 - FTBChunks
+- CuriosAPI (Not Complete)
+  - LivingEntityRenderer.addLayer Lost?
 
 ## Already optimized
 
