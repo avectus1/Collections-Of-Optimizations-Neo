@@ -8,6 +8,7 @@ public final class CoOConfig {
     public static final ModConfigSpec.BooleanValue LOOTR_SKIP_IDLE_BLOCK_ENTITY_TICKER;
     public static final ModConfigSpec.IntValue LOOTR_BLOCK_ENTITY_TICKER_BUDGET;
     public static final ModConfigSpec.BooleanValue PATCHOULI_CACHE_BOOK_ITEM_LOOKUP;
+    public static final ModConfigSpec.BooleanValue FTBCHUNKS_SKIP_HIDDEN_MINIMAP_WORK;
 
     static {
         ModConfigSpec.Builder builder = new ModConfigSpec.Builder();
@@ -30,6 +31,12 @@ public final class CoOConfig {
         PATCHOULI_CACHE_BOOK_ITEM_LOOKUP = builder
                 .comment("Cache Patchouli's lookup from an item to its guide book.")
                 .define("cacheBookItemLookup", true);
+        builder.pop();
+
+        builder.comment("FTB Chunks patches.").push("ftbchunks");
+        FTBCHUNKS_SKIP_HIDDEN_MINIMAP_WORK = builder
+                .comment("Skip rebuilding the minimap texture when the minimap is not visible.")
+                .define("skipHiddenMinimapWork", true);
         builder.pop();
 
         SPEC = builder.build();

@@ -7,6 +7,7 @@ NeoForge 1.21.1 port
 - Xareo MiniMap
 - Lootr
 - Patchouli
+- FTBChunks
 
 ## Already optimized
 

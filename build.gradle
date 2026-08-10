@@ -60,6 +60,10 @@ dependencies {
     implementation 'curse.maven:xaeros-minimap-263420:8449819'
     implementation 'curse.maven:lootr-361276:8580031'
     implementation 'curse.maven:artifacts-312353:7875426'
+    implementation 'curse.maven:ftb-chunks-forge-314906:8520252'
+    implementation 'curse.maven:ftb-library-forge-404465:8569579'
+    implementation 'curse.maven:ftb-ranks-forge-314905:8519426'
+    implementation 'curse.maven:ftb-teams-forge-404468:7878281'
     implementation 'vazkii.patchouli:Patchouli:1.21.1-93-NEOFORGE'
 
     compileOnly 'org.spongepowered:mixin:0.8.7'

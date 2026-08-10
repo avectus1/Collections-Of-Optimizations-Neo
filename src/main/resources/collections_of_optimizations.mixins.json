@@ -9,7 +9,8 @@
     "patchouli.MixinItemStackUtil"
   ],
   "client": [
-    "xaerominimap.MixinMinimapFBORenderer"
+    "xaerominimap.MixinMinimapFBORenderer",
+    "ftbchunks.MixinFTBChunksClient"
   ],
   "injectors": {
     "defaultRequire": 0

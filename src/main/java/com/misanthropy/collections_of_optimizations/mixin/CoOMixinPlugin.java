@@ -15,6 +15,8 @@ public final class CoOMixinPlugin implements IMixinConfigPlugin {
             "com.misanthropy.collections_of_optimizations.mixin.lootr.MixinBlockEntityTicker";
     private static final String PATCHOULI_MIXIN =
             "com.misanthropy.collections_of_optimizations.mixin.patchouli.MixinItemStackUtil";
+    private static final String FTBCHUNKS_MIXIN =
+            "com.misanthropy.collections_of_optimizations.mixin.ftbchunks.MixinFTBChunksClient";
 
     @Override
     public void onLoad(String mixinPackage) {
@@ -35,6 +37,9 @@ public final class CoOMixinPlugin implements IMixinConfigPlugin {
         }
         if (PATCHOULI_MIXIN.equals(mixinClassName)) {
             return LoadingModList.get().getModFileById("patchouli") != null;
+        }
+        if (FTBCHUNKS_MIXIN.equals(mixinClassName)) {
+            return LoadingModList.get().getModFileById("ftbchunks") != null;
         }
         return true;
     }
