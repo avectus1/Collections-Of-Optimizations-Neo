@@ -4,22 +4,18 @@ import net.minecraft.world.item.Item;
 import vazkii.patchouli.common.book.Book;
 import vazkii.patchouli.common.book.BookRegistry;
 
-import javax.annotation.Nullable;
 import java.util.HashMap;
 import java.util.Map;
 
 public final class PatchouliBookLookup {
-
     private static final Map<Item, Book> CACHE = new HashMap<>();
-
     private static int knownBookCount = -1;
 
     private PatchouliBookLookup() {
     }
 
-    @Nullable
     public static synchronized Book forItem(Item item) {
-        Map<net.minecraft.resources.ResourceLocation, Book> books = BookRegistry.INSTANCE.books;
+        Map<?, Book> books = BookRegistry.INSTANCE.books;
         int count = books.size();
         if (count != knownBookCount) {
             CACHE.clear();

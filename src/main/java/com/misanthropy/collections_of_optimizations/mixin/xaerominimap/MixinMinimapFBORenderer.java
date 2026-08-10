@@ -18,23 +18,17 @@ import xaero.hud.minimap.module.MinimapSession;
 
 @Mixin(value = MinimapFBORenderer.class, remap = false)
 public abstract class MixinMinimapFBORenderer {
-
     @Unique
     private long coo$lastFboRender;
 
-    @Inject(
-            method = "renderChunksToFBO",
-            at = @At("HEAD"),
-            cancellable = true,
-            require = 0
-    )
+    @Inject(method = "renderChunksToFBO", at = @At("HEAD"), cancellable = true, require = 0)
     private void coo$capMinimapRenderRate(MinimapSession minimapSession, GuiGraphics guiGraphics,
-                                          MinimapProcessor minimap, Vec3 renderPos,
-                                          ResourceKey<Level> mapDimension, double mapDimensionScale,
-                                          int viewW, float partial, int level, boolean useWorldMap,
-                                          boolean lockedNorth, int shape, double ps, double pc,
-                                          boolean cave, CustomVertexConsumers cvc, CallbackInfo ci) {
-        int cap = CoOConfig.xaeroMinimapRenderFpsCap;
+                                           MinimapProcessor minimap, Vec3 renderPos,
+                                           ResourceKey<Level> mapDimension, double mapDimensionScale,
+                                           int viewW, float partial, int level, boolean useWorldMap,
+                                           boolean lockedNorth, int shape, double ps, double pc,
+                                           boolean cave, CustomVertexConsumers cvc, CallbackInfo ci) {
+        int cap = CoOConfig.XAERO_MINIMAP_RENDER_FPS_CAP.get();
         if (cap <= 0) {
             return;
         }
