@@ -1,0 +1,23 @@
+package com.misanthropy.collections_of_optimizations.core;
+
+import org.violetmoon.zeta.util.handler.StructureBlockReplacementHandler.StructureFunction;
+
+import java.util.Set;
+
+public final class ZetaStructureFunctions {
+    private static StructureFunction[] cached;
+    private static int cachedSize = -1;
+
+    private ZetaStructureFunctions() {
+    }
+
+    public static StructureFunction[] snapshot(Set<StructureFunction> functions) {
+        StructureFunction[] local = cached;
+        if (local == null || cachedSize != functions.size()) {
+            local = functions.toArray(StructureFunction[]::new);
+            cached = local;
+            cachedSize = local.length;
+        }
+        return local;
+    }
+}

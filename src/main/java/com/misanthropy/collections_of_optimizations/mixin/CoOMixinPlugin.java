@@ -15,12 +15,14 @@ public final class CoOMixinPlugin implements IMixinConfigPlugin {
             "com.misanthropy.collections_of_optimizations.mixin.lootr.MixinBlockEntityTicker";
     private static final String PATCHOULI_MIXIN =
             "com.misanthropy.collections_of_optimizations.mixin.patchouli.MixinItemStackUtil";
-    private static final String FTBCHUNKS_MIXIN =
-            "com.misanthropy.collections_of_optimizations.mixin.ftbchunks.MixinFTBChunksClient";
+    private static final String FTBCHUNKS_PREFIX =
+            "com.misanthropy.collections_of_optimizations.mixin.ftbchunks.";
     private static final String CURIOS_PREFIX =
             "com.misanthropy.collections_of_optimizations.mixin.curios.";
     private static final String TERRABLENDER_PREFIX =
             "com.misanthropy.collections_of_optimizations.mixin.terrablender.";
+    private static final String ZETA_PREFIX =
+            "com.misanthropy.collections_of_optimizations.mixin.zeta.";
 
     @Override
     public void onLoad(String mixinPackage) {
@@ -42,7 +44,7 @@ public final class CoOMixinPlugin implements IMixinConfigPlugin {
         if (PATCHOULI_MIXIN.equals(mixinClassName)) {
             return LoadingModList.get().getModFileById("patchouli") != null;
         }
-        if (FTBCHUNKS_MIXIN.equals(mixinClassName)) {
+        if (mixinClassName.startsWith(FTBCHUNKS_PREFIX)) {
             return LoadingModList.get().getModFileById("ftbchunks") != null;
         }
         if (mixinClassName.startsWith(CURIOS_PREFIX)) {
@@ -50,6 +52,9 @@ public final class CoOMixinPlugin implements IMixinConfigPlugin {
         }
         if (mixinClassName.startsWith(TERRABLENDER_PREFIX)) {
             return LoadingModList.get().getModFileById("terrablender") != null;
+        }
+        if (mixinClassName.startsWith(ZETA_PREFIX)) {
+            return LoadingModList.get().getModFileById("zeta") != null;
         }
         return true;
     }

@@ -68,6 +68,8 @@ dependencies {
     implementation 'curse.maven:xaeros-minimap-263420:8449819'
     implementation 'curse.maven:lootr-361276:8580031'
     implementation 'curse.maven:artifacts-312353:7875426'
+    implementation 'curse.maven:placebo-283644:8463693'
+    implementation 'curse.maven:zeta-968868:7980010'
     implementation "curse.maven:architectury-api-419699:8492726"
     implementation 'curse.maven:ftb-chunks-forge-314906:8520252'
     implementation 'curse.maven:ftb-library-forge-404465:8569579'

@@ -52,6 +52,12 @@ ordering="AFTER"
 side="CLIENT"
 
 [[dependencies.${mod_id}]]
+modId="placebo"
+type="optional"
+ordering="AFTER"
+side="BOTH"
+
+[[dependencies.${mod_id}]]
 modId="curios"
   type="optional"
   ordering="AFTER"
@@ -59,6 +65,12 @@ modId="curios"
 
 [[dependencies.${mod_id}]]
 modId="terrablender"
+type="optional"
+ordering="AFTER"
+side="BOTH"
+
+[[dependencies.${mod_id}]]
+modId="zeta"
 type="optional"
 ordering="AFTER"
 side="BOTH"

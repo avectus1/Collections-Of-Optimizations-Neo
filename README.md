@@ -14,7 +14,8 @@ NeoForge 1.21.1 port
 
 ## Already optimized
 
-- Atrifacts
+- Artifacts
+- Placebo
 
 ## Use Other mod
 
@@ -24,8 +25,11 @@ NeoForge 1.21.1 port
 
 - Alex's Caves
 - Alex's Mobs
+- IAF
 
 ## Die
 
 - Ad Astra
+- Block Swap
+- Oculus
 - Terramity

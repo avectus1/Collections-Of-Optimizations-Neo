@@ -13,11 +13,15 @@
     "curios.MixinLivingEntityCurioPresence",
     "curios.MixinLivingEntitySlotCache",
     "terrablender.MixinNamespacedRule",
-    "terrablender.SurfaceContextAccessor"
+    "terrablender.SurfaceContextAccessor",
+    "zeta.MixinForgeEventsRemapper",
+    "zeta.MixinStructureBlockReplacementHandler",
+    "zeta.ZetaStructureReplacementAccessor"
   ],
   "client": [
     "xaerominimap.MixinMinimapFBORenderer",
-    "ftbchunks.MixinFTBChunksClient"
+    "ftbchunks.MixinFTBChunksClient",
+    "ftbchunks.MixinMapRegionData"
   ],
   "injectors": {
     "defaultRequire": 0

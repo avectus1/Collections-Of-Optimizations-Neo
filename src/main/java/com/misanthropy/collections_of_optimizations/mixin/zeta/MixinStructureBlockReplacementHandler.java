@@ -1,0 +1,37 @@
+package com.misanthropy.collections_of_optimizations.mixin.zeta;
+
+import com.misanthropy.collections_of_optimizations.CoOConfig;
+import com.misanthropy.collections_of_optimizations.core.ZetaStructureFunctions;
+import net.minecraft.world.level.ServerLevelAccessor;
+import net.minecraft.world.level.block.state.BlockState;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+import org.violetmoon.zeta.util.handler.StructureBlockReplacementHandler;
+import org.violetmoon.zeta.util.handler.StructureBlockReplacementHandler.StructureFunction;
+import org.violetmoon.zeta.util.handler.StructureBlockReplacementHandler.StructureHolder;
+
+@Mixin(value = StructureBlockReplacementHandler.class, remap = false)
+public abstract class MixinStructureBlockReplacementHandler {
+    @Inject(method = "getResultingBlockState", at = @At("HEAD"), cancellable = true, require = 0)
+    private static void coo$leanStructureReplacement(ServerLevelAccessor level, BlockState blockState,
+                                                     CallbackInfoReturnable<BlockState> cir) {
+        if (!CoOConfig.zetaLeanStructureReplacement) {
+            return;
+        }
+
+        StructureHolder holder = ZetaStructureReplacementAccessor.coo$currentStructureHolder();
+        if (holder != null && holder.currentStructure != null) {
+            StructureFunction[] functions = ZetaStructureFunctions.snapshot(ZetaStructureReplacementAccessor.coo$functions());
+            for (StructureFunction function : functions) {
+                BlockState result = function.transformBlockstate(level, blockState, holder);
+                if (result != null) {
+                    cir.setReturnValue(result);
+                    return;
+                }
+            }
+        }
+        cir.setReturnValue(blockState);
+    }
+}
