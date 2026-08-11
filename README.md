@@ -11,6 +11,7 @@ NeoForge 1.21.1 port
 - CuriosAPI (Not Complete)
   - LivingEntityRenderer.addLayer Lost?
 - TerraBlender
+- Zeta
 
 ## Already optimized
 
