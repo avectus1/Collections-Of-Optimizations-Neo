@@ -7,6 +7,7 @@ public final class CoOConfig {
     public static final ModConfigSpec SPEC;
     public static final ModConfigSpec.BooleanValue MASTER_ENABLED;
     public static final ModConfigSpec.IntValue XAERO_MINIMAP_RENDER_FPS_CAP;
+    public static final ModConfigSpec.IntValue XAERO_WORLD_MAP_VRAM_POLL_INTERVAL;
     public static final ModConfigSpec.BooleanValue LOOTR_SKIP_IDLE_BLOCK_ENTITY_TICKER;
     public static final ModConfigSpec.IntValue LOOTR_BLOCK_ENTITY_TICKER_BUDGET;
     public static final ModConfigSpec.BooleanValue PATCHOULI_CACHE_BOOK_ITEM_LOOKUP;
@@ -16,12 +17,14 @@ public final class CoOConfig {
     public static final ModConfigSpec.BooleanValue CURIOS_SKIP_CLIENT_TICK_ON_NON_PLAYERS;
     public static final ModConfigSpec.BooleanValue CURIOS_CACHE_ENTITY_SLOT_LOOKUP;
     public static final ModConfigSpec.BooleanValue CURIOS_FAST_EQUIPPED_ITEM_MISS;
+    public static final ModConfigSpec.BooleanValue CURIOS_FAST_FIND_FIRST_MISS;
     public static final ModConfigSpec.BooleanValue TERRABLENDER_CACHE_NAMESPACE_RULE;
     public static final ModConfigSpec.BooleanValue ZETA_LEAN_STRUCTURE_REPLACEMENT;
     public static final ModConfigSpec.BooleanValue ZETA_SHARE_EVENT_WRAPPERS;
 
     public static volatile boolean masterEnabled;
     public static volatile int xaeroMinimapRenderFpsCap;
+    public static volatile int xaeroworldmapVramPollInterval;
     public static volatile boolean lootrSkipIdleBlockEntityTicker;
     public static volatile int lootrBlockEntityTickerBudget;
     public static volatile boolean patchouliCacheBookItemLookup;
@@ -31,6 +34,7 @@ public final class CoOConfig {
     public static volatile boolean curiosSkipClientTickOnNonPlayers;
     public static volatile boolean curiosCacheEntitySlotLookup;
     public static volatile boolean curiosFastEquippedItemMiss;
+    public static volatile boolean curiosFastFindFirstMiss;
     public static volatile boolean terrablenderCacheNamespaceRule;
     public static volatile boolean zetaLeanStructureReplacement;
     public static volatile boolean zetaShareEventWrappers;
@@ -44,6 +48,12 @@ public final class CoOConfig {
         XAERO_MINIMAP_RENDER_FPS_CAP = builder
                 .comment("Maximum number of Minimap FBO renders per second. Set to 0 to disable the cap.")
                 .defineInRange("renderFpsCap", 30, 0, 240);
+        builder.pop();
+
+        builder.comment("Xaero's World Map patches.").push("xaeroworldmap");
+        XAERO_WORLD_MAP_VRAM_POLL_INTERVAL = builder
+                .comment("Milliseconds between free-VRAM queries. Set to 0 to query every frame as stock does.")
+                .defineInRange("vramPollInterval", 500, 0, 60000);
         builder.pop();
 
         builder.comment("Lootr patches.").push("lootr");
@@ -83,6 +93,9 @@ public final class CoOConfig {
         CURIOS_FAST_EQUIPPED_ITEM_MISS = builder
                 .comment("Avoid scanning Curios slots when an entity cannot contain the requested item.")
                 .define("fastEquippedItemMiss", true);
+        CURIOS_FAST_FIND_FIRST_MISS = builder
+                .comment("Avoid scanning Curios slots for findFirstCurio when the requested item is absent.")
+                .define("fastFindFirstMiss", true);
         builder.pop();
 
         builder.comment("TerraBlender patches.").push("terrablender");
@@ -122,6 +135,7 @@ public final class CoOConfig {
 
         masterEnabled = MASTER_ENABLED.get();
         xaeroMinimapRenderFpsCap = masterEnabled ? XAERO_MINIMAP_RENDER_FPS_CAP.get() : 0;
+        xaeroworldmapVramPollInterval = masterEnabled ? XAERO_WORLD_MAP_VRAM_POLL_INTERVAL.get() : 0;
         lootrSkipIdleBlockEntityTicker = masterEnabled && LOOTR_SKIP_IDLE_BLOCK_ENTITY_TICKER.get();
         lootrBlockEntityTickerBudget = masterEnabled ? LOOTR_BLOCK_ENTITY_TICKER_BUDGET.get() : 0;
         patchouliCacheBookItemLookup = masterEnabled && PATCHOULI_CACHE_BOOK_ITEM_LOOKUP.get();
@@ -131,6 +145,7 @@ public final class CoOConfig {
         curiosSkipClientTickOnNonPlayers = masterEnabled && CURIOS_SKIP_CLIENT_TICK_ON_NON_PLAYERS.get();
         curiosCacheEntitySlotLookup = masterEnabled && CURIOS_CACHE_ENTITY_SLOT_LOOKUP.get();
         curiosFastEquippedItemMiss = masterEnabled && CURIOS_FAST_EQUIPPED_ITEM_MISS.get();
+        curiosFastFindFirstMiss = masterEnabled && CURIOS_FAST_FIND_FIRST_MISS.get();
         terrablenderCacheNamespaceRule = masterEnabled && TERRABLENDER_CACHE_NAMESPACE_RULE.get();
         zetaLeanStructureReplacement = masterEnabled && ZETA_LEAN_STRUCTURE_REPLACEMENT.get();
         zetaShareEventWrappers = masterEnabled && ZETA_SHARE_EVENT_WRAPPERS.get();

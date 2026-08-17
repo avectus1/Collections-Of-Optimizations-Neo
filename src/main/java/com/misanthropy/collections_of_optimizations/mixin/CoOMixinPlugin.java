@@ -11,6 +11,8 @@ import java.util.Set;
 public final class CoOMixinPlugin implements IMixinConfigPlugin {
     private static final String XAERO_MIXIN =
             "com.misanthropy.collections_of_optimizations.mixin.xaerominimap.MixinMinimapFBORenderer";
+    private static final String XAERO_WORLD_MAP_MIXIN =
+            "com.misanthropy.collections_of_optimizations.mixin.xaeroworldmap.MixinMapLimiter";
     private static final String LOOTR_MIXIN =
             "com.misanthropy.collections_of_optimizations.mixin.lootr.MixinBlockEntityTicker";
     private static final String PATCHOULI_MIXIN =
@@ -37,6 +39,9 @@ public final class CoOMixinPlugin implements IMixinConfigPlugin {
     public boolean shouldApplyMixin(String targetClassName, String mixinClassName) {
         if (XAERO_MIXIN.equals(mixinClassName)) {
             return LoadingModList.get().getModFileById("xaerominimap") != null;
+        }
+        if (XAERO_WORLD_MAP_MIXIN.equals(mixinClassName)) {
+            return LoadingModList.get().getModFileById("xaeroworldmap") != null;
         }
         if (LOOTR_MIXIN.equals(mixinClassName)) {
             return LoadingModList.get().getModFileById("lootr") != null;

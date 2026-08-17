@@ -66,6 +66,7 @@ repositories {
 
 dependencies {
     implementation 'curse.maven:xaeros-minimap-263420:8449819'
+    implementation 'curse.maven:xaeros-world-map-317780:8449921'
     implementation 'curse.maven:lootr-361276:8580031'
     implementation 'curse.maven:artifacts-312353:7875426'
     implementation 'curse.maven:placebo-283644:8463693'

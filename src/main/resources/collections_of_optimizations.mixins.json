@@ -10,6 +10,7 @@
     "curios.MixinCuriosEntityManager",
     "curios.MixinCuriosEventHandler",
     "curios.MixinCuriosHelperFastMiss",
+    "curios.MixinCurioInventoryCapability",
     "curios.MixinLivingEntityCurioPresence",
     "curios.MixinLivingEntitySlotCache",
     "terrablender.MixinNamespacedRule",
@@ -20,6 +21,7 @@
   ],
   "client": [
     "xaerominimap.MixinMinimapFBORenderer",
+    "xaeroworldmap.MixinMapLimiter",
     "ftbchunks.MixinFTBChunksClient",
     "ftbchunks.MixinMapRegionData"
   ],
