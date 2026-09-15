@@ -21,6 +21,9 @@ public final class CoOConfig {
     public static final ModConfigSpec.BooleanValue TERRABLENDER_CACHE_NAMESPACE_RULE;
     public static final ModConfigSpec.BooleanValue ZETA_LEAN_STRUCTURE_REPLACEMENT;
     public static final ModConfigSpec.BooleanValue ZETA_SHARE_EVENT_WRAPPERS;
+    public static final ModConfigSpec.BooleanValue AMBIENTSOUNDS_MEMO_BIOME_MATCH;
+    public static final ModConfigSpec.BooleanValue BALM_MEMO_DYNAMIC_MODEL_KEYS;
+    public static final ModConfigSpec.BooleanValue CAELUS_SKIP_GROUNDED_NON_PLAYERS;
 
     public static volatile boolean masterEnabled;
     public static volatile int xaeroMinimapRenderFpsCap;
@@ -38,6 +41,9 @@ public final class CoOConfig {
     public static volatile boolean terrablenderCacheNamespaceRule;
     public static volatile boolean zetaLeanStructureReplacement;
     public static volatile boolean zetaShareEventWrappers;
+    public static volatile boolean ambientsoundsMemoBiomeMatch;
+    public static volatile boolean balmMemoDynamicModelKeys;
+    public static volatile boolean caelusSkipGroundedNonPlayers;
 
     static {
         ModConfigSpec.Builder builder = new ModConfigSpec.Builder();
@@ -113,6 +119,24 @@ public final class CoOConfig {
                 .define("shareEventWrappers", true);
         builder.pop();
 
+        builder.comment("AmbientSounds patches.").push("ambientsounds");
+        AMBIENTSOUNDS_MEMO_BIOME_MATCH = builder
+                .comment("Memoize repeated biome condition checks on the client thread.")
+                .define("memoBiomeMatch", true);
+        builder.pop();
+
+        builder.comment("Balm patches.").push("balm");
+        BALM_MEMO_DYNAMIC_MODEL_KEYS = builder
+                .comment("Cache BlockState string keys used by Balm dynamic model lookup.")
+                .define("memoDynamicModelKeys", true);
+        builder.pop();
+
+        builder.comment("Caelus patches.").push("caelus");
+        CAELUS_SKIP_GROUNDED_NON_PLAYERS = builder
+                .comment("Skip Caelus flight checks for grounded non-player entities.")
+                .define("skipGroundedNonPlayers", true);
+        builder.pop();
+
         SPEC = builder.build();
     }
 
@@ -149,6 +173,9 @@ public final class CoOConfig {
         terrablenderCacheNamespaceRule = masterEnabled && TERRABLENDER_CACHE_NAMESPACE_RULE.get();
         zetaLeanStructureReplacement = masterEnabled && ZETA_LEAN_STRUCTURE_REPLACEMENT.get();
         zetaShareEventWrappers = masterEnabled && ZETA_SHARE_EVENT_WRAPPERS.get();
+        ambientsoundsMemoBiomeMatch = masterEnabled && AMBIENTSOUNDS_MEMO_BIOME_MATCH.get();
+        balmMemoDynamicModelKeys = masterEnabled && BALM_MEMO_DYNAMIC_MODEL_KEYS.get();
+        caelusSkipGroundedNonPlayers = masterEnabled && CAELUS_SKIP_GROUNDED_NON_PLAYERS.get();
     }
 
     private CoOConfig() {

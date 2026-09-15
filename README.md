@@ -4,13 +4,17 @@ NeoForge 1.21.1 port
 
 ## Ported
 
-- Xareo MiniMap
-- Lootr
-- Patchouli
-- FTBChunks
+- Ambient Sounds
+- Balm
+- Caelus
 - CuriosAPI (Not Complete)
   - LivingEntityRenderer.addLayer Lost?
+- FTBChunks
+- Lootr
+- Patchouli
 - TerraBlender
+- Xareo Mini Map
+- Xaero World Map
 - Zeta
 
 ## Already optimized
@@ -28,9 +32,12 @@ NeoForge 1.21.1 port
 - Alex's Mobs
 - IAF
 
-## Die
+## No 1.21.1
 
 - Ad Astra
 - Block Swap
+- IAF Dragon Fix
+- Goety Revelation
 - Oculus
-- Terramity
+- Pehkui
+- TerraMity

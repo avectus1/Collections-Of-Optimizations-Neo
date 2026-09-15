@@ -20,6 +20,9 @@
     "zeta.ZetaStructureReplacementAccessor"
   ],
   "client": [
+    "ambientsounds.MixinBiomeArea",
+    "balm.MixinAbstractCachedDynamicModel",
+    "caelus.MixinCaelusMixinHooks",
     "xaerominimap.MixinMinimapFBORenderer",
     "xaeroworldmap.MixinMapLimiter",
     "ftbchunks.MixinFTBChunksClient",

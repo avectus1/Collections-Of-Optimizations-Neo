@@ -17,6 +17,12 @@ public final class CoOMixinPlugin implements IMixinConfigPlugin {
             "com.misanthropy.collections_of_optimizations.mixin.lootr.MixinBlockEntityTicker";
     private static final String PATCHOULI_MIXIN =
             "com.misanthropy.collections_of_optimizations.mixin.patchouli.MixinItemStackUtil";
+    private static final String AMBIENTSOUNDS_PREFIX =
+            "com.misanthropy.collections_of_optimizations.mixin.ambientsounds.";
+    private static final String BALM_PREFIX =
+            "com.misanthropy.collections_of_optimizations.mixin.balm.";
+    private static final String CAELUS_PREFIX =
+            "com.misanthropy.collections_of_optimizations.mixin.caelus.";
     private static final String FTBCHUNKS_PREFIX =
             "com.misanthropy.collections_of_optimizations.mixin.ftbchunks.";
     private static final String CURIOS_PREFIX =
@@ -48,6 +54,15 @@ public final class CoOMixinPlugin implements IMixinConfigPlugin {
         }
         if (PATCHOULI_MIXIN.equals(mixinClassName)) {
             return LoadingModList.get().getModFileById("patchouli") != null;
+        }
+        if (mixinClassName.startsWith(AMBIENTSOUNDS_PREFIX)) {
+            return LoadingModList.get().getModFileById("ambientsounds") != null;
+        }
+        if (mixinClassName.startsWith(BALM_PREFIX)) {
+            return LoadingModList.get().getModFileById("balm") != null;
+        }
+        if (mixinClassName.startsWith(CAELUS_PREFIX)) {
+            return LoadingModList.get().getModFileById("caelus") != null;
         }
         if (mixinClassName.startsWith(FTBCHUNKS_PREFIX)) {
             return LoadingModList.get().getModFileById("ftbchunks") != null;
