@@ -31,6 +31,12 @@ public final class CurioPresenceCache {
         GENERATION.incrementAndGet();
     }
 
+    public static void invalidate(LivingEntity entity) {
+        if (entity instanceof CurioPresenceHolder holder) {
+            holder.coo$invalidateCurioPresence();
+        }
+    }
+
     public static boolean mayHaveEquipped(LivingEntity entity, Item item) {
         if (entity == null || item == null || !(entity instanceof CurioPresenceHolder holder)) {
             return true;

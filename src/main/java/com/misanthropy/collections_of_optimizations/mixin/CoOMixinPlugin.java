@@ -31,6 +31,12 @@ public final class CoOMixinPlugin implements IMixinConfigPlugin {
             "com.misanthropy.collections_of_optimizations.mixin.terrablender.";
     private static final String ZETA_PREFIX =
             "com.misanthropy.collections_of_optimizations.mixin.zeta.";
+    private static final String XAERO_WORLD_MAP_PREFIX =
+            "com.misanthropy.collections_of_optimizations.mixin.xaeroworldmap.";
+    private static final String ARCHITECTURY_PREFIX =
+            "com.misanthropy.collections_of_optimizations.mixin.architectury.";
+    private static final String ARTIFACTS_PREFIX =
+            "com.misanthropy.collections_of_optimizations.mixin.artifacts.";
 
     @Override
     public void onLoad(String mixinPackage) {
@@ -47,6 +53,9 @@ public final class CoOMixinPlugin implements IMixinConfigPlugin {
             return LoadingModList.get().getModFileById("xaerominimap") != null;
         }
         if (XAERO_WORLD_MAP_MIXIN.equals(mixinClassName)) {
+            return LoadingModList.get().getModFileById("xaeroworldmap") != null;
+        }
+        if (mixinClassName.startsWith(XAERO_WORLD_MAP_PREFIX)) {
             return LoadingModList.get().getModFileById("xaeroworldmap") != null;
         }
         if (LOOTR_MIXIN.equals(mixinClassName)) {
@@ -75,6 +84,12 @@ public final class CoOMixinPlugin implements IMixinConfigPlugin {
         }
         if (mixinClassName.startsWith(ZETA_PREFIX)) {
             return LoadingModList.get().getModFileById("zeta") != null;
+        }
+        if (mixinClassName.startsWith(ARCHITECTURY_PREFIX)) {
+            return LoadingModList.get().getModFileById("architectury") != null;
+        }
+        if (mixinClassName.startsWith(ARTIFACTS_PREFIX)) {
+            return LoadingModList.get().getModFileById("artifacts") != null;
         }
         return true;
     }

@@ -8,9 +8,12 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import top.theillusivec4.curios.api.SlotResult;
 import top.theillusivec4.curios.common.capability.CurioInventoryCapability;
+import top.theillusivec4.curios.api.type.inventory.ICurioStacksHandler;
 
+import java.util.Map;
 import java.util.Optional;
 
 @Mixin(value = CurioInventoryCapability.class, remap = false)
@@ -24,5 +27,15 @@ public abstract class MixinCurioInventoryCapability {
         if (wearer != null && !CurioPresenceCache.mayHaveEquipped(wearer, item)) {
             cir.setReturnValue(Optional.empty());
         }
+    }
+
+    @Inject(method = "setCurios(Ljava/util/Map;)V", at = @At("RETURN"), require = 0)
+    private void coo$invalidateOnSetCurios(Map<String, ICurioStacksHandler> curios, CallbackInfo ci) {
+        CurioPresenceCache.invalidate(((CurioInventoryCapability) (Object) this).getWearer());
+    }
+
+    @Inject(method = "reset()V", at = @At("RETURN"), require = 0)
+    private void coo$invalidateOnReset(CallbackInfo ci) {
+        CurioPresenceCache.invalidate(((CurioInventoryCapability) (Object) this).getWearer());
     }
 }

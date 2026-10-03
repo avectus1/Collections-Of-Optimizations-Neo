@@ -1,7 +1,7 @@
 plugins {
     id 'java-library'
     id 'idea'
-    id 'net.neoforged.moddev' version '2.0.141'
+    id 'net.neoforged.moddev' version '2.0.148'
 }
 
 version = mod_version
@@ -69,24 +69,24 @@ repositories {
 }
 
 dependencies {
-    implementation 'curse.maven:xaeros-minimap-263420:8449819'
-    implementation 'curse.maven:xaeros-world-map-317780:8449921'
-    implementation 'curse.maven:lootr-361276:8580031'
-    implementation 'curse.maven:artifacts-312353:7875426'
+    implementation 'curse.maven:xaeros-minimap-263420:8849842'
+    implementation 'curse.maven:xaeros-world-map-317780:8849973'
+    implementation 'curse.maven:lootr-361276:8968561'
+    implementation 'curse.maven:artifacts-312353:8791899'
     implementation 'curse.maven:placebo-283644:8463693'
     implementation 'curse.maven:zeta-968868:7980010'
     implementation "curse.maven:architectury-api-419699:8492726"
-    implementation 'curse.maven:ftb-chunks-forge-314906:8520252'
-    implementation 'curse.maven:ftb-library-forge-404465:8569579'
-    implementation 'curse.maven:ftb-ranks-forge-314905:8519426'
-    implementation 'curse.maven:ftb-teams-forge-404468:7878281'
+    implementation 'curse.maven:ftb-chunks-forge-314906:8791113'
+    implementation 'curse.maven:ftb-library-forge-404465:9008089'
+    implementation 'curse.maven:ftb-ranks-forge-314905:8878560'
+    implementation 'curse.maven:ftb-teams-forge-404468:8724782'
     implementation 'vazkii.patchouli:Patchouli:1.21.1-93-NEOFORGE'
     implementation 'top.theillusivec4.curios:curios-neoforge:9.5.1+1.21.1'
     implementation 'com.github.glitchfiend:TerraBlender-neoforge:1.21.1-4.1.0.8'
 
     // Optional A-C targets audited against their NeoForge 1.21.1 jars.
-    compileOnly('maven.modrinth:ambientsounds:6.3.8') { transitive = false }
-    compileOnly('maven.modrinth:balm:21.0.65+neoforge-1.21.1') { transitive = false }
+    compileOnly('maven.modrinth:ambientsounds:6.3.9') { transitive = false }
+    compileOnly('maven.modrinth:balm:21.0.66+neoforge-1.21.1') { transitive = false }
     //compileOnly('maven.modrinth:better-combat:2.4.0+1.21.1-neoforge') { transitive = false }
     compileOnly('maven.modrinth:caelus:7.0.1+1.21.1') { transitive = false }
     //compileOnly('maven.modrinth:create:6.0.10+mc1.21.1') { transitive = false }
