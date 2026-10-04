@@ -4,22 +4,53 @@ NeoForge 1.21.1 port
 
 ## Ported
 
+- Ad Astra
 - Ambient Sounds
+- Architectury API
+- Armageddon
+- Ars Additions
+- Ars Elemental
+- Ars Nouveau
 - Balm
+- Better Combat
+- Biolith
+- Biomes We've Gone
+- Born in Chaos
+- Cable Facades
 - Caelus
+- Cataclysm
+- Chimes
+- Copycats+
+- Corpse
+- Create
+- Create Crafts & Additions
 - CuriosAPI (Not Complete)
   - LivingEntityRenderer.addLayer Lost?
+- Cucumber
+- Dungeon Crawl
+- Dungeons Delight
+- Easy Villagers
+- Entity Model Features
+- FancyMenu
+- Farmer's Delight
 - FTBChunks
 - Lootr
 - Patchouli
 - TerraBlender
-- Xareo Mini Map
+- Xaero Minimap
 - Xaero World Map
 - Zeta
 
-## Already optimized
+## Already Optimized
 
+- Animus
 - Artifacts
+- Cooking for Blockheads
+- Critters and Companions
+- Deeper and Darker
+- Distant Horizons
+- Dynamic Trees
+- Echelon
 - Placebo
 
 ## Use Other mod
@@ -30,14 +61,15 @@ NeoForge 1.21.1 port
 
 - Alex's Caves
 - Alex's Mobs
-- IAF
+- Biomancy
+- EEEAB's Mobs
+- Ice and Fire Community Edition
+- Saint's Dragons
 
 ## No 1.21.1
 
-- Ad Astra
 - Block Swap
 - IAF Dragon Fix
 - Goety Revelation
 - Oculus
-- Pehkui
 - TerraMity

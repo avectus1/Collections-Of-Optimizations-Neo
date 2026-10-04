@@ -6,6 +6,7 @@ import org.spongepowered.asm.mixin.extensibility.IMixinConfigPlugin;
 import org.spongepowered.asm.mixin.extensibility.IMixinInfo;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 public final class CoOMixinPlugin implements IMixinConfigPlugin {
@@ -37,6 +38,33 @@ public final class CoOMixinPlugin implements IMixinConfigPlugin {
             "com.misanthropy.collections_of_optimizations.mixin.architectury.";
     private static final String ARTIFACTS_PREFIX =
             "com.misanthropy.collections_of_optimizations.mixin.artifacts.";
+    private static final Map<String, String> A_F_MOD_IDS = Map.ofEntries(
+            Map.entry("adastra", "ad_astra"),
+            Map.entry("armageddon", "armageddon_mod"),
+            Map.entry("arsadditions", "ars_additions"),
+            Map.entry("arselemental", "ars_elemental"),
+            Map.entry("arsnouveau", "ars_nouveau"),
+            Map.entry("arsnspells", "ars_n_spells"),
+            Map.entry("chimes", "chimes"),
+            Map.entry("cataclysm", "cataclysm"),
+            Map.entry("bettercombat", "bettercombat"),
+            Map.entry("biolith", "biolith"),
+            Map.entry("biomeswevegone", "biomeswevegone"),
+            Map.entry("borninchaos", "born_in_chaos_v1"),
+            Map.entry("cablefacades", "cable_facades"),
+            Map.entry("copycats", "copycats"),
+            Map.entry("create", "create"),
+            Map.entry("createaddition", "createaddition"),
+            Map.entry("cucumber", "cucumber"),
+            Map.entry("corpse", "corpse"),
+            Map.entry("dungeoncrawl", "dungeoncrawl"),
+            Map.entry("dungeonsdelight", "dungeonsdelight"),
+            Map.entry("easyvillagers", "easy_villagers"),
+            Map.entry("emf", "entity_model_features"),
+            Map.entry("farmersdelight", "farmersdelight"),
+            Map.entry("fancymenu", "fancymenu"),
+            Map.entry("crittersandcompanions", "crittersandcompanions")
+    );
 
     @Override
     public void onLoad(String mixinPackage) {
@@ -90,6 +118,17 @@ public final class CoOMixinPlugin implements IMixinConfigPlugin {
         }
         if (mixinClassName.startsWith(ARTIFACTS_PREFIX)) {
             return LoadingModList.get().getModFileById("artifacts") != null;
+        }
+        String packagePrefix = "com.misanthropy.collections_of_optimizations.mixin.";
+        if (mixinClassName.startsWith(packagePrefix)) {
+            String remainder = mixinClassName.substring(packagePrefix.length());
+            int separator = remainder.indexOf('.');
+            if (separator > 0) {
+                String modId = A_F_MOD_IDS.get(remainder.substring(0, separator));
+                if (modId != null) {
+                    return LoadingModList.get().getModFileById(modId) != null;
+                }
+            }
         }
         return true;
     }
