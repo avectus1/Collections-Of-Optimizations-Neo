@@ -1,9 +1,5 @@
 package com.misanthropy.collections_of_optimizations.mixin.vanilla;
 
-import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
-import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
-import com.llamalad7.mixinextras.sugar.Share;
-import com.llamalad7.mixinextras.sugar.ref.LocalBooleanRef;
 import com.misanthropy.collections_of_optimizations.CoOConfig;
 import com.misanthropy.collections_of_optimizations.core.VanillaOverrideChecks;
 import java.util.function.Predicate;
@@ -14,6 +10,8 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.Unique;
+import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.At;
 
 @Mixin(value = Entity.class, remap = false)
@@ -28,7 +26,10 @@ public abstract class MixinEntityFireScanGate {
     @Shadow
     protected abstract int getFireImmuneTicks();
 
-    @WrapOperation(
+    @Unique
+    private boolean coo$fireScanSkipped;
+
+    @Redirect(
             method = "move",
             at = @At(
                     value = "INVOKE",
@@ -36,19 +37,19 @@ public abstract class MixinEntityFireScanGate {
             ),
             require = 0
     )
-    private Stream<BlockState> coo$skipIrrelevantFireScan(Level level, AABB box, Operation<Stream<BlockState>> original,
-                                                         @Share("coo$fireScanSkipped") LocalBooleanRef skipped) {
+    private Stream<BlockState> coo$skipIrrelevantFireScan(Level level, AABB box) {
+        this.coo$fireScanSkipped = false;
         if (CoOConfig.vanillaSkipIrrelevantFireScan && !this.wasOnFire) {
             int ticks = this.remainingFireTicks;
             if (ticks > 0 || ticks == -this.getFireImmuneTicks() && VanillaOverrideChecks.stockFireSetter(this.getClass())) {
-                skipped.set(true);
+                this.coo$fireScanSkipped = true;
                 return Stream.empty();
             }
         }
-        return original.call(level, box);
+        return level.getBlockStatesIfLoaded(box);
     }
 
-    @WrapOperation(
+    @Redirect(
             method = "move",
             at = @At(
                     value = "INVOKE",
@@ -57,11 +58,11 @@ public abstract class MixinEntityFireScanGate {
             ),
             require = 0
     )
-    private boolean coo$answerSkippedFireScan(Stream<BlockState> states, Predicate<? super BlockState> test, Operation<Boolean> original,
-                                              @Share("coo$fireScanSkipped") LocalBooleanRef skipped) {
-        if (skipped.get()) {
+    private boolean coo$answerSkippedFireScan(Stream<BlockState> states, Predicate<? super BlockState> test) {
+        if (this.coo$fireScanSkipped) {
+            this.coo$fireScanSkipped = false;
             return false;
         }
-        return original.call(states, test);
+        return states.noneMatch(test);
     }
 }

@@ -130,6 +130,9 @@ public class CoOMixinPlugin implements IMixinConfigPlugin {
             Map.entry("elysiumapi.MixinMultiNoiseBiomeSourceReplacers", new String[]{"terrablender"}),
 
 
+            Map.entry("vanilla.MixinStringRenderOutputFontSet", new String[]{"immediatelyfast"}),
+            Map.entry("vanilla.MixinEntityFireScanGate", new String[]{"lithium"}),
+            Map.entry("vanilla.MixinGameEventDispatcherLookup", new String[]{"lithium"}),
             Map.entry("vanilla.MixinStructureCheck", new String[]{"modernfix"}),
             Map.entry("vanilla.MixinServerLevelStructureState", new String[]{"modernfix"}),
 

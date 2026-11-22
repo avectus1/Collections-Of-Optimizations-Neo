@@ -1,7 +1,6 @@
 package com.misanthropy.collections_of_optimizations.mixin.vanilla;
 
-import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
-import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
+import org.spongepowered.asm.mixin.injection.Redirect;
 import com.misanthropy.collections_of_optimizations.CoOConfig;
 import java.util.EnumSet;
 import net.minecraft.world.entity.ai.goal.Goal;
@@ -13,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.At;
 @Mixin(value = GoalSelector.class, remap = false)
 public abstract class MixinGoalSelectorDisabledFlags {
 
-    @WrapOperation(
+    @Redirect(
             method = "tick",
             at = @At(
                     value = "INVOKE",
@@ -21,10 +20,15 @@ public abstract class MixinGoalSelectorDisabledFlags {
             ),
             require = 0
     )
-    private boolean coo$skipWhenNothingDisabled(WrappedGoal goal, EnumSet<Goal.Flag> disabled, Operation<Boolean> original) {
+    private boolean coo$skipWhenNothingDisabled(WrappedGoal goal, EnumSet<Goal.Flag> disabled) {
         if (CoOConfig.vanillaSkipEmptyDisabledFlags && disabled.isEmpty()) {
             return false;
         }
-        return original.call(goal, disabled);
+        for (Goal.Flag flag : goal.getFlags()) {
+            if (disabled.contains(flag)) {
+                return true;
+            }
+        }
+        return false;
     }
 }
