@@ -1,75 +1,83 @@
-# Collections Of Optimizations NeoForge
+# Collections Of Optimizations Neo
 
-NeoForge 1.21.1 port
+NeoForge 1.21.1 port of Collections of Optimizations. It fixes lag, stutter and memory leaks in vanilla Minecraft and in many popular mods. Each fix only turns on if its mod is installed, and every one can be switched off in the config. Sodium is optional (fast model drawing needs it).
 
-## Ported
+## Covered mods
 
 - Ad Astra
-- Ambient Sounds
+- Alex's Caves (Neo port)
+- Alex's Mobs (Neo port)
+- AllTheLeaks
+- AmbientSounds
 - Architectury API
-- Armageddon
 - Ars Additions
 - Ars Elemental
 - Ars Nouveau
+- Artifacts
+- Async Particles
 - Balm
 - Better Combat
 - Biolith
-- Biomes We've Gone
 - Born in Chaos
+- Bosses of Mass Destruction
 - Cable Facades
 - Caelus
 - Cataclysm
 - Chimes
+- Citadel
 - Copycats+
 - Corpse
 - Create
 - Create Crafts & Additions
-- CuriosAPI (Not Complete)
-  - LivingEntityRenderer.addLayer Lost?
 - Cucumber
+- Curios API
+- Deeper and Darker
+- Duplicationless
 - Dungeon Crawl
 - Dungeons Delight
 - Easy Villagers
+- Eeeab's Mobs
+- Elysium API
+- EMI (memory leak fix)
 - Entity Model Features
+- Entity Texture Features
 - FancyMenu
-- Farmer's Delight
-- FTBChunks
+- Fluidium
+- FTB Chunks
+- Iron's Spells 'n Spellbooks
+- Legendary Monsters
+- Lionfish API
 - Lootr
+- ModernFix
+- Not Enough Animations
+- Oh The Biomes We've Gone
 - Patchouli
+- Sophisticated Backpacks
 - TerraBlender
-- Xaero Minimap
-- Xaero World Map
+- Xaero's Minimap
+- Xaero's World Map
 - Zeta
+- Vanilla (world generation, loading, entity tracking, rendering, memory)
 
-## Already Optimized
+## Building
 
-- Animus
-- Artifacts
-- Cooking for Blockheads
-- Critters and Companions
-- Deeper and Darker
-- Distant Horizons
-- Dynamic Trees
-- Echelon
-- Placebo
+Put the NeoForge 1.21.1 jars of the mods above in `libs/` (compile only, not shipped), then run:
 
-## Use Other mod
+```
+./gradlew build
+```
 
-- Geckolib: https://www.curseforge.com/minecraft/mc-mods/geckolibbetterfps
+## Credits
 
-## Unofficial?
+- Original mod: Collections of Optimizations by Misanthropy (Forge 1.20.1)
+- NeoForge 1.21.1 port this is based on: GLDYM - https://github.com/GLDYM/Collections-Of-Optimizations-Neoforge
+- Alex's Caves and Alex's Mobs support built against the NeoForge 1.21.1 "Neo" ports by TysonTheEmber (based on crabsatellite's 1.21.1 branch)
+- 0.0.5 update by avectus1
 
-- Alex's Caves
-- Alex's Mobs
-- Biomancy
-- EEEAB's Mobs
-- Ice and Fire Community Edition
-- Saint's Dragons
+## Disclaimer
 
-## No 1.21.1
+This is an unofficial update built on GLDYM's NeoForge port. It isn't affiliated with or endorsed by GLDYM or Misanthropy, and all credit for the original work goes to them. If GLDYM or Misanthropy want this project taken down or changed, contact me and I'll do it right away.
 
-- Block Swap
-- IAF Dragon Fix
-- Goety Revelation
-- Oculus
-- TerraMity
+## License
+
+GPL-3.0, same as GLDYM's port. See [LICENSE](LICENSE).
