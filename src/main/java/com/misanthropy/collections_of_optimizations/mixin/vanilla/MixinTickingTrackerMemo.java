@@ -47,7 +47,7 @@ public abstract class MixinTickingTrackerMemo {
    public void setLevel(long chunkPos, int level) {
       this.coo$firstKey = Long.MIN_VALUE;
       this.coo$secondKey = Long.MIN_VALUE;
-      if (level > 33) {
+      if (level >= 33) {
          this.chunks.remove(chunkPos);
       } else {
          this.chunks.put(chunkPos, (byte)level);

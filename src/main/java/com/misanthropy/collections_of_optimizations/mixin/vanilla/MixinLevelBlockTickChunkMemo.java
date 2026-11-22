@@ -35,7 +35,7 @@ public abstract class MixinLevelBlockTickChunkMemo {
       )}
    )
    private boolean coo$memoTickChunk(Level level, BlockPos pos, Operation<Boolean> original) {
-      if (!CoOConfig.vanillaMemoBlockTickChunk) {
+      if (!CoOConfig.vanillaMemoBlockTickChunk || pos == null) {
          return (Boolean)original.call(new Object[]{level, pos});
       } else {
          long key = ChunkPos.asLong(pos.getX() >> 4, pos.getZ() >> 4);
