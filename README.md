@@ -9,6 +9,7 @@ NeoForge 1.21.1 port of Collections of Optimizations. It fixes lag, stutter and 
 - Alex's Mobs (Neo port)
 - AllTheLeaks
 - AmbientSounds
+- Amendments
 - Architectury API
 - Ars Additions
 - Ars Elemental
@@ -24,6 +25,7 @@ NeoForge 1.21.1 port of Collections of Optimizations. It fixes lag, stutter and 
 - Caelus
 - Cataclysm
 - Chimes
+- Chunk Sending
 - Citadel
 - Copycats+
 - Corpse
@@ -32,9 +34,9 @@ NeoForge 1.21.1 port of Collections of Optimizations. It fixes lag, stutter and 
 - Cucumber
 - Curios API
 - Deeper and Darker
-- Duplicationless
 - Dungeon Crawl
 - Dungeons Delight
+- Duplicationless
 - Easy Villagers
 - Eeeab's Mobs
 - Elysium API
@@ -44,16 +46,24 @@ NeoForge 1.21.1 port of Collections of Optimizations. It fixes lag, stutter and 
 - FancyMenu
 - Fluidium
 - FTB Chunks
+- Iceberg
 - Iron's Spells 'n Spellbooks
+- KubeJS
 - Legendary Monsters
 - Lionfish API
+- Lithostitched
+- Lodestone (Malum)
 - Lootr
+- MmmMmmMmmMmm
 - ModernFix
+- Moonlight Lib
 - Not Enough Animations
 - Oh The Biomes We've Gone
 - Patchouli
 - Sophisticated Backpacks
+- Supplementaries
 - TerraBlender
+- The Illusioner
 - Xaero's Minimap
 - Xaero's World Map
 - Zeta
