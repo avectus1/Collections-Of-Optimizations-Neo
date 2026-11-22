@@ -9,6 +9,37 @@ import java.util.function.DoubleConsumer;
 import java.util.function.IntConsumer;
 
 public final class CoOConfig {
+    public static boolean vanillaWeakBiomeSearchSlot = true;
+    public static boolean vanillaTickingLevelMemo = true;
+    public static boolean vanillaSnapshotEntityUnloads = true;
+    public static boolean vanillaShareTemplatePositions = true;
+    public static boolean vanillaReuseNoiseColumnCells = true;
+    public static boolean vanillaReuseGradientRandom = true;
+    public static boolean vanillaReuseBiomeListEncoding = true;
+    public static boolean vanillaMultifaceWithoutStreams = true;
+    public static boolean vanillaMemoBlockTickChunk = true;
+    public static boolean vanillaFreeLeakedRenderTargets = true;
+    public static boolean vanillaFlatBiomeSearch = true;
+    public static boolean vanillaFastZipPackPaths = true;
+    public static boolean vanillaFastBiomeTreeSort = true;
+    public static boolean vanillaFastAttributeInstanceLookup = true;
+    public static boolean vanillaClientFireImmuneMemo = true;
+    public static boolean vanillaCacheResourceLocationString = true;
+    public static boolean vanillaCacheBiomeLookups = true;
+    public static boolean structureessentialsCheckFinalStateOnce = true;
+    public static boolean sophisticatedbackpacksLazyShapes = true;
+    public static boolean ironsspellbooksFlatSpellcasterScan = true;
+    public static boolean emfReuseCompiledAnimations = true;
+    public static boolean emfIndexedResourceExists = true;
+    public static boolean emfCompiledPatterns = true;
+    public static boolean doespotatotickRememberUpdateFix = true;
+    public static boolean chunksendingCacheOnlyWhenShared = true;
+    public static boolean alltheleaksSkipServerStopGc = true;
+    public static boolean alltheleaksLazyLeakSummary = true;
+    public static boolean alexscavesSkipDisabledBiomeHook = true;
+    public static boolean alexscavesSkipDeadCaveMaps = true;
+    public static boolean alexscavesRadiumEntityCollisions = true;
+    public static boolean alexscavesBiomeSampleTickCache = true;
     public static int chunksendingCacheSweepInterval = 20;
     public static boolean illusionerSkipIdleEncounterTick = true;
     public static boolean borninchaosCorpseFishEffectRefresh = true;
@@ -1159,6 +1190,27 @@ public final class CoOConfig {
         builder.pop();
 
         builder.comment("Entity Model Features patches.").push("emf");
+        gate(
+         builder.comment(
+               "Compile the handful of regular expressions EMF checks every animation variable against once instead of on every check, and walk animation text with a plain character loop instead of a stream, while models load."
+            )
+            .define("compiledPatterns", true),
+         v -> emfCompiledPatterns = v
+      );
+        gate(
+         builder.comment(
+               "Answer the misses of the model file existence check from the list EMF already made. EMF lists every model file under emf/cem and optifine/cem once per resource reload, but for every file that is not in that list it still asked each resource pack in turn, hundreds of packs on disk, whether the file exists, and nearly every such question is a miss. With this on those misses are answered from the list, and files are found exactly as before. Client."
+            )
+            .define("indexedResourceExists", true),
+         v -> emfIndexedResourceExists = v
+      );
+        gate(
+         builder.comment(
+               "Keep each compiled animation class EMF makes and hand the same class back whenever a model with the same animations is built again. EMF turns the animation formulas of every animated model into a small class with its own class loader each time that model is built, and models are built again at runtime, for example statues and other blocks or mobs that make a fresh model. Every rebuilt model left a dead class behind, and each time the garbage collector found a dead class it had to sweep the whole compiled code cache during its remark pause, which turned a 35 ms pause into a 70 ms freeze every minute or so. With this on the bytes of each new animation class are compared with the classes already made and an identical class is reused, so no animation class ever dies and the remark pause stays short. Animations run the same code as before. Client."
+            )
+            .define("reuseCompiledAnimations", true),
+         v -> emfReuseCompiledAnimations = v
+      );
         gate(builder
                 .comment("Stop the anger time map growing one entry per neutral mob ever rendered.")
                 .define("dropZeroAngerEntries", true), v -> emfDropZeroAngerEntries = v);
@@ -1362,6 +1414,20 @@ public final class CoOConfig {
 
 
         builder.comment("AllTheLeaks patches.").push("alltheleaks");
+        gate(
+         builder.comment(
+               "Skip the full garbage collection AllTheLeaks forces every time a world closes. Leaving a singleplayer world waits for it, and with a pack this size one forced collection takes a second or more. The memory is freed by the normal collector anyway; AllTheLeaks only uses the forced one to make its leak counts cleaner. Both sides."
+            )
+            .define("skipServerStopGc", true),
+         v -> alltheleaksSkipServerStopGc = v
+      );
+        gate(
+         builder.comment(
+               "Only rebuild All The Leaks' leak summary every five seconds while its debug screen summary is turned on, and right before it writes the summary to the log. The rebuild walks every tracked object and groups them by class on the client tick and on the server tick, and its result is only ever read by that debug screen line and the periodic log. The log and the force_refresh command still get an up to date summary."
+            )
+            .define("lazyLeakSummary", true),
+         v -> alltheleaksLazyLeakSummary = v
+      );
         gate(builder
                 .comment("Skip the full garbage collection AllTheLeaks forces on every second crash report. Mods that catch errors and keep the game running write crash reports during play, and each forced collection froze the game for over half a second. The leak list in the report may then count objects that were about to be collected.")
                 .define("skipCrashReportGc", true), v -> alltheleaksSkipCrashReportGc = v);
@@ -1601,6 +1667,34 @@ public final class CoOConfig {
         builder.pop();
 
         builder.comment("Alex's Caves patches.").push("alexscaves");
+        gate(
+         builder.comment(
+               "Look up the biomes around the camera once per tick for Alex's Caves' sky, fog and light colours. It asked for the same 216 biome spots six times every tick, one round per colour. The colours come out exactly the same. Client."
+            )
+            .define("biomeSampleTickCache", true),
+         v -> alexscavesBiomeSampleTickCache = v
+      );
+        gate(
+         builder.comment(
+               "Alex's Caves replaces the whole entity movement collision step to add magnet block collisions, which also throws away Radium's faster entity collision lookup. Every moving entity then checks every nearby entity, item drops included, on both client and server. Keep Alex's Caves' step but ask Radium for the entity collisions, the same way Radium does for unmodified movement. Same collisions, far fewer entity checks."
+            )
+            .define("radiumEntityCollisions", true),
+         v -> alexscavesRadiumEntityCollisions = v
+      );
+        gate(
+         builder.comment(
+               "When every cave biome is set to disabled_completely in alexscaves_biome_generation, skip Alex's Caves' cave biome placement check on every biome lookup in every dimension. It can never place anything then. Worldgen."
+            )
+            .define("skipDisabledBiomeHook", true),
+         v -> alexscavesSkipDisabledBiomeHook = v
+      );
+        gate(
+         builder.comment(
+               "End a cave map search right away when its biome is disabled_completely and the map is used outside the Alex's Caves dimensions, instead of sampling up to cave_map_search_attempts spots that can never match. Server."
+            )
+            .define("skipDeadCaveMaps", true),
+         v -> alexscavesSkipDeadCaveMaps = v
+      );
         gate(builder
                 .comment("Stop recomputing Alex's Caves' cave biome placement 96 times per column.")
                 .define("memoRareBiomeQuads", true), v -> alexscavesMemoRareBiomeQuads = v);
@@ -1645,6 +1739,132 @@ public final class CoOConfig {
         builder.pop();
 
         builder.comment("Vanilla patches. These are the only patches here that are not aimed at a specific mod.").push("vanilla");
+        gate(
+         builder.comment(
+               "Build the biome lookup trees TerraBlender and vanilla make on every world load with each node's sort keys worked out once instead of on every comparison. The trees come out identical."
+            )
+            .define("fastBiomeTreeSort", true),
+         v -> vanillaFastBiomeTreeSort = v
+      );
+        gate(
+         builder.comment(
+               "Search the biome lookup trees from flat number arrays instead of walking linked node objects. Same visiting order and same answers as vanilla, every tree checks itself against the vanilla search when it is built and keeps the vanilla search if they ever disagree."
+            )
+            .define("flatBiomeSearch", true),
+         v -> vanillaFlatBiomeSearch = v
+      );
+        gate(
+         builder.comment(
+               "Reuse one random number generator per thread for the surface rules' gradient bands (the bedrock, deepslate and similar fades). Vanilla builds a new generator, three objects, for every block it checks there, only to read one number from it. The reused one is reseeded the same way and gives the same number, checked against vanilla at startup."
+            )
+            .define("reuseGradientRandom", true),
+         v -> vanillaReuseGradientRandom = v
+      );
+        gate(
+         builder.comment(
+               "Let a closed world's biome data go. Every biome lookup tree remembers, for each thread, the last biome it found, and that memory holds the biome, which reaches the whole world generation registry of its world. The game's worker threads outlive the world, so after you close a singleplayer world they keep its registries in memory until they happen to look up a biome again. With this on the memory points at the biome weakly. A tree holds all of its biomes, so while the tree can still be searched the memory is never cleared and every lookup starts from the same biome as before, ties included; once the tree is gone the biome and its registries can be freed. Takes effect for trees built after the config loads."
+            )
+            .define("weakBiomeSearchSlot", true),
+         v -> vanillaWeakBiomeSearchSlot = v
+      );
+        gate(
+         builder.comment(
+               "Packs whose overworld or nether keeps its biome list inside level.dat (thousands of entries in big packs) encode that whole list again on the server thread at every autosave, /save and world close, entry by entry through the game's codecs. While the list is the very same list holding the very same entries, written against the same biome registry, hand back a copy of the encoding made at the last save instead. The first two reuses are also encoded fresh and compared, and any difference turns this off for good, so level.dat holds exactly the same data. Server."
+            )
+            .define("reuseBiomeListEncoding", true),
+         v -> vanillaReuseBiomeListEncoding = v
+      );
+        gate(
+         builder.comment(
+               "Check the faces of glow lichen, sculk veins and other multiface blocks with a plain loop instead of building a stream for every check. World generation and block updates of sculk veins run this for every block they touch. Same answer."
+            )
+            .define("multifaceWithoutStreams", true),
+         v -> vanillaMultifaceWithoutStreams = v
+      );
+        gate(
+         builder.comment(
+               "Give every structure piece the same block position objects for the same spots inside the piece instead of a new one per block. Loaded structure pieces hold millions of these, almost all of them repeats, so the pieces take noticeably less memory and loading new ones makes less garbage. Positions read the same."
+            )
+            .define("shareTemplatePositions", true),
+         v -> vanillaShareTemplatePositions = v
+      );
+        gate(
+         builder.comment(
+               "Build the path of a file inside a zipped resource pack by joining three strings instead of running String.format, which every lookup into every zipped pack did. Same path."
+            )
+            .define("fastZipPackPaths", true),
+         v -> vanillaFastZipPackPaths = v
+      );
+        gate(
+         builder.comment(
+               "Find nearby players and spellcasting mobs for Iron's Spellbooks' per-tick cast particles by walking the client's loaded entity list instead of every entity section in a 128 block box. Same entities, same box test. Client."
+            )
+            .define("ironsspellbooksFlatSpellcasterScan", true),
+         v -> ironsspellbooksFlatSpellcasterScan = v
+      );
+        gate(
+         builder.comment(
+               "While ticking block entities, ask whether a chunk is block-ticking once per run of block entities in that chunk instead of once per block entity. The answer comes from chunk ticket levels, which only change between ticks, so the result is identical. Big storage rooms and factories tick thousands of block entities per tick, mostly grouped by chunk."
+            )
+            .define("memoBlockTickChunk", true),
+         v -> vanillaMemoBlockTickChunk = v
+      );
+        gate(
+         builder.comment(
+               "Terrain height lookups (structure placement, meteorites, spawn checks) each build the noise for one 4x4 block cell from scratch, so asking for the 16 columns of the same cell computes the same corner noise 16 times. Keep the last few cells per worker thread and only redo the cheap part per column. Same heights as before."
+            )
+            .define("reuseNoiseColumnCells", true),
+         v -> vanillaReuseNoiseColumnCells = v
+      );
+        gate(
+         builder.comment(
+               "Remember the biome picked at each biome cell for the noise biome source. While generating, every chunk asks again for the biomes just outside its own edges, which are the edge biomes its neighbours already worked out, and each answer is a full climate sample plus a search over every biome in the pack. Answers come from the same biome source, so biomes are identical."
+            )
+            .define("cacheBiomeLookups", true),
+         v -> vanillaCacheBiomeLookups = v
+      );
+        gate(
+         builder.comment(
+               "Give back the graphics memory of an off-screen picture that a mod threw away without releasing it. Normally that memory stays taken until the game closes. Only frees what the graphics card confirms belongs to that picture, and writes a line to the log naming it. Costs nothing while no mod leaks. Client."
+            )
+            .define("freeLeakedRenderTargets", true),
+         v -> vanillaFreeLeakedRenderTargets = v
+      );
+        gate(
+         builder.comment(
+               "Remember the text form of every resource id after it is built once. Overlays, textures, sounds and many mods turn the same ids into text every frame, and each time that built a new string and hashed it again."
+            )
+            .define("cacheResourceLocationString", true),
+         v -> vanillaCacheResourceLocationString = v
+      );
+        gate(
+         builder.comment(
+               "Remember whether a client entity is fire immune for the rest of the tick. The fire overlay and particle mods ask every entity this every frame, and in this pack each answer runs through several mods' checks, including a pet enchantment lookup and a persistent data read. The answer is at most one tick old, and only on the client, where it only decides whether flames are drawn. Client."
+            )
+            .define("clientFireImmuneMemo", true),
+         v -> vanillaClientFireImmuneMemo = v
+      );
+        gate(
+         builder.comment(
+               "Remember the last two chunk ticking levels the server looked up. Every entity and block entity asks the chunk ticket tracker each tick whether its chunk is close enough to tick, which is a hash map lookup each time even though most of them sit in the same few chunks. With this on the last two answers are kept and thrown away whenever any chunk's level changes, so the answers are always current. Server."
+            )
+            .define("tickingLevelMemo", true),
+         v -> vanillaTickingLevelMemo = v
+      );
+        gate(
+         builder.comment(
+               "Unload the entities of chunks that left view distance from a copy of the waiting list instead of walking the live list. Unloading an entity fires events other mods listen to, and if one of them loads or keeps a chunk while the list is being walked, the list changes under the walk and the server crashes in a fastutil iterator. Seen once after a long distance teleport at a high view distance. Same chunks unload in the same tick; a chunk that came back into view during the walk is left loaded. Server."
+            )
+            .define("snapshotEntityUnloads", true),
+         v -> vanillaSnapshotEntityUnloads = v
+      );
+        gate(
+         builder.comment(
+               "Answer an attribute lookup that already has an instance, or that the entity can never have, without going through the map's compute call. Every attribute read on every living entity, which the game does constantly for movement, combat and gear, went through HashMap.computeIfAbsent with a lambda that builds the attribute instance, even though the instance is almost always there already. With this on, an existing instance is returned straight from the map, and an attribute the entity type does not have at all is answered with nothing straight away, which is the same answer the stock path ends up with without storing anything. Anything else still takes the stock path."
+            )
+            .define("fastAttributeInstanceLookup", true),
+         v -> vanillaFastAttributeInstanceLookup = v
+      );
         gate(builder
                 .comment("When a world is closed, drop the references other mods keep to it (Citadel, Copycats, KubeJS, Opposing Force, Xaero's config library, Simply Swords, Subtle Effects). Without this the last world stays in memory on the title screen and next to the new world after rejoining.")
                 .define("releaseClosedWorld", true), v -> releaseStoppedServer = v);
@@ -2044,6 +2264,13 @@ public final class CoOConfig {
 
 
         builder.comment("Sophisticated Backpacks patches.").push("sophisticatedbackpacks");
+        gate(
+         builder.comment(
+               "Work out each backpack block's outline shape the first time it is needed instead of all of them on the main thread at every resource reload."
+            )
+            .define("lazyShapes", true),
+         v -> sophisticatedbackpacksLazyShapes = v
+      );
         gate(builder
                 .comment("Let Sophisticated Backpacks leave alone every mob that is not carrying one of its backpacks. The mod listens to the living tick event, which fires for every living entity on the server every single tick, and the first thing it does there is ask the entity for its Forge persistent data and then pull the sophisticatedbackpacks compound out of it, twice. Asking for the persistent data creates and permanently attaches an empty compound to any entity that did not already have one, and that empty compound is then written into the save file as a ForgeData tag for the rest of that entity's life, while pulling out a compound that is not there hands back a freshly allocated one that is thrown away immediately. A world with a few hundred mobs loaded is paying a couple of thousand throwaway compound tags a second and is quietly growing the saved data of everything that has ever ticked, all to find out that the mob has no backpack. This reads the persistent data field directly without creating it, and if the mob has no sophisticatedbackpacks compound then neither branch of the handler could have done anything, so the handler is skipped outright. The same check is put in front of the chunk unload path that clears a dropped backpack's contents id, which reads the same data the same way for every monster that leaves the level. Mobs that actually spawned wearing a backpack take exactly the stock path, so mob backpack spawning, the jukebox upgrade they can carry and the contents cleanup all behave as before. Turn it off for stock behaviour.")
                 .define("skipEntityDataChecks", true), v -> sophisticatedbackpacksSkipEntityDataChecks = v);
@@ -2233,6 +2460,13 @@ public final class CoOConfig {
         builder.pop();
     
         builder.comment("Chunk Sending patches.").push("chunksending");
+        gate(
+         builder.comment(
+               "Only keep a copy of each chunk's network packet while more than one player is online. Chunk Sending stores the packet it built for a chunk, a few dozen kilobytes of blocks plus copies of every light layer, on that chunk for up to five minutes so a second player can be sent the same one. With a single player nobody ever reuses it, and at a high view distance the server holds thousands of them, several hundred megabytes that the garbage collector has to copy and mark while you travel. With this on nothing is stored while you are alone and caching resumes as soon as a second player joins. Server."
+            )
+            .define("cacheOnlyWhenShared", true),
+         v -> chunksendingCacheOnlyWhenShared = v
+      );
         gate(builder
                 .comment("Ticks between sweeps of Chunk Sending's expired chunk packet caches. Stock walks every cached chunk packet every server tick looking for ones older than five minutes. Sweeping once a second finds the same entries a moment later. 1 restores stock behaviour.")
                 .defineInRange("cacheSweepInterval", 20, 1, 1200), 1, v -> chunksendingCacheSweepInterval = v);
@@ -2256,6 +2490,40 @@ public final class CoOConfig {
         gate(builder
                 .comment("Skip KubeJS' world highlight pass (buffer clear, depth copy and outline shader) while nothing in the world is highlighted. Client.")
                 .define("skipIdleHighlightPass", true), v -> kubejsSkipIdleHighlightPass = v);
+        builder.pop();
+    
+        builder.comment("Does Potato Tick? patches.").push("doespotatotick");
+        gate(
+         builder.comment("Remember that an entity already has the mod's one-time update fix instead of reading the marker from its saved data on every tick.")
+            .define("rememberUpdateFix", true),
+         v -> doespotatotickRememberUpdateFix = v
+      );
+        builder.pop();
+
+        builder.comment("Structure Essentials patches.").push("structureessentials");
+        gate(
+         builder.comment(
+               "Structure Essentials checks the final block of every jigsaw connector each time a structure piece is copied, by parsing the same block text again, which happens thousands of times while structures are laid out. With this on each distinct text is checked once; a broken one still fails the same way every time."
+            )
+            .define("checkFinalStateOnce", true),
+         v -> structureessentialsCheckFinalStateOnce = v
+      );
+        builder.pop();
+
+        builder.comment("Gnetum patches.").push("gnetum");
+        gate(
+         builder.comment("Resolve an event handler's mod id with one map lookup instead of a containsKey followed by a get.").define("singleModIdLookup", true),
+         v -> gnetumSingleModIdLookup = v
+      );
+        builder.pop();
+        builder.push("gnetum");
+        gate(
+         builder.comment(
+               "Answer gnetum's per element caching question once per tick instead of once per element per frame. Each ask is a set lookup plus a guava cache lookup and there are dozens of elements."
+            )
+            .define("memoCacheSettings", true),
+         v -> gnetumMemoCacheSettings = v
+      );
         builder.pop();
     }
 

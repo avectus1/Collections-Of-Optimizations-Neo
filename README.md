@@ -34,6 +34,7 @@ NeoForge 1.21.1 port of Collections of Optimizations. It fixes lag, stutter and 
 - Cucumber
 - Curios API
 - Deeper and Darker
+- Does Potato Tick
 - Dungeon Crawl
 - Dungeons Delight
 - Duplicationless
@@ -46,6 +47,7 @@ NeoForge 1.21.1 port of Collections of Optimizations. It fixes lag, stutter and 
 - FancyMenu
 - Fluidium
 - FTB Chunks
+- Gnetum
 - Iceberg
 - Iron's Spells 'n Spellbooks
 - KubeJS
@@ -61,6 +63,7 @@ NeoForge 1.21.1 port of Collections of Optimizations. It fixes lag, stutter and 
 - Oh The Biomes We've Gone
 - Patchouli
 - Sophisticated Backpacks
+- Structure Essentials
 - Supplementaries
 - TerraBlender
 - The Illusioner

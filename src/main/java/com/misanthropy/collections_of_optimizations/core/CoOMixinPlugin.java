@@ -106,6 +106,9 @@ public class CoOMixinPlugin implements IMixinConfigPlugin {
             Map.entry("iceberg", "iceberg"),
             Map.entry("lodestone", "lodestone"),
             Map.entry("kubejs", "kubejs"),
+            Map.entry("doespotatotick", "doespotatotick"),
+            Map.entry("structureessentials", "structureessentials"),
+            Map.entry("gnetum", "gnetum"),
             Map.entry("zeta", "zeta")
     );
 
@@ -131,6 +134,7 @@ public class CoOMixinPlugin implements IMixinConfigPlugin {
 
 
             Map.entry("vanilla.MixinStringRenderOutputFontSet", new String[]{"immediatelyfast"}),
+            Map.entry("vanilla.MixinRenderTargetLeakFree", new String[]{"gpumemleakfix"}),
             Map.entry("vanilla.MixinEntityFireScanGate", new String[]{"lithium"}),
             Map.entry("vanilla.MixinGameEventDispatcherLookup", new String[]{"lithium"}),
             Map.entry("vanilla.MixinStructureCheck", new String[]{"modernfix"}),
