@@ -74,3 +74,6 @@ modId="zeta"
 type="optional"
 ordering="AFTER"
 side="BOTH"
+
+[[accessTransformers]]
+file="META-INF/accesstransformer.cfg"

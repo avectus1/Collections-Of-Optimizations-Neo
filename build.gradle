@@ -73,11 +73,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'curse.maven:xaeros-minimap-263420:8849842'
-    implementation 'curse.maven:xaeros-world-map-317780:8849973'
-    implementation 'curse.maven:lootr-361276:8968561'
-    implementation 'curse.maven:artifacts-312353:8791899'
-    implementation 'curse.maven:placebo-283644:8463693'
+    compileOnly fileTree(dir: 'libs', include: '*.jar')
     implementation 'curse.maven:zeta-968868:7980010'
     implementation "curse.maven:architectury-api-419699:8492726"
     implementation 'curse.maven:ftb-chunks-forge-314906:8791113'
@@ -85,37 +81,28 @@ dependencies {
     implementation 'curse.maven:ftb-ranks-forge-314905:8878560'
     implementation 'curse.maven:ftb-teams-forge-404468:8724782'
     implementation 'vazkii.patchouli:Patchouli:1.21.1-93-NEOFORGE'
-    implementation 'top.theillusivec4.curios:curios-neoforge:9.5.1+1.21.1'
     implementation 'com.github.glitchfiend:TerraBlender-neoforge:1.21.1-4.1.0.8'
 
     // Optional A-C targets audited against their NeoForge 1.21.1 jars.
-    compileOnly('maven.modrinth:ambientsounds:6.3.9') { transitive = false }
     compileOnly('maven.modrinth:balm:21.0.66+neoforge-1.21.1') { transitive = false }
     compileOnly('maven.modrinth:ad-astra:1.16.26') { transitive = false }
     compileOnly('maven.modrinth:armageddon:v3.1.2') { transitive = false }
     compileOnly('maven.modrinth:ars-additions:21.3.0') { transitive = false }
-    compileOnly 'curse.maven:ars-elemental-561470:8999174'
     compileOnly('maven.modrinth:ars-nouveau:5.13.2') { transitive = false }
     compileOnly('maven.modrinth:ars-n-spells:3.3.5') { transitive = false }
     compileOnly('maven.modrinth:chimes:2.1.1') { transitive = false }
-    compileOnly 'curse.maven:lendercataclysm-551586:8931182'
     compileOnly('maven.modrinth:better-combat:2.4.0+1.21.1-neoforge') { transitive = false }
     compileOnly('maven.modrinth:biolith:3.0.14') { transitive = false }
     compileOnly('maven.modrinth:oh-the-biomes-weve-gone:2.6.0-NeoForge') { transitive = false }
-    compileOnly('maven.modrinth:borninchaos:1.7.6') { transitive = false }
     compileOnly('maven.modrinth:cable-facades:2.1.4') { transitive = false }
     compileOnly('maven.modrinth:copycats:3.0.9+mc.1.21.1-neoforge') { transitive = false }
     compileOnly('maven.modrinth:create:6.0.10+mc1.21.1') { transitive = false }
     compileOnly('maven.modrinth:createaddition:neoforge-1.21.1-1.7.2') { transitive = false }
     compileOnly('maven.modrinth:cucumber:8.0.16') { transitive = false }
-    compileOnly('maven.modrinth:corpse:neoforge-1.21.1-1.1.13') { transitive = false }
     compileOnly('maven.modrinth:dungeoncrawl:2.3.17') { transitive = false }
     compileOnly('maven.modrinth:dungeons_delight:1.5.1') { transitive = false }
     compileOnly('maven.modrinth:easy-villagers:neoforge-1.21.1-1.1.42') { transitive = false }
-    compileOnly('maven.modrinth:entity-model-features:3.3.9-neoforge-1.21') { transitive = false }
-    compileOnly 'curse.maven:entity-texture-features-568563:8908931'
     compileOnly('maven.modrinth:farmers-delight:1.21.1-1.3.4') { transitive = false }
-    compileOnly('maven.modrinth:deeperdarker:1.4.1-neoforge-1.21.1') { transitive = false }
     compileOnly('maven.modrinth:fancymenu:3.9.14-1.21.1-neoforge') { transitive = false }
     compileOnly('com.github.bawnorton.mixinsquared:mixinsquared-common:0.3.4')
     compileOnly('maven.modrinth:caelus:7.0.1+1.21.1') { transitive = false }
