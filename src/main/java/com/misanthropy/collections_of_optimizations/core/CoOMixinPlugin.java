@@ -93,6 +93,19 @@ public class CoOMixinPlugin implements IMixinConfigPlugin {
             Map.entry("xaerolib", "xaerolib"),
             Map.entry("xaerominimap", "xaerominimap"),
             Map.entry("xaeroworldmap", "xaeroworldmap"),
+            Map.entry("amendments", "amendments"),
+            Map.entry("dummmmmmy", "dummmmmmy"),
+            Map.entry("immediatelyfast", "immediatelyfast"),
+            Map.entry("moonlight", "moonlight"),
+            Map.entry("shouldersurfing", "shouldersurfing"),
+            Map.entry("sliceanddice", "sliceanddice"),
+            Map.entry("structurify", "structurify"),
+            Map.entry("supplementaries", "supplementaries"),
+            Map.entry("chunksending", "chunksending"),
+            Map.entry("illusioner", "illusioner"),
+            Map.entry("iceberg", "iceberg"),
+            Map.entry("lodestone", "lodestone"),
+            Map.entry("kubejs", "kubejs"),
             Map.entry("zeta", "zeta")
     );
 
@@ -315,6 +328,9 @@ public class CoOMixinPlugin implements IMixinConfigPlugin {
     public void postApply(String targetClassName, ClassNode targetClass, String mixinClassName, IMixinInfo mixinInfo) {
         if (ELYSIUM_SOUND_CACHE_MIXIN.equals(mixinClassName)) {
             rewireElysiumSoundHandler(targetClass);
+        }
+        if (mixinClassName.endsWith("HugeMethods") && !"false".equals(System.getProperty("coo.splitHugeMethods"))) {
+            HugeMethodSplitter.split(targetClass);
         }
     }
 

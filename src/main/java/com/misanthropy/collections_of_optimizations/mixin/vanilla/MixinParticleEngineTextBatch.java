@@ -10,7 +10,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(value = ParticleEngine.class, remap = false)
 public abstract class MixinParticleEngineTextBatch {
 
-    private static final String RENDER = "render(Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource$BufferSource;Lnet/minecraft/client/renderer/LightTexture;Lnet/minecraft/client/Camera;FLnet/minecraft/client/renderer/culling/Frustum;)V";
+    private static final String RENDER = "render(Lnet/minecraft/client/renderer/LightTexture;Lnet/minecraft/client/Camera;FLnet/minecraft/client/renderer/culling/Frustum;Ljava/util/function/Predicate;)V";
 
     @Inject(method = RENDER, at = @At("HEAD"), remap = false, require = 0)
     private void coo$beginTextBatch(CallbackInfo ci) {
@@ -21,9 +21,9 @@ public abstract class MixinParticleEngineTextBatch {
             method = RENDER,
             at = @At(
                     value = "INVOKE",
-                    target = "Lnet/minecraft/client/particle/ParticleRenderType;end(Lcom/mojang/blaze3d/vertex/Tesselator;)V",
+                    target = "Lcom/mojang/blaze3d/vertex/BufferUploader;drawWithShader(Lcom/mojang/blaze3d/vertex/MeshData;)V",
                     shift = At.Shift.AFTER,
-                    remap = true
+                    remap = false
             ),
             remap = false,
             require = 0

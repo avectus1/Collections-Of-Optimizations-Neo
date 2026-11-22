@@ -9,6 +9,20 @@ import java.util.function.DoubleConsumer;
 import java.util.function.IntConsumer;
 
 public final class CoOConfig {
+    public static int chunksendingCacheSweepInterval = 20;
+    public static boolean illusionerSkipIdleEncounterTick = true;
+    public static boolean borninchaosCorpseFishEffectRefresh = true;
+    public static boolean icebergCacheArmorClassLookup = true;
+    public static boolean lodestoneSkipIdleDepthCopy = true;
+    public static boolean kubejsSkipIdleHighlightPass = true;
+    public static boolean xaeroworldmapSkipUploadBenchmark = true;
+    public static boolean xaeroworldmapMarkLayersOnce = true;
+    public static boolean xaeroworldmapLazyTileHeights = true;
+    public static boolean xaerolibPersistBlockColors = true;
+    public static boolean xaeroMinimapSkipHiddenRadar = true;
+    public static boolean xaeroMinimapDeferRadarUpdate = true;
+    public static boolean immediatelyfastReuseFallbackSets = true;
+    public static boolean immediatelyfastMemoLayerOrder = true;
 
     public static final ModConfigSpec SPEC;
 
@@ -1045,6 +1059,13 @@ public final class CoOConfig {
         builder.pop();
 
         builder.comment("XaeroLib patches.").push("xaerolib");
+        gate(
+         builder.comment(
+               "Keep the map colour Xaero's minimap and world map work out for each block texture in a small file and reuse it next time. Without it, the first time each kind of block shows up in a session the map reads that block's texture out of its mod file on the render thread, a few milliseconds each, which is a stutter when you walk into a new structure. The file starts over by itself when mods or resource packs change."
+            )
+            .define("persistBlockColors", true),
+         v -> xaerolibPersistBlockColors = v
+      );
         gate(builder
                 .comment("Resolve the active config profile once per client tick instead of on every single config read.")
                 .define("cacheConfigProfile", true), v -> xaerolibCacheConfigProfile = v);
@@ -1054,6 +1075,27 @@ public final class CoOConfig {
         builder.pop();
 
         builder.comment("Xaero's World Map patches.").push("xaeroworldmap");
+        gate(
+         builder.comment(
+               "Give new map tiles a shared empty height table and make each tile its own copy only when a height is first written. The map writer makes tiles for every chunk around you before it knows the chunk can be drawn, and each one used to allocate two 8 KB height tables straight away, which at high render distance was over 100 MB per second of garbage on the render thread. Tiles that get drawn behave exactly as before. Takes effect on the next launch."
+            )
+            .define("lazyTileHeights", true),
+         v -> xaeroworldmapLazyTileHeights = v
+      );
+        gate(
+         builder.comment(
+               "Skip the world map's texture upload benchmark. For the first few hundred map texture uploads of every launch, of each of seven kinds, Xaero's World Map waits for the graphics card to finish all queued work twice per upload just to time it, and the timings are only ever shown in a debug line. Each wait stalls the frame for as long as the card takes to drain, which is what made the map stutter while you explore early in a session. Uploads themselves are unchanged. Client."
+            )
+            .define("skipUploadBenchmark", true),
+         v -> xaeroworldmapSkipUploadBenchmark = v
+      );
+        gate(
+         builder.comment(
+               "Mark a map region's other cave layers as outdated once per frame instead of once for every chunk written into it. In singleplayer every region is world save data, so stock looks up and flags the same region in every loaded cave layer for each chunk the map writer visits, which is about half of the writer's render thread time and grows with every cave depth you have mapped. The flags only ever get set, so the map is identical. Client."
+            )
+            .define("markLayersOnce", true),
+         v -> xaeroworldmapMarkLayersOnce = v
+      );
         gate(builder
                 .comment("Milliseconds between the map limiter's free VRAM query, which stock fires a blocking glGetIntegerv for on every single frame. 0 restores the stock every frame behaviour. Client.")
                 .defineInRange("vramPollInterval", 500, 0, 60000), 0, v -> xaeroworldmapVramPollInterval = v);
@@ -1148,6 +1190,20 @@ public final class CoOConfig {
 
 
         builder.comment("Xaero's Minimap patches.").push("xaerominimap");
+        gate(
+         builder.comment(
+               "Rebuild the radar entity lists right after the frame that holds the client tick instead of inside the tick. Sorting every loaded entity into its radar category is one of the larger parts of the client tick near villages and farms, and the tick frame is the slow one. The lists are rebuilt from the same tick, one frame later. Client."
+            )
+            .define("deferRadarUpdate", true),
+         v -> xaeroMinimapDeferRadarUpdate = v
+      );
+        gate(
+         builder.comment(
+               "Skip the radar entity lists while the minimap is hidden and no screen is open. The radar sorts every loaded entity into its categories each tick, and with the minimap turned off nothing reads the result. The world map still gets them while it is open. Client."
+            )
+            .define("skipHiddenRadar", true),
+         v -> xaeroMinimapSkipHiddenRadar = v
+      );
         gate(builder
                 .comment("Maximum times per second the minimap redraws its map contents. Anything below the client frame rate leaves a visibly stale minimap, so this is off by default. 0 restores the stock every frame behaviour. Client.")
                 .defineInRange("renderFpsCap", 0, 0, 260), 0, v -> xaeroMinimapRenderFpsCap = v);
@@ -1195,6 +1251,9 @@ public final class CoOConfig {
 
 
         builder.comment("Born in Chaos patches.").push("borninchaos");
+        gate(builder
+                .comment("Let a Corpse Fish in water keep its Dolphin's Grace until it has half run out instead of re-applying a fresh one every tick, which fires the effect events and sends an effect packet to every nearby player each tick.")
+                .define("corpseFishEffectRefresh", true), v -> borninchaosCorpseFishEffectRefresh = v);
         gate(builder
                 .comment("Bail out of Born in Chaos' held item animation handler before it copies your hands.")
                 .define("skipItemAnimationCopies", true), v -> borninchaosSkipItemAnimationCopies = v);
@@ -2067,6 +2126,137 @@ public final class CoOConfig {
         builder.pop();
 
 
+    
+        builder.comment("Supplementaries patches.").push("supplementaries");
+        gate(
+         builder.comment("Skip the enderman skull's 64 block look ray when no player is aiming anywhere near it.").define("leanEndermanSkullWatch", true),
+         v -> supplementariesLeanEndermanSkullWatch = v
+      );
+        gate(
+         builder.comment("Only run Supplementaries' antique ink chunk sync for signs instead of every block entity in every chunk sent.")
+            .define("skipNonSignCapSync", true),
+         v -> supplementariesSkipNonSignCapSync = v
+      );
+        gate(
+         builder.comment("Cache the tinted map block lookup instead of walking five tags per map pixel per tick.").define("memoMapTintLookup", true),
+         v -> supplementariesMemoMapTintLookup = v
+      );
+        builder.pop();
+
+        builder.comment("Amendments patches.").push("amendments");
+        gate(
+         builder.comment("Stop wall lanterns broadcasting a sway packet every tick for entities that are not moving.").define("skipIdleSwaySync", true),
+         v -> amendmentsSkipIdleSwaySync = v
+      );
+        builder.pop();
+
+        builder.comment("Moonlight Lib patches.").push("moonlight");
+        gate(
+         builder.comment("Skip Moonlight's custom map marker refresh on maps that have no markers.").define("skipEmptyMapMarkerScan", true),
+         v -> moonlightSkipEmptyMapMarkerScan = v
+      );
+        builder.pop();
+
+        builder.comment("Shoulder Surfing Reloaded patches.").push("shouldersurfing");
+        gate(
+         builder.comment(
+               "Skip the two crosshair raytraces on frames where their result cannot be shown: a static crosshair with the obstruction indicator off, or set to only show while aiming, while you are not aiming. Client."
+            )
+            .define("skipIdleCrosshairPick", true),
+         v -> shouldersurfingSkipIdleCrosshairPick = v
+      );
+        gate(
+         builder.comment(
+               "Distance in blocks between the raytraces the dynamic camera offset sweeps along the camera arm every frame. The mod hardcodes 0.03125, which is 96 raytraces per frame for the default arm length. 0.125 is 24. Client."
+            )
+            .defineInRange("cameraSweepStep", 0.125, 0.03125, 1.0),
+         0.03125,
+         v -> shouldersurfingCameraSweepStep = v
+      );
+        gate(
+         builder.comment("Compile the adaptive crosshair item patterns once instead of on every frame the aim state is checked. Client.")
+            .define("memoAdaptiveItemPatterns", true),
+         v -> shouldersurfingMemoAdaptiveItemPatterns = v
+      );
+        builder.pop();
+
+        builder.comment("MmmMmmMmmMmm patches.").push("dummmmmmy");
+        gate(
+         builder.comment(
+               "Stop MmmMmmMmmMmm building a damage number packet that nobody is ever going to be sent. Every single time anything with health takes damage on the server, and every single time anything with health is healed, the mod is told about it, and the very first thing it does is build the little packet that carries the floating number, complete with a look up of the damage type in the registry, before it goes on to read the setting that decides who, if anyone, should receive it. The setting is called damage_mode and healing_mode and both of them are shipped set to NONE, so on a stock install that packet is built and thrown away every time, and the healing side is the busier of the two because regeneration, food regen, lifesteal and every healing spell in the pack all go through it. The two middle settings, ALL_PLAYERS and LOCAL_PLAYER, have the same shape of waste: they only ever send anything when the hit came from a real player, or when the thing being healed is a real player, and every mob hitting another mob still gets the full packet built for it first and then dropped. With this on the setting is read before the packet instead of after it, and the packet is only built in the cases where the mod would actually have sent it, so what arrives on your screen is exactly what arrived before. It also quietly removes a crash: with damage numbers set to ALL_PLAYERS or LOCAL_PLAYER the mod asks a damage source that it has not checked for null who caused it, which is a null pointer inside the damage routine of whatever was unlucky enough to be hit, and that case is now skipped rather than reached. Turn it off for stock behaviour."
+            )
+            .define("skipUnusedDamageNumbers", true),
+         v -> dummmmmmySkipUnusedDamageNumbers = v
+      );
+        gate(
+         builder.comment(
+               "How many ticks MmmMmmMmmMmm must wait before it lets a mob look around for a scarecrow again. When a dummy is wearing a pumpkin it scares animals, and the way the mod arranges that is to hang a flee goal on every single animal in the world the moment it loads in, whether or not a dummy exists anywhere. That goal is asked ten times a second, for every animal, whether it should start, and answering that question means sweeping a box twenty four blocks wide and six blocks tall around the animal and type checking everything inside it. In a pack with a few hundred animals loaded that is a couple of thousand entity sweeps a second spent almost entirely on proving that the dummy somebody built in their base an hour ago is still not nearby. The decoy goal that gets added to monsters when dummy_decoy is switched on is handled the same way. With this at ten the goal is asked once, and if the answer is no it is left alone for the next ten asks, which works out at roughly one sweep a second per animal instead of ten, and a panicking animal keeps fleeing exactly as it did because only the question of whether to start is delayed, never the fleeing itself. The worst case is an animal wandering into range taking up to about a second longer to bolt. Raise it if you have a lot of animals and no scarecrows, lower it if you want snappier scaring. 0 restores the stock every tick behaviour."
+            )
+            .defineInRange("scarecrowScanInterval", 10, 0, 200),
+         0,
+         v -> dummmmmmyScarecrowScanInterval = v
+      );
+        gate(
+         builder.comment(
+               "Stop MmmMmmMmmMmm throwing an error when another mod hands it a damage type it cannot look up. To colour the floating number the mod asks the damage source for its type and then asks the registry for that type's name, and if the registry does not know it the mod does not fall back to anything, it throws an assertion on the spot. That assertion goes off inside the vanilla damage routine, so it does not produce a quiet log line, it tears out of whatever was being hurt and takes the tick with it. It is reachable in a big pack because a damage source is allowed to carry its type inline rather than by name, several mods build theirs that way for one off effects, and datapack or script added types that were not present when the world loaded behave the same. The mod already has a name it uses for damage that has no source at all, and this simply uses that same name for a type it cannot resolve, which the colour lookup on the client already knows how to handle. Numbers for every damage type the registry does know about are unchanged. Turn it off for stock behaviour."
+            )
+            .define("tolerateUnregisteredDamageTypes", true),
+         v -> dummmmmmyTolerateUnregisteredDamageTypes = v
+      );
+        gate(
+         builder.comment(
+               "Draw every floating damage number on screen in one go instead of one number at a time. Each number, at the end of drawing itself, tells the shared buffer that every entity, block entity and particle in the world draws into to empty itself onto the GPU right now, every layer of it, so hitting a row of dummies with a sweep walks, uploads and draws that whole buffer once per number per frame for as long as the numbers float. With this on the numbers write their text into the buffer as before and the buffer is emptied once, right after the last particle of that kind has been drawn and while the camera is still set up for particles, so every number lands in the same place, at the same size and in the same colour, in a single draw. Turn it off for stock behaviour."
+            )
+            .define("batchDamageNumberFlush", true),
+         v -> dummmmmmyBatchDamageNumberFlush = v
+      );
+        builder.pop();
+
+        builder.comment("Lithostitched patches.").push("lithostitched");
+        gate(
+         builder.comment(
+               "Build a template pool's weighted shuffle from primitive arrays instead of rebuilding a boxed entry list three times per jigsaw connector."
+            )
+            .define("fastTemplateShuffle", true),
+         v -> lithostitchedFastTemplateShuffle = v
+      );
+        gate(
+         builder.comment("Merge Lithostitched's biome modifiers into Forge's list once per world load instead of once per biome.")
+            .define("cacheBiomeModifierList", true),
+         v -> lithostitchedCacheBiomeModifierList = v
+      );
+        gate(
+         builder.comment("Resolve a block swap processor's id to id table to a block to block table once instead of three registry lookups per placed block.")
+            .define("cacheBlockSwapMap", true),
+         v -> lithostitchedCacheBlockSwapMap = v
+      );
+        builder.pop();
+    
+        builder.comment("Chunk Sending patches.").push("chunksending");
+        gate(builder
+                .comment("Ticks between sweeps of Chunk Sending's expired chunk packet caches. Stock walks every cached chunk packet every server tick looking for ones older than five minutes. Sweeping once a second finds the same entries a moment later. 1 restores stock behaviour.")
+                .defineInRange("cacheSweepInterval", 20, 1, 1200), 1, v -> chunksendingCacheSweepInterval = v);
+        builder.pop();
+        builder.comment("The Illusioner patches.").push("illusioner");
+        gate(builder
+                .comment("Skip the encounter manager tick while no Illusioner fight is running and nobody is waiting to be returned. Stock copies the encounter list every server tick even when it is empty.")
+                .define("skipIdleEncounterTick", true), v -> illusionerSkipIdleEncounterTick = v);
+        builder.pop();
+        builder.comment("Iceberg patches.").push("iceberg");
+        gate(builder
+                .comment("Remember the result of Iceberg's AzureLib class lookups in its armor layer hook. Stock looks both classes up by name for every armor piece every frame, and the one that does not exist throws a new ClassNotFoundException each time. Client.")
+                .define("cacheArmorClassLookup", true), v -> icebergCacheArmorClassLookup = v);
+        builder.pop();
+        builder.comment("Lodestone patches.").push("lodestone");
+        gate(builder
+                .comment("Only copy the depth buffer for Lodestone's deferred effects on frames where one of them was actually queued. Stock blits the full depth buffer every frame. Client.")
+                .define("skipIdleDepthCopy", true), v -> lodestoneSkipIdleDepthCopy = v);
+        builder.pop();
+        builder.comment("KubeJS patches.").push("kubejs");
+        gate(builder
+                .comment("Skip KubeJS' world highlight pass (buffer clear, depth copy and outline shader) while nothing in the world is highlighted. Client.")
+                .define("skipIdleHighlightPass", true), v -> kubejsSkipIdleHighlightPass = v);
+        builder.pop();
     }
 
     public static void onLoad(ModConfigEvent.Loading event) {
