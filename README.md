@@ -59,20 +59,11 @@ NeoForge 1.21.1 port of Collections of Optimizations. It fixes lag, stutter and 
 - Zeta
 - Vanilla (world generation, loading, entity tracking, rendering, memory)
 
-## Building
-
-Put the NeoForge 1.21.1 jars of the mods above in `libs/` (compile only, not shipped), then run:
-
-```
-./gradlew build
-```
 
 ## Credits
 
 - Original mod: Collections of Optimizations by Misanthropy (Forge 1.20.1)
 - NeoForge 1.21.1 port this is based on: GLDYM - https://github.com/GLDYM/Collections-Of-Optimizations-Neoforge
-- Alex's Caves and Alex's Mobs support built against the NeoForge 1.21.1 "Neo" ports by TysonTheEmber (based on crabsatellite's 1.21.1 branch)
-- 0.0.5 update by avectus1
 
 ## Disclaimer
 
