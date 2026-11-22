@@ -40,6 +40,12 @@ public final class CollectionsOfOptimizations {
             ClientTickStamp.register();
             CameraShakeScanCache.register();
             ClientLevelRelease.register();
+            if (ModList.get().getModContainerById("flywheel").filter(mod -> mod.getModInfo().getVersion().getMajorVersion() >= 1).isPresent()) {
+                com.misanthropy.collections_of_optimizations.core.FlywheelWarm.register();
+            }
+            if (ModList.get().isLoaded("xaerolib")) {
+                com.misanthropy.collections_of_optimizations.core.XaeroConfigFrame.register();
+            }
             if (ModList.get().isLoaded("emi")) {
                 EmiHistoryRelease.register();
             }

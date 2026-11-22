@@ -109,6 +109,10 @@ public class CoOMixinPlugin implements IMixinConfigPlugin {
             Map.entry("doespotatotick", "doespotatotick"),
             Map.entry("structureessentials", "structureessentials"),
             Map.entry("gnetum", "gnetum"),
+            Map.entry("flywheel", "flywheel"),
+            Map.entry("byepregen", "byepregen"),
+            Map.entry("ironslib", "irons_lib"),
+            Map.entry("guardvillagers", "guardvillagers"),
             Map.entry("zeta", "zeta")
     );
 

@@ -9,6 +9,14 @@ import java.util.function.DoubleConsumer;
 import java.util.function.IntConsumer;
 
 public final class CoOConfig {
+    public static boolean xaerolibFrameConfigMemo = true;
+    public static int guardvillagersShieldFollowInterval = 10;
+    public static int alexsmobsRaccoonBegInterval = 4;
+    public static boolean flywheelWarmPrograms = true;
+    public static boolean flywheelParkWorkers = true;
+    public static boolean createSkipIdleBehaviourTicks = true;
+    public static boolean createReleaseContraptionRenderLevels = true;
+    public static boolean createCacheRuntimeData = true;
     public static boolean vanillaWeakBiomeSearchSlot = true;
     public static boolean vanillaTickingLevelMemo = true;
     public static boolean vanillaSnapshotEntityUnloads = true;
@@ -1078,6 +1086,27 @@ public final class CoOConfig {
 
 
         builder.comment("Create patches.").push("create");
+        gate(
+         builder.comment(
+               "Free each contraption's client render world when the contraption goes away. Every moving contraption the client renders gets its own small copy of a world, and Flywheel builds a visualization manager for it the moment a block entity is placed in that copy. Flywheel only lets go of a manager when its world unloads, and these copies never unload, so every contraption you have ever seen stays in memory with its blocks, its block entities, the real world it points to and the manager's buffers, until the next resource reload. With this on the copy is treated as unloaded when its contraption entity leaves the client, which is exactly what Flywheel does for a real world. Client."
+            )
+            .define("releaseContraptionRenderLevels", true),
+         v -> createReleaseContraptionRenderLevels = v
+      );
+        gate(
+         builder.comment(
+               "Skip the behaviours of a Create block that have nothing to tick. Every tick every Create machine, shaft and cog walks all of its behaviours and calls their tick, and for most behaviours that tick only counts down a timer that leads to nothing because they never react to it. With this on only behaviours that actually do something on tick or on their slow tick are called, in the same order; the rest are skipped. Both sides."
+            )
+            .define("skipIdleBehaviourTicks", true),
+         v -> createSkipIdleBehaviourTicks = v
+      );
+        gate(
+         builder.comment(
+               "Create works out its wood cutting recipes by checking every item in the game against a few patterns, on the main thread, every time a world is opened. The answer only depends on which items exist, so work it out once in the background when loading finishes and reuse it."
+            )
+            .define("cacheRuntimeData", true),
+         v -> createCacheRuntimeData = v
+      );
         gate(builder
                 .comment("Read each block position at most once per big outline pick. Stock tests a 3x3x3 neighbourhood at every raycast step, so neighbouring steps re-read the same positions.")
                 .define("dedupeBigOutlineProbes", true), v -> createDedupeBigOutlineProbes = v);
@@ -1090,6 +1119,9 @@ public final class CoOConfig {
         builder.pop();
 
         builder.comment("XaeroLib patches.").push("xaerolib");
+        gate(builder
+                .comment("Remember Xaero's effective config values for the rest of the frame on the render thread. The minimap and world map ask for them thousands of times per frame and every ask walks redirectors, server enforcement and the profile table. Client.")
+                .define("frameConfigMemo", true), v -> xaerolibFrameConfigMemo = v);
         gate(
          builder.comment(
                "Keep the map colour Xaero's minimap and world map work out for each block texture in a small file and reuse it next time. Without it, the first time each kind of block shows up in a session the map reads that block's texture out of its mod file on the render thread, a few milliseconds each, which is a stutter when you walk into a new structure. The file starts over by itself when mods or resource packs change."
@@ -1652,6 +1684,9 @@ public final class CoOConfig {
 
 
         builder.comment("Alex's Mobs patches.").push("alexsmobs");
+        gate(builder
+                .comment("Ticks between an idle raccoon's checks for a nearby player holding food. Stock checks every tick. 1 restores stock behaviour.")
+                .defineInRange("raccoonBegInterval", 4, 1, 40), 1, v -> alexsmobsRaccoonBegInterval = v);
         gate(builder
                 .comment("Stop attaching the snow leopard and tiger avoidance goals to every creeper.")
                 .define("skipCreeperAvoidGoals", true), v -> alexsmobsSkipCreeperAvoidGoals = v);
@@ -2524,6 +2559,29 @@ public final class CoOConfig {
             .define("memoCacheSettings", true),
          v -> gnetumMemoCacheSettings = v
       );
+        builder.pop();
+        
+        builder.comment("Flywheel patches (Create's renderer).").push("flywheel");
+        gate(
+         builder.comment(
+               "Wake Flywheel's worker threads by parking and unparking them instead of a shared lock. With the lock, the render thread had to wait for a low priority worker that was holding it while chunk generation kept every core busy, which showed up as 50 to 90 ms hitches while flying. Takes effect on the next launch."
+            )
+            .define("parkWorkers", true),
+         v -> flywheelParkWorkers = v
+      );
+        gate(
+         builder.comment(
+               "Remember which Flywheel shader programs the game had to build (chests, bells, Create machines and so on) and build them again right after start-up, one per tick, starting on the title screen. Flywheel only builds a program the first time something needs it, and each one froze the game for about 20 ms, so walking into a village or a structure stuttered once per new kind of block. The list is kept in config/collections_of_optimizations/warm-flywheel.txt. Client."
+            )
+            .define("warmPrograms", true),
+         v -> flywheelWarmPrograms = v
+      );
+        builder.pop();
+    
+        builder.comment("Guard Villagers patches.").push("guardvillagers");
+        gate(builder
+                .comment("Ticks between a guard's searches for a shield guard to follow. Stock searches the area every tick. 1 restores stock behaviour.")
+                .defineInRange("shieldFollowInterval", 10, 1, 100), 1, v -> guardvillagersShieldFollowInterval = v);
         builder.pop();
     }
 
