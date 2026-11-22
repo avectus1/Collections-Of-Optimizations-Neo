@@ -3,6 +3,11 @@ package com.misanthropy.collections_of_optimizations;
 import com.misanthropy.collections_of_optimizations.core.CurioPresenceCache;
 import com.misanthropy.collections_of_optimizations.core.CuriosSlotCache;
 import com.misanthropy.collections_of_optimizations.core.ClientTickStamp;
+import com.misanthropy.collections_of_optimizations.core.CameraShakeScanCache;
+import com.misanthropy.collections_of_optimizations.core.ClientLevelRelease;
+import com.misanthropy.collections_of_optimizations.core.ElysiumSoundTransformers;
+import com.misanthropy.collections_of_optimizations.core.EmiHistoryRelease;
+import com.misanthropy.collections_of_optimizations.core.GhostPlayerPurge;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.ModList;
@@ -19,9 +24,29 @@ public final class CollectionsOfOptimizations {
         modContainer.registerConfig(ModConfig.Type.COMMON, CoOConfig.SPEC);
         modEventBus.addListener(CoOConfig::onLoad);
         modEventBus.addListener(CoOConfig::onReload);
+        if (Boolean.getBoolean("coo.audit")) {
+            modEventBus.addListener(net.neoforged.fml.event.lifecycle.FMLLoadCompleteEvent.class, event -> {
+                org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger("coo-audit");
+                try {
+                    org.spongepowered.asm.mixin.MixinEnvironment.getCurrentEnvironment().audit();
+                    log.info("[coo-audit] mixin audit done");
+                } catch (Throwable throwable) {
+                    log.error("[coo-audit] audit threw", throwable);
+                }
+            });
+        }
         if (FMLEnvironment.dist == Dist.CLIENT) {
             ClientConfigScreen.register(modContainer);
             ClientTickStamp.register();
+            CameraShakeScanCache.register();
+            ClientLevelRelease.register();
+            if (ModList.get().isLoaded("emi")) {
+                EmiHistoryRelease.register();
+            }
+        }
+        GhostPlayerPurge.register();
+        if (ModList.get().isLoaded("elysium_api")) {
+            ElysiumSoundTransformers.register();
         }
         if (ModList.get().isLoaded("curios")) {
             CuriosSlotCache.register();
