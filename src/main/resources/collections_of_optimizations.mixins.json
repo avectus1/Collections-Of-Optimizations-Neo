@@ -202,7 +202,10 @@
     "redomesticate.MixinTameableUtilsFastCheck",
     "majruszsdifficulty.MixinSpawnStateLimitMemo",
     "majruszsdifficulty.MixinMobCountsLimitMemo",
-    "majruszsdifficulty.MixinSpawnRateEventNoPlayerScan"
+    "majruszsdifficulty.MixinSpawnRateEventNoPlayerScan",
+    "arselemental.MixinDripstoneSpikeEntityReloadGuard",
+    "arselemental.MixinWaterJetReloadGuard",
+    "arselemental.MixinMagnetSpellReloadGuard"
   ],
   "client": [
     "alexscaves.MixinBiomeSamplerTickCache",

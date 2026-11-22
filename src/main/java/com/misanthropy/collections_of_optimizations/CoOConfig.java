@@ -28,6 +28,7 @@ public final class CoOConfig {
     public static boolean vanillaMemoBlockTickChunk = true;
     public static boolean vanillaSpawnChunkScope = true;
     public static boolean stutterfixPriorityOnce = true;
+    public static boolean arselementalSpellEntityReloadGuard = true;
     public static boolean redomesticateFastTamedCheck = true;
     public static boolean majruszsdifficultySpawnLimitMemo = true;
     public static boolean majruszsdifficultySkipSpawnRatePlayerScan = true;
@@ -2594,6 +2595,11 @@ public final class CoOConfig {
         gate(builder
                 .comment("Ticks between a guard's searches for a shield guard to follow. Stock searches the area every tick. 1 restores stock behaviour.")
                 .defineInRange("shieldFollowInterval", 10, 1, 100), 1, v -> guardvillagersShieldFollowInterval = v);
+        builder.pop();
+
+        builder.comment("Ars Elemental fixes.").push("arselemental");
+        gate(builder.comment("Dripstone spikes and water jets do not save their spell, so after a world reload (or /summon) they crash the server on their next tick. Remove such spell-less leftovers instead.")
+                .define("spellEntityReloadGuard", true), v -> arselementalSpellEntityReloadGuard = v);
         builder.pop();
 
         builder.comment("StutterFix patches.").push("stutterfix");
