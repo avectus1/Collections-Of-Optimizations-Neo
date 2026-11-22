@@ -195,7 +195,14 @@
     "xaerolib.MixinXaeroServerConfigManagerRelease",
     "zeta.MixinForgeEventsRemapper",
     "zeta.MixinStructureBlockReplacementHandler",
-    "zeta.ZetaStructureReplacementAccessor"
+    "zeta.ZetaStructureReplacementAccessor",
+    "vanilla.MixinNaturalSpawnerScope",
+    "vanilla.MixinStructureManagerSpawnScope",
+    "stutterfix.MixinStutterFixPriorityOnce",
+    "redomesticate.MixinTameableUtilsFastCheck",
+    "majruszsdifficulty.MixinSpawnStateLimitMemo",
+    "majruszsdifficulty.MixinMobCountsLimitMemo",
+    "majruszsdifficulty.MixinSpawnRateEventNoPlayerScan"
   ],
   "client": [
     "alexscaves.MixinBiomeSamplerTickCache",

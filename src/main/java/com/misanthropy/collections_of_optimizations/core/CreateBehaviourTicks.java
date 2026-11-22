@@ -8,7 +8,15 @@ public final class CreateBehaviourTicks {
    private static final ClassValue<Boolean> TICKS = new ClassValue<Boolean>() {
       protected Boolean computeValue(Class<?> type) {
          for (Class<?> current = type; current != null && current != BlockEntityBehaviour.class; current = current.getSuperclass()) {
-            for (Method method : current.getDeclaredMethods()) {
+            Method[] methods;
+            try {
+               methods = current.getDeclaredMethods();
+            } catch (LinkageError e) {
+               // A behaviour that mentions an optional mod's classes (ComputerCraft peripherals and the like)
+               // cannot be inspected when that mod is missing; keep ticking it like Create does.
+               return true;
+            }
+            for (Method method : methods) {
                if (method.getParameterCount() == 0 && (method.getName().equals("tick") || method.getName().equals("lazyTick"))) {
                   return true;
                }

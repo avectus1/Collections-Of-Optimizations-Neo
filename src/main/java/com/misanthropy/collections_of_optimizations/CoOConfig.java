@@ -26,6 +26,11 @@ public final class CoOConfig {
     public static boolean vanillaReuseBiomeListEncoding = true;
     public static boolean vanillaMultifaceWithoutStreams = true;
     public static boolean vanillaMemoBlockTickChunk = true;
+    public static boolean vanillaSpawnChunkScope = true;
+    public static boolean stutterfixPriorityOnce = true;
+    public static boolean redomesticateFastTamedCheck = true;
+    public static boolean majruszsdifficultySpawnLimitMemo = true;
+    public static boolean majruszsdifficultySkipSpawnRatePlayerScan = true;
     public static boolean vanillaFreeLeakedRenderTargets = true;
     public static boolean vanillaFlatBiomeSearch = true;
     public static boolean vanillaFastZipPackPaths = true;
@@ -1846,6 +1851,13 @@ public final class CoOConfig {
       );
         gate(
          builder.comment(
+               "During each natural spawn attempt, look up the chunks it touches once and reuse them for every biome, structure and spawn-range check in that attempt, and reuse the spawn list the attempt just built instead of building it a second time. Chunks cannot load, unload or change tickets in the middle of an attempt, so the spawns are the same. With many mods the chunk cache is wrapped several times over, which made these lookups the main cost of mob spawning."
+            )
+            .define("spawnChunkScope", true),
+         v -> vanillaSpawnChunkScope = v
+      );
+        gate(
+         builder.comment(
                "Terrain height lookups (structure placement, meteorites, spawn checks) each build the noise for one 4x4 block cell from scratch, so asking for the 16 columns of the same cell computes the same corner noise 16 times. Keep the last few cells per worker thread and only redo the cheap part per column. Same heights as before."
             )
             .define("reuseNoiseColumnCells", true),
@@ -2582,6 +2594,23 @@ public final class CoOConfig {
         gate(builder
                 .comment("Ticks between a guard's searches for a shield guard to follow. Stock searches the area every tick. 1 restores stock behaviour.")
                 .defineInRange("shieldFollowInterval", 10, 1, 100), 1, v -> guardvillagersShieldFollowInterval = v);
+        builder.pop();
+
+        builder.comment("StutterFix patches.").push("stutterfix");
+        gate(builder.comment("StutterFix sets the server thread's priority from inside the server loop, which asks the operating system for the same priority every tick. Only ask when the priority would change.")
+                .define("priorityOnce", true), v -> stutterfixPriorityOnce = v);
+        builder.pop();
+
+        builder.comment("Redomesticate patches.").push("redomesticate");
+        gate(builder.comment("Redomesticate checks whether a mob is tamed several times per tick for every mob. Remember per entity class whether it can be tamed through Redomesticate, instead of repeating a slow interface check each time. Same answers.")
+                .define("fastTamedCheck", true), v -> redomesticateFastTamedCheck = v);
+        builder.pop();
+
+        builder.comment("Majrusz's Difficulty patches.").push("majruszsdifficulty");
+        gate(builder.comment("The mob cap per category is asked for every chunk while spawning, and Majrusz's Difficulty answers each ask by dispatching an event. Its answer only changes with the game stage or a blood moon, so keep each category's answer for the rest of the tick.")
+                .define("spawnLimitMemo", true), v -> majruszsdifficultySpawnLimitMemo = v);
+        gate(builder.comment("Majrusz's Difficulty builds a spawn-rate event per chunk and mob category every tick, and each one searches for the nearest player, which none of its listeners use. Skip the search.")
+                .define("skipSpawnRatePlayerScan", true), v -> majruszsdifficultySkipSpawnRatePlayerScan = v);
         builder.pop();
     }
 
