@@ -23,10 +23,9 @@ public abstract class MixinCataclysmShakeScan {
                     value = "INVOKE",
                     target = "Lnet/minecraft/world/level/Level;getEntitiesOfClass(Ljava/lang/Class;Lnet/minecraft/world/phys/AABB;)Ljava/util/List;"
             ),
-            remap = true,
             require = 0
     )
-    private List<Entity> coo$cacheShakeScan(Level level, Class<Entity> type, AABB box,
+    private static List<Entity> coo$cacheShakeScan(Level level, Class<Entity> type, AABB box,
                                             Operation<List<Entity>> original) {
         if (!CoOConfig.cataclysmCacheShakeScan) {
             return original.call(level, type, box);

@@ -29,7 +29,7 @@ public abstract class MixinCurioInventoryMapView {
             require = 0
     )
     private Map<String, ICurioStacksHandler> coo$reuseCurioMapView(Map<String, ICurioStacksHandler> backing) {
-        if (!CoOConfig.curiosReuseMapView || backing == null) {
+        if (!CoOConfig.curiosReuseCurioMapView || backing == null) {
             return Collections.unmodifiableMap(backing);
         }
         if (this.coo$viewBacking != backing) {

@@ -25,7 +25,7 @@ public abstract class MixinCorpseEntityIdleScan {
     private boolean coo$emptyCached;
 
     @WrapWithCondition(
-            method = "m_8119_()V",
+            method = "tick()V",
             at = @At(
                     value = "INVOKE",
                     target = "Lde/maxhenkel/corpse/entities/CorpseEntity;setIsSkeleton(Z)V"
@@ -46,7 +46,7 @@ public abstract class MixinCorpseEntityIdleScan {
     }
 
     @WrapOperation(
-            method = "m_8119_()V",
+            method = "tick()V",
             at = @At(
                     value = "INVOKE",
                     target = "Lde/maxhenkel/corpse/entities/CorpseEntity;isEmpty()Z"

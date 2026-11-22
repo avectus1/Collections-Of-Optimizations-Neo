@@ -28,7 +28,7 @@ public abstract class MixinEVIronFarmTileentity {
             method = "tick()V",
             at = @At(
                     value = "INVOKE",
-                    target = "Lde/maxhenkel/easyvillagers/blocks/tileentity/IronFarmTileentity;m_6596_()V",
+                    target = "Lde/maxhenkel/easyvillagers/blocks/tileentity/IronFarmTileentity;setChanged()V",
                     ordinal = 0
             ),
             require = 0

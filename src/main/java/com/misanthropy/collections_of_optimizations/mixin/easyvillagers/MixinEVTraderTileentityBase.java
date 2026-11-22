@@ -28,7 +28,7 @@ public abstract class MixinEVTraderTileentityBase {
             method = "tickServer()V",
             at = @At(
                     value = "INVOKE",
-                    target = "Lde/maxhenkel/easyvillagers/blocks/tileentity/TraderTileentityBase;m_6596_()V",
+                    target = "Lde/maxhenkel/easyvillagers/blocks/tileentity/TraderTileentityBase;setChanged()V",
                     ordinal = 0
             ),
             require = 0

@@ -19,7 +19,8 @@ public abstract class MixinBasaltBarreraExtension {
             cancellable = true,
             require = 0
     )
-    private static void coo$skipChunksWithoutBasaltBarrera(ChunkAccess chunk,
+    private static void coo$skipChunksWithoutBasaltBarrera(java.util.function.Function<net.minecraft.core.BlockPos, net.minecraft.core.Holder<net.minecraft.world.level.biome.Biome>> biomeGetter,
+                                                           ChunkAccess chunk,
                                                            WorldGenRegion region,
                                                            ChunkGenerator generator,
                                                            CallbackInfo ci) {

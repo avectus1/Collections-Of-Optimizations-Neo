@@ -14,7 +14,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(value = Charm.class, remap = false)
 public abstract class MixinCharmInventoryTick {
 
-    @Inject(method = "m_6883_", at = @At("HEAD"), cancellable = true, require = 0)
+    @Inject(method = "inventoryTick", at = @At("HEAD"), cancellable = true, require = 0)
     private void coo$skipStowedCharmTick(ItemStack stack, Level level, Entity entity, int slot, boolean selected, CallbackInfo ci) {
         if (!CoOConfig.arsadditionsSkipStowedCharmTick) {
             return;

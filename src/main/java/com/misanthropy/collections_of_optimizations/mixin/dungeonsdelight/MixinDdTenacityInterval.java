@@ -20,7 +20,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(targets = "net.yirmiri.dungeonsdelight.common.effect.TenacityEffect", remap = false)
 public abstract class MixinDdTenacityInterval {
 
-    @Inject(method = "m_6584_", at = @At("HEAD"), cancellable = true, require = 0)
+    @Inject(method = "isDurationEffectTick", at = @At("HEAD"), cancellable = true, require = 0)
     private void coo$tickEveryTick(int duration, int amplifier, CallbackInfoReturnable<Boolean> cir) {
         if (CoOConfig.dungeonsdelightPerPlayerTenacityInterval) {
             cir.setReturnValue(true);
@@ -28,8 +28,8 @@ public abstract class MixinDdTenacityInterval {
     }
 
     @WrapWithCondition(
-            method = "m_6742_",
-            at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/player/Player;m_5634_(F)V"),
+            method = "applyEffectTick",
+            at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/player/Player;heal(F)V"),
             require = 0
     )
     private boolean coo$healOnOwnInterval(Player player, float amount, @Local(argsOnly = true) int amplifier) {
@@ -37,8 +37,8 @@ public abstract class MixinDdTenacityInterval {
     }
 
     @WrapWithCondition(
-            method = "m_6742_",
-            at = @At(value = "INVOKE", target = "Lnet/minecraft/world/food/FoodData;m_38710_(Lnet/minecraft/world/entity/player/Player;)V"),
+            method = "applyEffectTick",
+            at = @At(value = "INVOKE", target = "Lnet/minecraft/world/food/FoodData;tick(Lnet/minecraft/world/entity/player/Player;)V"),
             require = 0
     )
     private boolean coo$foodTickOnOwnInterval(FoodData food, Player player, @Local(argsOnly = true) int amplifier) {

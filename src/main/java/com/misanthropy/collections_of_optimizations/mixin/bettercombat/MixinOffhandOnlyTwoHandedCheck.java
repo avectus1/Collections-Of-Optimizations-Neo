@@ -14,7 +14,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public abstract class MixinOffhandOnlyTwoHandedCheck {
 
     @TargetHandler(
-            mixin = "net.bettercombat.mixin.PlayerEntityMixin",
+            mixin = "net.bettercombat.mixin.player.PlayerEntityMixin",
             name = "getEquippedStack_Pre"
     )
     @WrapMethod(method = "@MixinSquared:Handler", require = 0)

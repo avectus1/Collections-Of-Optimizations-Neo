@@ -17,8 +17,8 @@ import org.spongepowered.asm.mixin.injection.At;
 public abstract class MixinDdMonsterYamTick {
 
     @WrapOperation(
-            method = "m_8119_",
-            at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/LivingEntity;m_7292_(Lnet/minecraft/world/effect/MobEffectInstance;)Z"),
+            method = "tick",
+            at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/LivingEntity;addEffect(Lnet/minecraft/world/effect/MobEffectInstance;)Z"),
             require = 0
     )
     private boolean coo$leanAura(LivingEntity target, MobEffectInstance effect, Operation<Boolean> original) {
@@ -36,8 +36,8 @@ public abstract class MixinDdMonsterYamTick {
     }
 
     @WrapOperation(
-            method = "m_8119_",
-            at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/Level;m_7967_(Lnet/minecraft/world/entity/Entity;)Z"),
+            method = "tick",
+            at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/Level;addFreshEntity(Lnet/minecraft/world/entity/Entity;)Z"),
             require = 0
     )
     private boolean coo$noDoubleAdd(Level level, Entity entity, Operation<Boolean> original) {

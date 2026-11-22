@@ -20,7 +20,7 @@ public abstract class MixinArsAdditionsPortalScan {
             method = "isPlayerInStructure",
             at = @At(
                     value = "INVOKE",
-                    target = "Lnet/minecraft/world/level/StructureManager;m_220491_(Lnet/minecraft/core/BlockPos;Lnet/minecraft/tags/TagKey;)Lnet/minecraft/world/level/levelgen/structure/StructureStart;"
+                    target = "Lnet/minecraft/world/level/StructureManager;getStructureWithPieceAt(Lnet/minecraft/core/BlockPos;Lnet/minecraft/tags/TagKey;)Lnet/minecraft/world/level/levelgen/structure/StructureStart;"
             ),
             require = 0)
     private static StructureStart coo$cacheRuinedPortalMiss(StructureManager manager, BlockPos pos, TagKey<Structure> tag,

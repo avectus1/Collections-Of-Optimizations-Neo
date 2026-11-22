@@ -22,7 +22,7 @@ public abstract class MixinDdMonsterEffectSwap {
     @Final
     private Holder<MobEffect> normalVariant;
 
-    @Inject(method = "m_6742_", at = @At("HEAD"), cancellable = true, require = 0)
+    @Inject(method = "applyEffectTick", at = @At("HEAD"), cancellable = true, require = 0)
     private void coo$leanSwap(LivingEntity living, int amplifier, CallbackInfo ci) {
         if (!CoOConfig.dungeonsdelightLeanMonsterEffectSwap) {
             return;
