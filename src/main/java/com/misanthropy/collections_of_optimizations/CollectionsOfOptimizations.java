@@ -60,6 +60,9 @@ public final class CollectionsOfOptimizations {
         GhostPlayerPurge.register();
         com.misanthropy.collections_of_optimizations.core.StructureTemplateRelease.register();
         com.misanthropy.collections_of_optimizations.core.ModLeakGuards.register();
+        if (ModList.get().isLoaded("eeeabsmobs")) {
+            com.misanthropy.collections_of_optimizations.core.EeeabTargetRelease.register();
+        }
         if (ModList.get().isLoaded("more_quest_types")) {
             com.misanthropy.collections_of_optimizations.core.MqtBufferSweep.register();
         }

@@ -37,6 +37,8 @@ public final class CoOConfig {
     public static boolean xaeroSlimeSeedsLeakGuard = true;
     public static boolean morequesttypesBufferSweep = true;
     public static boolean clientUnloadRelease = true;
+    public static boolean majruszsdifficultyForgetPhantomPlayer = true;
+    public static boolean eeeabsmobsBossTargetRelease = true;
     public static boolean citadelSkipSameTickRate = true;
     public static boolean elysiumapiFastTransformerLookup = true;
     public static boolean morequesttypesFlatSummonScan = true;
@@ -2673,6 +2675,10 @@ public final class CoOConfig {
                 .define("moreQuestTypesEventBuffers", true), v -> morequesttypesBufferSweep = v);
         gate(builder.comment("Models and renderers that remember the last mob they drew (every Citadel model for Alex's Mobs and Alex's Caves, Bosses of Mass Destruction's boss lights, Corpse's renderer) keep that mob's old client world alive after you leave or change dimension. Let them forget when a client world unloads. Client.")
                 .define("forgetOldWorldMobs", true), v -> clientUnloadRelease = v);
+        gate(builder.comment("Majrusz's Difficulty keeps the last player its phantom check looked at, after they leave or respawn. Forget it at the end of each phantom spawner tick (it is only read within the tick).")
+                .define("majruszPhantomPlayer", true), v -> majruszsdifficultyForgetPhantomPlayer = v);
+        gate(builder.comment("EEEAB's Immortal boss keeps players who logged out or respawned in its target list while it lives. Drop them when a player leaves or respawns.")
+                .define("eeeabImmortalTargets", true), v -> eeeabsmobsBossTargetRelease = v);
         builder.pop();
 
         builder.comment("StutterFix patches.").push("stutterfix");
