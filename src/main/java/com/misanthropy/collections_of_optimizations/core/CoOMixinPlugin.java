@@ -114,6 +114,8 @@ public class CoOMixinPlugin implements IMixinConfigPlugin {
             Map.entry("ironslib", "irons_lib"),
             Map.entry("guardvillagers", "guardvillagers"),
             Map.entry("stutterfix", "stutterfix"),
+            Map.entry("morequesttypes", "more_quest_types"),
+            Map.entry("dungeonnowloading", "dungeonnowloading"),
             Map.entry("redomesticate", "redomesticate"),
             Map.entry("majruszsdifficulty", "majruszsdifficulty"),
             Map.entry("zeta", "zeta")

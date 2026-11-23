@@ -205,7 +205,11 @@
     "majruszsdifficulty.MixinSpawnRateEventNoPlayerScan",
     "arselemental.MixinDripstoneSpikeEntityReloadGuard",
     "arselemental.MixinWaterJetReloadGuard",
-    "arselemental.MixinMagnetSpellReloadGuard"
+    "arselemental.MixinMagnetSpellReloadGuard",
+    "citadel.MixinCitadelTickRateNoResend",
+    "elysiumapi.MixinBlockTransformerSlot",
+    "elysiumapi.MixinPropertiesTransformerFastLookup",
+    "dungeonnowloading.DnlVertexEffectAccessor"
   ],
   "client": [
     "alexscaves.MixinBiomeSamplerTickCache",
@@ -336,7 +340,11 @@
     "xaeroworldmap.MixinRegionTextureUnpackPbo",
     "xaeroworldmap.MixinTextureUploadBenchmarkSkip",
     "xaeroworldmap.MixinXaeroMapHugeMethods",
-    "xaeroworldmap.MixinXaeroWorldMapCoreChunkCleanField"
+    "xaeroworldmap.MixinXaeroWorldMapCoreChunkCleanField",
+    "morequesttypes.MixinSummonedRendererFlatScan",
+    "notenoughanimations.MixinPlayerFreezeMemoSlot",
+    "notenoughanimations.MixinFreezingAnimationTickMemo",
+    "dungeonnowloading.DnlSoundHandlerAccessor"
   ],
   "injectors": {
     "defaultRequire": 0

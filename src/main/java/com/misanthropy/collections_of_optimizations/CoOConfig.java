@@ -28,6 +28,11 @@ public final class CoOConfig {
     public static boolean vanillaMemoBlockTickChunk = true;
     public static boolean vanillaSpawnChunkScope = true;
     public static boolean stutterfixPriorityOnce = true;
+    public static boolean citadelSkipSameTickRate = true;
+    public static boolean elysiumapiFastTransformerLookup = true;
+    public static boolean morequesttypesFlatSummonScan = true;
+    public static boolean notenoughanimationsFreezeCheckPerTick = true;
+    public static boolean dungeonnowloadingLeakGuard = true;
     public static boolean arselementalSpellEntityReloadGuard = true;
     public static boolean redomesticateFastTamedCheck = true;
     public static boolean majruszsdifficultySpawnLimitMemo = true;
@@ -2600,6 +2605,31 @@ public final class CoOConfig {
         builder.comment("Ars Elemental fixes.").push("arselemental");
         gate(builder.comment("Dripstone spikes and water jets do not save their spell, so after a world reload (or /summon) they crash the server on their next tick. Remove such spell-less leftovers instead.")
                 .define("spellEntityReloadGuard", true), v -> arselementalSpellEntityReloadGuard = v);
+        builder.pop();
+
+        builder.comment("Citadel patches (2).").push("citadel_tickrate");
+        gate(builder.comment("Citadel resets the server tick rate at the start of every tick even when nothing changed, which recomputes tick timing and sends a ticking-state packet to every player 20 times a second. Skip it when the rate is already the one being set.")
+                .define("skipSameTickRate", true), v -> citadelSkipSameTickRate = v);
+        builder.pop();
+
+        builder.comment("Elysium API patches (2).").push("elysiumapi_transformers");
+        gate(builder.comment("Keep each block's Elysium property transformer on the block itself instead of looking it up in a concurrent map on every block state check (is it air, does it random tick...). Refreshed whenever Elysium reloads its transformers.")
+                .define("fastTransformerLookup", true), v -> elysiumapiFastTransformerLookup = v);
+        builder.pop();
+
+        builder.comment("More Quest Types patches.").push("morequesttypes");
+        gate(builder.comment("Find quest-summoned entities for their floating texture from the client's flat entity list instead of collecting every entity within 128 blocks every frame. Client.")
+                .define("flatSummonScan", true), v -> morequesttypesFlatSummonScan = v);
+        builder.pop();
+
+        builder.comment("Not Enough Animations patches (2).").push("notenoughanimations_freeze");
+        gate(builder.comment("Check whether a player stands in powder snow once per player per tick instead of every frame. Client.")
+                .define("freezeCheckPerTick", true), v -> notenoughanimationsFreezeCheckPerTick = v);
+        builder.pop();
+
+        builder.comment("Dungeon Now Loading leak fixes.").push("dungeonnowloading");
+        gate(builder.comment("Forget Vertex Transmission links when the effect runs out or is cured (not only when the mob is removed), empty them when the server stops, and drop finished looping sounds that DNL never forgets, which held on to old worlds.")
+                .define("leakGuard", true), v -> dungeonnowloadingLeakGuard = v);
         builder.pop();
 
         builder.comment("StutterFix patches.").push("stutterfix");

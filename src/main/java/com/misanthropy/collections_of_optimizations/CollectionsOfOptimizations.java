@@ -46,11 +46,17 @@ public final class CollectionsOfOptimizations {
             if (ModList.get().isLoaded("xaerolib")) {
                 com.misanthropy.collections_of_optimizations.core.XaeroConfigFrame.register();
             }
+            if (ModList.get().isLoaded("dungeonnowloading")) {
+                com.misanthropy.collections_of_optimizations.core.DnlClientLeakGuard.register();
+            }
             if (ModList.get().isLoaded("emi")) {
                 EmiHistoryRelease.register();
             }
         }
         GhostPlayerPurge.register();
+        if (ModList.get().isLoaded("dungeonnowloading")) {
+            com.misanthropy.collections_of_optimizations.core.DnlLeakGuard.register();
+        }
         if (ModList.get().isLoaded("elysium_api")) {
             ElysiumSoundTransformers.register();
         }
