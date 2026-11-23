@@ -227,7 +227,9 @@
     "eeeabsmobs.ImmortalBossTargetsAccessor",
     "undergarden.MixinUgRotspawnRepelScan",
     "undergarden.MixinUgScintlingGooCheck",
-    "undergarden.MixinUgMuncherGriefing"
+    "undergarden.MixinUgMuncherGriefing",
+    "geckolib.MixinGeckoEasingType",
+    "geckolib.MixinGeckoKeyframePoint"
   ],
   "client": [
     "alexscaves.MixinBiomeSamplerTickCache",
@@ -383,7 +385,8 @@
     "subtleeffects.MixinSeBiomeEffectsManagerBiome",
     "perception.MixinPerceptionTrailWrapper",
     "shouldersurfing.MixinSsMatchPredicateMemo",
-    "shouldersurfing.MixinSsItemPropertyIds"
+    "shouldersurfing.MixinSsItemPropertyIds",
+    "ironsspellbooks.MixinIsbAnvilRecipeSharedScrolls"
   ],
   "injectors": {
     "defaultRequire": 0

@@ -17,6 +17,7 @@ By avectus1
 - The Undergarden: Rotspawn skip their big repellent scan when nothing nearby can scare them, Scintlings only check griefing when they can leave goo
 - Perception: trail colors are parsed once and trails skip an unneeded player search
 - Shoulder Surfing: adaptive crosshair item patterns are compiled once
+- GeckoLib: easing curves are built once instead of per bone and frame, keyframe lookups skip throwaway objects (works alongside GeckoLib Better FPS)
 
 ### Memory
 - Unused structure templates are released after 5 minutes idle
@@ -25,6 +26,7 @@ By avectus1
 - More Quest Types event buffers are now cleared regularly
 - Majrusz's Difficulty no longer keeps the last player checked by the phantom spawner
 - EEEAB's Mobs Immortal boss no longer keeps players who left or respawned in its target list
+- Iron's Spellbooks: Arcane Anvil recipe pages share spell data instead of copying it for every weapon, spell and level
 
 ### Fixes
 - Fixed a crash with Create when ComputerCraft is not installed

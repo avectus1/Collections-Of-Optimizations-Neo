@@ -116,6 +116,7 @@ public class CoOMixinPlugin implements IMixinConfigPlugin {
             Map.entry("subtleeffects", "subtle_effects"),
             Map.entry("undergarden", "undergarden"),
             Map.entry("perception", "perception"),
+            Map.entry("geckolib", "geckolib"),
             Map.entry("stutterfix", "stutterfix"),
             Map.entry("morequesttypes", "more_quest_types"),
             Map.entry("dungeonnowloading", "dungeonnowloading"),

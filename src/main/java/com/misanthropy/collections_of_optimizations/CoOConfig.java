@@ -31,6 +31,9 @@ public final class CoOConfig {
     public static int vanillaStructureTemplateIdleSeconds = 300;
     public static int vanillaStructureTemplateSweepTicks = 1200;
     public static boolean stutterfixPriorityOnce = true;
+    public static boolean isbSharedRecipeScrolls = true;
+    public static boolean geckolibEasing = true;
+    public static boolean geckolibKeyframeLookup = true;
     public static boolean undergardenRepelPaletteCheck = true;
     public static boolean undergardenScintlingGooCheck = true;
     public static boolean undergardenMuncherGriefing = true;
@@ -2691,6 +2694,18 @@ public final class CoOConfig {
                 .define("majruszPhantomPlayer", true), v -> majruszsdifficultyForgetPhantomPlayer = v);
         gate(builder.comment("EEEAB's Immortal boss keeps players who logged out or respawned in its target list while it lives. Drop them when a player leaves or respawns.")
                 .define("eeeabImmortalTargets", true), v -> eeeabsmobsBossTargetRelease = v);
+        builder.pop();
+
+        builder.comment("Iron's Spells 'n Spellbooks recipe viewer memory (client).").push("ironsspellbooks_recipes");
+        gate(builder.comment("The Arcane Anvil recipe pages build separate spell data for every spell, level and weapon. Share one per spell and level (they can't change). Same recipes shown, much less memory with many weapons.")
+                .define("sharedScrollData", true), v -> isbSharedRecipeScrolls = v);
+        builder.pop();
+
+        builder.comment("GeckoLib patches. These leave alone the parts GeckoLib Better FPS already changes.").push("geckolib");
+        gate(builder.comment("Build GeckoLib's built-in easing curves once instead of for every bone, axis and frame, and run them without boxed numbers. Same results.")
+                .define("easingCurves", true), v -> geckolibEasing = v);
+        gate(builder.comment("Find the current keyframe without an iterator or a throwaway wrapper object. Same results.")
+                .define("keyframeLookup", true), v -> geckolibKeyframeLookup = v);
         builder.pop();
 
         builder.comment("The Undergarden patches.").push("undergarden");
