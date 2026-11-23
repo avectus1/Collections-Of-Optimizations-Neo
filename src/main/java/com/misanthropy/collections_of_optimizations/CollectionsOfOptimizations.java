@@ -46,6 +46,7 @@ public final class CollectionsOfOptimizations {
             if (ModList.get().isLoaded("xaerolib")) {
                 com.misanthropy.collections_of_optimizations.core.XaeroConfigFrame.register();
             }
+            com.misanthropy.collections_of_optimizations.core.ClientUnloadRelease.register();
             if (ModList.get().isLoaded("citadel") || ModList.get().isLoaded("alexscaves") || ModList.get().isLoaded("xaerominimap")) {
                 com.misanthropy.collections_of_optimizations.core.ModClientLeakGuards.register();
             }
@@ -59,6 +60,9 @@ public final class CollectionsOfOptimizations {
         GhostPlayerPurge.register();
         com.misanthropy.collections_of_optimizations.core.StructureTemplateRelease.register();
         com.misanthropy.collections_of_optimizations.core.ModLeakGuards.register();
+        if (ModList.get().isLoaded("more_quest_types")) {
+            com.misanthropy.collections_of_optimizations.core.MqtBufferSweep.register();
+        }
         if (ModList.get().isLoaded("dungeonnowloading")) {
             com.misanthropy.collections_of_optimizations.core.DnlLeakGuard.register();
         }

@@ -214,7 +214,15 @@
     "vanilla.MixinStructureTemplateManagerRelease",
     "alexsmobs.AlexsMobsLeakAccessor",
     "alexsmobs.AMWorldDataLeakAccessor",
-    "alexsmobs.MixinAMWorldDataOverworldKey"
+    "alexsmobs.MixinAMWorldDataOverworldKey",
+    "morequesttypes.MqtBreakBlockAccessor",
+    "morequesttypes.MqtCommandAccessor",
+    "morequesttypes.MqtInteractAccessor",
+    "morequesttypes.MqtReceiveDamageAccessor",
+    "morequesttypes.MqtSpellCastAccessor",
+    "morequesttypes.MqtTameAccessor",
+    "morequesttypes.MqtUseItemAccessor",
+    "morequesttypes.MqtDamageAccessor"
   ],
   "client": [
     "alexscaves.MixinBiomeSamplerTickCache",
@@ -353,7 +361,11 @@
     "citadel.CitadelEntityLinkAccessor",
     "alexscaves.MixinCaveMapRendererRelease",
     "alexscaves.CaveMapRendererAccessor",
-    "xaerominimap.XaeroSlimeSeedsAccessor"
+    "xaerominimap.XaeroSlimeSeedsAccessor",
+    "citadel.MixinModelAnimatorRelease",
+    "bmd.MixinObsidilithBoneLightRelease",
+    "bmd.MixinVoidBlossomBoneLightRelease",
+    "corpse.MixinCorpseRendererRelease"
   ],
   "injectors": {
     "defaultRequire": 0
