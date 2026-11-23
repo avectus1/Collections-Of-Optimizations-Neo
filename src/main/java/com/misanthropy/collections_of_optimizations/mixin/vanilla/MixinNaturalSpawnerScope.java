@@ -1,7 +1,5 @@
 package com.misanthropy.collections_of_optimizations.mixin.vanilla;
 
-import com.llamalad7.mixinextras.injector.wrapmethod.WrapMethod;
-import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.misanthropy.collections_of_optimizations.CoOConfig;
 import com.misanthropy.collections_of_optimizations.core.SpawnScope;
 import net.minecraft.core.BlockPos;
@@ -22,15 +20,21 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 @Mixin(value = NaturalSpawner.class, remap = false)
 public abstract class MixinNaturalSpawnerScope {
 
-    @WrapMethod(method = "spawnCategoryForPosition(Lnet/minecraft/world/entity/MobCategory;Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/level/chunk/ChunkAccess;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/NaturalSpawner$SpawnPredicate;Lnet/minecraft/world/level/NaturalSpawner$AfterSpawnCallback;)V")
+    /**
+     * Opened around the call rather than with a method wrapper, so that no wrapper object is allocated for
+     * each spawn attempt (thousands per tick); try/finally still closes the scope if the attempt throws.
+     */
+    @Redirect(method = {"spawnCategoryForChunk",
+            "spawnCategoryForPosition(Lnet/minecraft/world/entity/MobCategory;Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/core/BlockPos;)V"},
+            at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/NaturalSpawner;spawnCategoryForPosition(Lnet/minecraft/world/entity/MobCategory;Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/level/chunk/ChunkAccess;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/NaturalSpawner$SpawnPredicate;Lnet/minecraft/world/level/NaturalSpawner$AfterSpawnCallback;)V"))
     private static void coo$scope(MobCategory category, ServerLevel level, ChunkAccess chunk, BlockPos pos,
-                                  NaturalSpawner.SpawnPredicate filter, NaturalSpawner.AfterSpawnCallback callback, Operation<Void> original) {
+                                  NaturalSpawner.SpawnPredicate filter, NaturalSpawner.AfterSpawnCallback callback) {
         if (!CoOConfig.vanillaSpawnChunkScope || !SpawnScope.enter(level, chunk)) {
-            original.call(category, level, chunk, pos, filter, callback);
+            NaturalSpawner.spawnCategoryForPosition(category, level, chunk, pos, filter, callback);
             return;
         }
         try {
-            original.call(category, level, chunk, pos, filter, callback);
+            NaturalSpawner.spawnCategoryForPosition(category, level, chunk, pos, filter, callback);
         } finally {
             SpawnScope.exit();
         }

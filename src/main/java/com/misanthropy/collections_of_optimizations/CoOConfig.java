@@ -27,7 +27,14 @@ public final class CoOConfig {
     public static boolean vanillaMultifaceWithoutStreams = true;
     public static boolean vanillaMemoBlockTickChunk = true;
     public static boolean vanillaSpawnChunkScope = true;
+    public static boolean vanillaReleaseStructureTemplates = true;
+    public static int vanillaStructureTemplateIdleSeconds = 300;
+    public static int vanillaStructureTemplateSweepTicks = 1200;
     public static boolean stutterfixPriorityOnce = true;
+    public static boolean alexsmobsLeakGuard = true;
+    public static boolean citadelLeakGuard = true;
+    public static boolean alexscavesCaveMapRelease = true;
+    public static boolean xaeroSlimeSeedsLeakGuard = true;
     public static boolean citadelSkipSameTickRate = true;
     public static boolean elysiumapiFastTransformerLookup = true;
     public static boolean morequesttypesFlatSummonScan = true;
@@ -1864,6 +1871,25 @@ public final class CoOConfig {
       );
         gate(
          builder.comment(
+               "Vanilla keeps every structure template it loads (villages, dungeons, ruins...) for the whole session, so memory climbs while you explore. Drop templates nobody has used for a while; if a structure needs one again it is read from the same file again. Templates made in game with structure blocks are never dropped."
+            )
+            .define("releaseStructureTemplates", true),
+         v -> vanillaReleaseStructureTemplates = v
+      );
+      gate(
+         builder.comment("How long a structure template must go unused before it is dropped, in seconds.")
+            .defineInRange("structureTemplateIdleSeconds", 300, 10, 86400),
+         300,
+         v -> vanillaStructureTemplateIdleSeconds = v
+      );
+      gate(
+         builder.comment("How often to look for unused structure templates, in ticks.")
+            .defineInRange("structureTemplateSweepTicks", 1200, 20, 72000),
+         1200,
+         v -> vanillaStructureTemplateSweepTicks = v
+      );
+        gate(
+         builder.comment(
                "Terrain height lookups (structure placement, meteorites, spawn checks) each build the noise for one 4x4 block cell from scratch, so asking for the 16 columns of the same cell computes the same corner noise 16 times. Keep the last few cells per worker thread and only redo the cheap part per column. Same heights as before."
             )
             .define("reuseNoiseColumnCells", true),
@@ -2630,6 +2656,17 @@ public final class CoOConfig {
         builder.comment("Dungeon Now Loading leak fixes.").push("dungeonnowloading");
         gate(builder.comment("Forget Vertex Transmission links when the effect runs out or is cured (not only when the mob is removed), empty them when the server stops, and drop finished looping sounds that DNL never forgets, which held on to old worlds.")
                 .define("leakGuard", true), v -> dungeonnowloadingLeakGuard = v);
+        builder.pop();
+
+        builder.comment("Memory leak fixes for other mods.").push("leaks");
+        gate(builder.comment("Alex's Mobs keeps every server world in two static maps (whale spawner, world data) after the world is closed, so in singleplayer each world you leave stays in memory. Empty them when the server stops, and file the world data under the key it is read with.")
+                .define("alexsMobsWorldMaps", true), v -> alexsmobsLeakGuard = v);
+        gate(builder.comment("Citadel's guide books (Alex's Mobs animal dictionary...) keep the mob models they draw, and with them the old client world, after you leave a world. Forget them when leaving. Client.")
+                .define("citadelBookEntities", true), v -> citadelLeakGuard = v);
+        gate(builder.comment("Alex's Caves makes a new cave map renderer and 128x128 texture for every cave map item object it draws and never frees them. Free the ones not drawn for 30 seconds, and all of them when leaving a world. Client.")
+                .define("alexsCavesCaveMaps", true), v -> alexscavesCaveMapRelease = v);
+        gate(builder.comment("Xaero's Minimap remembers every world-map tile it drew the slime chunk overlay on and never forgets one, keeping unloaded map tiles in memory. Forget them when there are too many and when leaving a world. Client.")
+                .define("xaeroSlimeChunkTiles", true), v -> xaeroSlimeSeedsLeakGuard = v);
         builder.pop();
 
         builder.comment("StutterFix patches.").push("stutterfix");

@@ -209,7 +209,12 @@
     "citadel.MixinCitadelTickRateNoResend",
     "elysiumapi.MixinBlockTransformerSlot",
     "elysiumapi.MixinPropertiesTransformerFastLookup",
-    "dungeonnowloading.DnlVertexEffectAccessor"
+    "dungeonnowloading.DnlVertexEffectAccessor",
+    "vanilla.MixinStructureTemplateStamp",
+    "vanilla.MixinStructureTemplateManagerRelease",
+    "alexsmobs.AlexsMobsLeakAccessor",
+    "alexsmobs.AMWorldDataLeakAccessor",
+    "alexsmobs.MixinAMWorldDataOverworldKey"
   ],
   "client": [
     "alexscaves.MixinBiomeSamplerTickCache",
@@ -344,7 +349,11 @@
     "morequesttypes.MixinSummonedRendererFlatScan",
     "notenoughanimations.MixinPlayerFreezeMemoSlot",
     "notenoughanimations.MixinFreezingAnimationTickMemo",
-    "dungeonnowloading.DnlSoundHandlerAccessor"
+    "dungeonnowloading.DnlSoundHandlerAccessor",
+    "citadel.CitadelEntityLinkAccessor",
+    "alexscaves.MixinCaveMapRendererRelease",
+    "alexscaves.CaveMapRendererAccessor",
+    "xaerominimap.XaeroSlimeSeedsAccessor"
   ],
   "injectors": {
     "defaultRequire": 0

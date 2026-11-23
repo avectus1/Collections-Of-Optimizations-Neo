@@ -67,6 +67,10 @@ public final class BmdBlockCacheState {
         }
     }
 
+    public static void clear() {
+        TRACKED.clear();
+    }
+
     public static boolean absent(ResourceLocation key) {
         Set<BlockPos> known = TRACKED.get(key);
         return known == null || known.isEmpty();
