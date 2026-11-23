@@ -31,6 +31,18 @@ public final class CoOConfig {
     public static int vanillaStructureTemplateIdleSeconds = 300;
     public static int vanillaStructureTemplateSweepTicks = 1200;
     public static boolean stutterfixPriorityOnce = true;
+    public static boolean undergardenRepelPaletteCheck = true;
+    public static boolean undergardenScintlingGooCheck = true;
+    public static boolean undergardenMuncherGriefing = true;
+    public static boolean perceptionTrailColors = true;
+    public static boolean shouldersurfingPatternMemo = true;
+    public static boolean subtleeffectsTickerRemoval = true;
+    public static boolean subtleeffectsRangeOnce = true;
+    public static boolean subtleeffectsGeyserRandom = true;
+    public static boolean subtleeffectsChestLookup = true;
+    public static boolean subtleeffectsIdleWater = true;
+    public static boolean subtleeffectsCoveredLava = true;
+    public static boolean subtleeffectsSharedBiome = true;
     public static boolean alexsmobsLeakGuard = true;
     public static boolean citadelLeakGuard = true;
     public static boolean alexscavesCaveMapRelease = true;
@@ -2679,6 +2691,42 @@ public final class CoOConfig {
                 .define("majruszPhantomPlayer", true), v -> majruszsdifficultyForgetPhantomPlayer = v);
         gate(builder.comment("EEEAB's Immortal boss keeps players who logged out or respawned in its target list while it lives. Drop them when a player leaves or respawns.")
                 .define("eeeabImmortalTargets", true), v -> eeeabsmobsBossTargetRelease = v);
+        builder.pop();
+
+        builder.comment("The Undergarden patches.").push("undergarden");
+        gate(builder.comment("Rotspawn scan ~10,000 blocks every 2 seconds for repellents. Skip the scan when no chunk section nearby can contain one (checked from each section's block list). Same results.")
+                .define("rotspawnRepelCheck", true), v -> undergardenRepelPaletteCheck = v);
+        gate(builder.comment("Scintlings fire a mob griefing event every tick. Only fire it when there is room to leave goo. Same goo.")
+                .define("scintlingGooCheck", true), v -> undergardenScintlingGooCheck = v);
+        gate(builder.comment("Fix: Munchers ignore the mobGriefing rule when bumping into blocks sideways. Make them respect it.")
+                .define("muncherRespectsMobGriefing", true), v -> undergardenMuncherGriefing = v);
+        builder.pop();
+
+        builder.comment("Perception patches (client).").push("perception");
+        gate(builder.comment("Remember parsed trail colors and skip the nearest-player search when the trail's backward shift is 0.")
+                .define("trailWork", true), v -> perceptionTrailColors = v);
+        builder.pop();
+
+        builder.comment("Shoulder Surfing adaptive crosshair (client).").push("shouldersurfing_patterns");
+        gate(builder.comment("Compile each adaptive crosshair item pattern and parse each item property id once, instead of on every check.")
+                .define("patternMemo", true), v -> shouldersurfingPatternMemo = v);
+        builder.pop();
+
+        builder.comment("Subtle Effects patches (client).").push("subtleeffects");
+        gate(builder.comment("Remove finished effect tickers in one pass instead of searching the whole list for each one.")
+                .define("tickerRemoval", true), v -> subtleeffectsTickerRemoval = v);
+        gate(builder.comment("The inner range check right after the outer one only measures distance (the chunk was just checked).")
+                .define("rangeOnce", true), v -> subtleeffectsRangeOnce = v);
+        gate(builder.comment("Reuse one random generator for the Nether geyser roll instead of making several per animated block. Same geysers.")
+                .define("geyserRandom", true), v -> subtleeffectsGeyserRandom = v);
+        gate(builder.comment("Only look for a chest block entity at blocks that can have a block entity.")
+                .define("chestLookup", true), v -> subtleeffectsChestLookup = v);
+        gate(builder.comment("Skip the steaming/boiling water checks when both are turned off in Subtle Effects (the default).")
+                .define("idleWater", true), v -> subtleeffectsIdleWater = v);
+        gate(builder.comment("Skip lava spark neighbour checks for lava covered from above, where Subtle Effects spawns nothing anyway.")
+                .define("coveredLava", true), v -> subtleeffectsCoveredLava = v);
+        gate(builder.comment("Look up the biome of each animated block once and share it between vanilla, biome particles and fireflies.")
+                .define("sharedBiome", true), v -> subtleeffectsSharedBiome = v);
         builder.pop();
 
         builder.comment("StutterFix patches.").push("stutterfix");

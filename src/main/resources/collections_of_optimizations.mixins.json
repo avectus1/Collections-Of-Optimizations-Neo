@@ -224,7 +224,10 @@
     "morequesttypes.MqtUseItemAccessor",
     "morequesttypes.MqtDamageAccessor",
     "majruszsdifficulty.MixinPhantomSpawnerForgetPlayer",
-    "eeeabsmobs.ImmortalBossTargetsAccessor"
+    "eeeabsmobs.ImmortalBossTargetsAccessor",
+    "undergarden.MixinUgRotspawnRepelScan",
+    "undergarden.MixinUgScintlingGooCheck",
+    "undergarden.MixinUgMuncherGriefing"
   ],
   "client": [
     "alexscaves.MixinBiomeSamplerTickCache",
@@ -367,7 +370,20 @@
     "citadel.MixinModelAnimatorRelease",
     "bmd.MixinObsidilithBoneLightRelease",
     "bmd.MixinVoidBlossomBoneLightRelease",
-    "corpse.MixinCorpseRendererRelease"
+    "corpse.MixinCorpseRendererRelease",
+    "subtleeffects.MixinSeTickerRemoval",
+    "subtleeffects.MixinSeEntityManagerRange",
+    "subtleeffects.MixinSeEntityTickerRange",
+    "subtleeffects.MixinSeGeyserRandom",
+    "subtleeffects.MixinSeChestBlockEntity",
+    "subtleeffects.MixinSeHeatedWaterIdle",
+    "subtleeffects.MixinSeCoveredLava",
+    "subtleeffects.MixinSeClientLevelBiome",
+    "subtleeffects.MixinSeFireflyManagerBiome",
+    "subtleeffects.MixinSeBiomeEffectsManagerBiome",
+    "perception.MixinPerceptionTrailWrapper",
+    "shouldersurfing.MixinSsMatchPredicateMemo",
+    "shouldersurfing.MixinSsItemPropertyIds"
   ],
   "injectors": {
     "defaultRequire": 0

@@ -13,6 +13,10 @@ By avectus1
 - Elysium API: faster block property lookups
 - More Quest Types: lighter summoned mob scan
 - Not Enough Animations: freezing animation check is cached per tick
+- Subtle Effects: lighter block and entity effect checks (shared biome lookups, fewer block entity lookups, no idle steam/lava checks, faster ticker removal, no per-block random generators in the Nether)
+- The Undergarden: Rotspawn skip their big repellent scan when nothing nearby can scare them, Scintlings only check griefing when they can leave goo
+- Perception: trail colors are parsed once and trails skip an unneeded player search
+- Shoulder Surfing: adaptive crosshair item patterns are compiled once
 
 ### Memory
 - Unused structure templates are released after 5 minutes idle
@@ -25,6 +29,7 @@ By avectus1
 ### Fixes
 - Fixed a crash with Create when ComputerCraft is not installed
 - Fixed Ars Elemental spell entities (dripstone spike, water jet, magnet) crashing after a reload
+- Fixed Undergarden Munchers breaking blocks with mobGriefing off
 
 Every change can be turned off in the config.
 
