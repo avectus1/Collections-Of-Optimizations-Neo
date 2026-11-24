@@ -4,12 +4,16 @@ NeoForge 1.21.1 port of Collections of Optimizations. It fixes lag, stutter and 
 
 ## Covered mods
 
+93 mods plus vanilla Minecraft, with around 350 patches. Every patch has its own config option.
+
 - Ad Astra
 - Alex's Caves (Neo port)
 - Alex's Mobs (Neo port)
 - AllTheLeaks
 - AmbientSounds
 - Amendments
+- Antarchy
+- Aquamirae
 - Architectury API
 - Ars Additions
 - Ars Elemental
@@ -21,9 +25,11 @@ NeoForge 1.21.1 port of Collections of Optimizations. It fixes lag, stutter and 
 - Biolith
 - Born in Chaos
 - Bosses of Mass Destruction
+- Bye Pregen
 - Cable Facades
 - Caelus
 - Cataclysm
+- CERBON's API
 - Chimes
 - Chunk Sending
 - Citadel
@@ -36,42 +42,64 @@ NeoForge 1.21.1 port of Collections of Optimizations. It fixes lag, stutter and 
 - Deeper and Darker
 - Does Potato Tick
 - Dungeon Crawl
+- Dungeon Now Loading
 - Dungeons Delight
 - Duplicationless
 - Easy Villagers
 - Eeeab's Mobs
+- Eidolon: Repraised
 - Elysium API
 - EMI (memory leak fix)
+- EMI Loot
+- Enderscape
 - Entity Model Features
 - Entity Texture Features
 - FancyMenu
 - Fluidium
 - FTB Chunks
+- GeckoLib
 - Gnetum
+- Guard Villagers
 - Iceberg
+- ImmediatelyFast
+- Iron's Lib
 - Iron's Spells 'n Spellbooks
+- Konkrete
 - KubeJS
 - Legendary Monsters
 - Lionfish API
 - Lithostitched
-- Lodestone (Malum)
+- Lodestone
 - Lootr
+- Majrusz's Progressive Difficulty
+- Malum
 - MmmMmmMmmMmm
 - ModernFix
 - Moonlight Lib
+- More Quest Types
+- Mowzie's Mobs
 - Not Enough Animations
 - Oh The Biomes We've Gone
 - Patchouli
+- Perception
+- Placebo
+- Redomesticate
+- Shoulder Surfing Reloaded
 - Sophisticated Backpacks
+- Sound Physics Remastered
 - Structure Essentials
+- StutterFix
+- Subtle Effects
 - Supplementaries
 - TerraBlender
 - The Illusioner
+- The Undergarden
+- Too Many Recipe Viewers
+- Xaero's Lib
 - Xaero's Minimap
 - Xaero's World Map
 - Zeta
 - Vanilla (world generation, loading, entity tracking, rendering, memory)
-
 
 ## Credits
 
