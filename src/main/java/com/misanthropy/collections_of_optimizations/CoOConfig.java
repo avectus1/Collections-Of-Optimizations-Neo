@@ -43,6 +43,7 @@ public final class CoOConfig {
     public static boolean enderscapeSoundTypeCache = true;
     public static boolean enderscapeStructureMusicScan = true;
     public static boolean enderscapeMusicPlayerLeak = true;
+    public static boolean blurFrameLogging = true;
     public static boolean mowziesmobsIdleEntityData = true;
     public static boolean mowziesmobsRenderTypeCache = true;
     public static boolean emiLootServerData = true;
@@ -2764,6 +2765,11 @@ public final class CoOConfig {
                 .define("soundTypeCache", true), v -> enderscapeSoundTypeCache = v);
         gate(builder.comment("For structure music, only check the structures that actually have a piece in the player's chunk instead of every structure in the game. Same music.")
                 .define("structureMusicScan", true), v -> enderscapeStructureMusicScan = v);
+        builder.pop();
+
+        builder.comment("Blur+ patches (client).").push("blur");
+        gate(builder.comment("Stop Blur+ from writing several debug log lines on every frame.")
+                .define("frameLogging", true), v -> blurFrameLogging = v);
         builder.pop();
 
         builder.comment("Mowzie's Mobs patches.").push("mowziesmobs");

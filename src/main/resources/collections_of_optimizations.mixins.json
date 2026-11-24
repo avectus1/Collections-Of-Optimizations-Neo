@@ -408,7 +408,8 @@
     "soundphysics.MixinSprRaycastAirSkip",
     "soundphysics.MixinSprClonedChunkDirect",
     "soundphysics.MixinSprClonedLevelLastChunk",
-    "species.MixinSpeciesGbfBoneRotation"
+    "species.MixinSpeciesGbfBoneRotation",
+    "blur.MixinBlurFrameLogging"
   ],
   "injectors": {
     "defaultRequire": 0

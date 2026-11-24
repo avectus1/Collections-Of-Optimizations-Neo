@@ -129,6 +129,7 @@ public class CoOMixinPlugin implements IMixinConfigPlugin {
             Map.entry("enderscape", "enderscape"),
             Map.entry("antarchy", "antarchy"),
             Map.entry("species", "species"),
+            Map.entry("blur", "blur"),
             Map.entry("stutterfix", "stutterfix"),
             Map.entry("morequesttypes", "more_quest_types"),
             Map.entry("dungeonnowloading", "dungeonnowloading"),

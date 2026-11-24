@@ -31,6 +31,7 @@ By avectus1
 - Enderscape: block sound lookups are instant instead of scanning a list that grows to thousands of entries, and structure music only checks structures in the player's chunk
 - Antarchy: its world generation profilers no longer wrap every feature and chunk when they're off
 - Iron's Spells: its aquifer check during terrain generation exits right away for chunks without its structures instead of running on every block with a callback object
+- Blur+: no longer writes several debug log lines on every frame
 
 ### Memory
 - Unused structure templates are released after 5 minutes idle
