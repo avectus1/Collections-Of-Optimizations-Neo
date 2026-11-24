@@ -63,6 +63,12 @@ public final class CollectionsOfOptimizations {
         if (ModList.get().isLoaded("emi_loot")) {
             com.misanthropy.collections_of_optimizations.core.EmiLootLeakGuard.register();
         }
+        if (ModList.get().isLoaded("aquamirae")) {
+            com.misanthropy.collections_of_optimizations.core.AquamiraeMultipartCount.register();
+        }
+        if (ModList.get().isLoaded("enderscape")) {
+            com.misanthropy.collections_of_optimizations.core.EnderscapeMusicLeakGuard.register();
+        }
         if (ModList.get().isLoaded("eeeabsmobs")) {
             com.misanthropy.collections_of_optimizations.core.EeeabTargetRelease.register();
         }

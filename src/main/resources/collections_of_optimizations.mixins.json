@@ -236,7 +236,12 @@
     "placebo.MixinPlaceboHashComponents",
     "malum.MixinMalumIdleLivingTick",
     "eidolon.MixinEidolonThrallCheck",
-    "eidolon.MixinEidolonBoneArmorScan"
+    "eidolon.MixinEidolonBoneArmorScan",
+    "aquamirae.MixinAquamiraeShellbackParts",
+    "ironsspellbooks.MixinIsbAquiferNuke",
+    "enderscape.MixinEnderscapeSoundTypeCache",
+    "enderscape.MixinEnderscapeStructureMusicScan",
+    "enderscape.EnderscapeStructureMusicAccessor"
   ],
   "client": [
     "alexscaves.MixinBiomeSamplerTickCache",

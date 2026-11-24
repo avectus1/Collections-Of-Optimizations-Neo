@@ -40,6 +40,9 @@ public final class CoOConfig {
     public static boolean malumIdleLivingTick = true;
     public static boolean eidolonThrallCheck = true;
     public static boolean eidolonBoneArmorScan = true;
+    public static boolean enderscapeSoundTypeCache = true;
+    public static boolean enderscapeStructureMusicScan = true;
+    public static boolean enderscapeMusicPlayerLeak = true;
     public static boolean mowziesmobsIdleEntityData = true;
     public static boolean mowziesmobsRenderTypeCache = true;
     public static boolean emiLootServerData = true;
@@ -2708,6 +2711,8 @@ public final class CoOConfig {
                 .define("eeeabImmortalTargets", true), v -> eeeabsmobsBossTargetRelease = v);
         gate(builder.comment("EMI Loot keeps the last world's loot tables and registries in memory after it closes. Drop them when the server stops (they are rebuilt on the next load).")
                 .define("emiLootServerData", true), v -> emiLootServerData = v);
+        gate(builder.comment("Enderscape: forget players who died or left the End from the structure music maps instead of keeping them until the server stops.")
+                .define("enderscapeMusicPlayers", true), v -> enderscapeMusicPlayerLeak = v);
         builder.pop();
 
         builder.comment("Iron's Spells 'n Spellbooks recipe viewer memory (client).").push("ironsspellbooks_recipes");
@@ -2752,6 +2757,13 @@ public final class CoOConfig {
                 .define("thrallCheck", true), v -> eidolonThrallCheck = v);
         gate(builder.comment("Only scan armor for Bonelord armor on the ticks where Eidolon uses the result (every 120 ticks).")
                 .define("boneArmorScan", true), v -> eidolonBoneArmorScan = v);
+        builder.pop();
+
+        builder.comment("Enderscape patches.").push("enderscape");
+        gate(builder.comment("Look up Enderscape's block sound overrides in one cached step instead of scanning an ever-growing list on every footstep, place and break. Same sounds.")
+                .define("soundTypeCache", true), v -> enderscapeSoundTypeCache = v);
+        gate(builder.comment("For structure music, only check the structures that actually have a piece in the player's chunk instead of every structure in the game. Same music.")
+                .define("structureMusicScan", true), v -> enderscapeStructureMusicScan = v);
         builder.pop();
 
         builder.comment("Mowzie's Mobs patches.").push("mowziesmobs");

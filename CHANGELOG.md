@@ -27,6 +27,10 @@ By avectus1
 - Malum: no longer creates, ticks and saves its soul, curio, touch of darkness and geas data on every mob
 - Eidolon: Repraised: thrall checks no longer create empty data tags on every mob, and the Bonelord armor scan only runs when it's used
 - Konkrete: the volume watcher thread only starts if something actually uses Konkrete sounds
+- Aquamirae: entity searches (collisions, pushing, AI, attacks) no longer get wrapped and checked for Shellback parts while no Shellback is loaded
+- Enderscape: block sound lookups are instant instead of scanning a list that grows to thousands of entries, and structure music only checks structures in the player's chunk
+- Antarchy: its world generation profilers no longer wrap every feature and chunk when they're off
+- Iron's Spells: its aquifer check during terrain generation exits right away for chunks without its structures instead of running on every block with a callback object
 
 ### Memory
 - Unused structure templates are released after 5 minutes idle
@@ -36,6 +40,7 @@ By avectus1
 - Majrusz's Difficulty no longer keeps the last player checked by the phantom spawner
 - EEEAB's Mobs Immortal boss no longer keeps players who left or respawned in its target list
 - EMI Loot no longer keeps the last world's loot tables and registries after leaving
+- Enderscape no longer keeps players who died or left the End in its structure music maps
 - Iron's Spellbooks: Arcane Anvil recipe pages share spell data instead of copying it for every weapon, spell and level
 
 ### Fixes

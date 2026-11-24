@@ -4,7 +4,7 @@ import com.cerbon.cerbons_api.api.multipart_entities.entity.MultipartAwareEntity
 import com.cerbon.cerbons_api.api.multipart_entities.entity.MultipartEntity;
 import com.cerbon.cerbons_api.api.multipart_entities.util.CompoundOrientedBox;
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
-import com.misanthropy.collections_of_optimizations.core.MultipartEntityHookCanceller;
+import com.misanthropy.collections_of_optimizations.core.CoOMixinCanceller;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.phys.AABB;
 import org.spongepowered.asm.mixin.Mixin;
@@ -16,7 +16,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 /**
  * Same behaviour as CERBON's EntityMixin, but the "is this a multipart entity" answer is worked out once
  * per entity instead of on every getBoundingBox call, and there is no CallbackInfoReturnable per call.
- * Only does anything when MultipartEntityHookCanceller actually removed CERBON's hook.
+ * Only does anything when CoOMixinCanceller actually removed CERBON's hook.
  */
 @Mixin(value = Entity.class, priority = 1500, remap = false)
 public abstract class MixinEntityMultipartHooks {
@@ -28,7 +28,7 @@ public abstract class MixinEntityMultipartHooks {
         byte kind = this.coo$multipartKind;
         if (kind == 0) {
             kind = 1;
-            if (MultipartEntityHookCanceller.ACTIVE) {
+            if (CoOMixinCanceller.isActive("com.cerbon.cerbons_api.mixin.multipart_entities.EntityMixin")) {
                 if ((Object) this instanceof MultipartEntity) {
                     kind |= 2;
                 }

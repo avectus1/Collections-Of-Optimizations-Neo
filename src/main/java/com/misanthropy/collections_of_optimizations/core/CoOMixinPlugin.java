@@ -125,6 +125,9 @@ public class CoOMixinPlugin implements IMixinConfigPlugin {
             Map.entry("soundphysics", "sound_physics_remastered"),
             Map.entry("malum", "malum"),
             Map.entry("eidolon", "eidolon_repraised"),
+            Map.entry("aquamirae", "aquamirae"),
+            Map.entry("enderscape", "enderscape"),
+            Map.entry("antarchy", "antarchy"),
             Map.entry("stutterfix", "stutterfix"),
             Map.entry("morequesttypes", "more_quest_types"),
             Map.entry("dungeonnowloading", "dungeonnowloading"),
@@ -231,6 +234,32 @@ public class CoOMixinPlugin implements IMixinConfigPlugin {
             "vanilla.MixinParticleEngineTextBatch", new String[]{"dummmmmmy", "blessfulled"}
     );
 
+    /** CoO mixins that stand in for another mod's mixin and would clash with it if that one isn't removed. */
+    private static final Set<String> NEEDS_MIXIN_CANCELLER = Set.of(
+            "ironsspellbooks.MixinIsbAquiferNuke",
+            "aquamirae.MixinAquamiraeShellbackParts",
+            "cerbonsapi.MixinEntityMultipartHooks",
+            "antarchy.Profilers"
+    );
+    private static Boolean squaredPresent;
+
+    private static synchronized boolean mixinSquaredPresent() {
+        if (squaredPresent == null) {
+            boolean found;
+            try {
+                found = org.spongepowered.asm.service.MixinService.getService().getBytecodeProvider()
+                        .getClassNode("com.bawnorton.mixinsquared.api.MixinCanceller") != null;
+            } catch (Throwable throwable) {
+                found = false;
+            }
+            squaredPresent = found;
+            if (!found) {
+                LOGGER.info("MixinSquared not found; Collections of Optimizations won't replace other mods' mixins");
+            }
+        }
+        return squaredPresent;
+    }
+
     private static final Map<String, Boolean> LOADED_CACHE = new HashMap<>();
     private static final Map<String, Integer> MAJOR_CACHE = new HashMap<>();
     private static final Map<String, String> VERSION_CACHE = new HashMap<>();
@@ -335,6 +364,9 @@ public class CoOMixinPlugin implements IMixinConfigPlugin {
         }
         String[] pinned = MIXIN_EXACT_VERSION.get(remainder);
         if (pinned != null && !pinned[1].equals(modVersion(pinned[0]))) {
+            return false;
+        }
+        if (NEEDS_MIXIN_CANCELLER.contains(remainder) && !mixinSquaredPresent()) {
             return false;
         }
         String[] required = MIXIN_REQUIRES.get(remainder);
