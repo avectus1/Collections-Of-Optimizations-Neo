@@ -47,6 +47,7 @@ By avectus1
 - Fixed a crash with Create when ComputerCraft is not installed
 - Fixed Ars Elemental spell entities (dripstone spike, water jet, magnet) crashing after a reload
 - Fixed Undergarden Munchers breaking blocks with mobGriefing off
+- Fixed a server tick crash when every patch is switched off because of an incompatible mod (Tickweave)
 
 Every change can be turned off in the config.
 

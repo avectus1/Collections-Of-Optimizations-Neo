@@ -35,6 +35,10 @@ public final class CollectionsOfOptimizations {
                 }
             });
         }
+        if (com.misanthropy.collections_of_optimizations.core.CoOMixinPlugin.allPatchesDisabled()) {
+            // Every mixin is off (see CoOMixinPlugin.TAKES_EVERYTHING); the runtime helpers below rely on them.
+            return;
+        }
         if (FMLEnvironment.dist == Dist.CLIENT) {
             ClientConfigScreen.register(modContainer);
             ClientTickStamp.register();

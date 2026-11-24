@@ -264,6 +264,16 @@ public class CoOMixinPlugin implements IMixinConfigPlugin {
     private static final Map<String, Integer> MAJOR_CACHE = new HashMap<>();
     private static final Map<String, String> VERSION_CACHE = new HashMap<>();
 
+    /** True when a mod that forces every CoO patch off is installed. */
+    public static boolean allPatchesDisabled() {
+        for (String modId : TAKES_EVERYTHING) {
+            if (isModPresent(modId)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     /** Whether {@link #shouldApplyMixin} would let this CoO mixin through, for cancellers that swap a mod's mixin for ours. */
     public static boolean wouldApply(String mixinClassName) {
         try {
