@@ -229,7 +229,9 @@
     "undergarden.MixinUgScintlingGooCheck",
     "undergarden.MixinUgMuncherGriefing",
     "geckolib.MixinGeckoEasingType",
-    "geckolib.MixinGeckoKeyframePoint"
+    "geckolib.MixinGeckoKeyframePoint",
+    "mowziesmobs.MixinMowzieIdleEntityData",
+    "emiloot.EmiLootParserAccessor"
   ],
   "client": [
     "alexscaves.MixinBiomeSamplerTickCache",
@@ -386,7 +388,11 @@
     "perception.MixinPerceptionTrailWrapper",
     "shouldersurfing.MixinSsMatchPredicateMemo",
     "shouldersurfing.MixinSsItemPropertyIds",
-    "ironsspellbooks.MixinIsbAnvilRecipeSharedScrolls"
+    "ironsspellbooks.MixinIsbAnvilRecipeSharedScrolls",
+    "mowziesmobs.MixinMowzieRenderFrozenCheck",
+    "mowziesmobs.MixinMowzieRenderTypeCache",
+    "toomanyrecipeviewers.MixinTmrvSlotStackMemo",
+    "toomanyrecipeviewers.TmrvCollectorAccessor"
   ],
   "injectors": {
     "defaultRequire": 0

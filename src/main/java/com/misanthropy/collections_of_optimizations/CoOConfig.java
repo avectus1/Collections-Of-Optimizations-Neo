@@ -31,6 +31,10 @@ public final class CoOConfig {
     public static int vanillaStructureTemplateIdleSeconds = 300;
     public static int vanillaStructureTemplateSweepTicks = 1200;
     public static boolean stutterfixPriorityOnce = true;
+    public static boolean tmrvSlotStackMemo = true;
+    public static boolean mowziesmobsIdleEntityData = true;
+    public static boolean mowziesmobsRenderTypeCache = true;
+    public static boolean emiLootServerData = true;
     public static boolean isbSharedRecipeScrolls = true;
     public static boolean geckolibEasing = true;
     public static boolean geckolibKeyframeLookup = true;
@@ -2694,11 +2698,25 @@ public final class CoOConfig {
                 .define("majruszPhantomPlayer", true), v -> majruszsdifficultyForgetPhantomPlayer = v);
         gate(builder.comment("EEEAB's Immortal boss keeps players who logged out or respawned in its target list while it lives. Drop them when a player leaves or respawns.")
                 .define("eeeabImmortalTargets", true), v -> eeeabsmobsBossTargetRelease = v);
+        gate(builder.comment("EMI Loot keeps the last world's loot tables and registries in memory after it closes. Drop them when the server stops (they are rebuilt on the next load).")
+                .define("emiLootServerData", true), v -> emiLootServerData = v);
         builder.pop();
 
         builder.comment("Iron's Spells 'n Spellbooks recipe viewer memory (client).").push("ironsspellbooks_recipes");
         gate(builder.comment("The Arcane Anvil recipe pages build separate spell data for every spell, level and weapon. Share one per spell and level (they can't change). Same recipes shown, much less memory with many weapons.")
                 .define("sharedScrollData", true), v -> isbSharedRecipeScrolls = v);
+        builder.pop();
+
+        builder.comment("Too Many Recipe Viewers (client).").push("toomanyrecipeviewers");
+        gate(builder.comment("Build each JEI-plugin recipe slot's item list once instead of several times per slot every frame; rebuilt when the slot's contents change.")
+                .define("slotStackMemo", true), v -> tmrvSlotStackMemo = v);
+        builder.pop();
+
+        builder.comment("Mowzie's Mobs patches.").push("mowziesmobs");
+        gate(builder.comment("Don't create, tick and save Mowzie's three data objects on every living entity until something Mowzie-related actually needs them (frozen, a Mowzie mob, a player). Less memory, less ticking, smaller saves.")
+                .define("idleEntityData", true), v -> mowziesmobsIdleEntityData = v);
+        gate(builder.comment("Build Mowzie's glow and solar flare render types once per texture instead of every frame, so drawing can stay batched.")
+                .define("renderTypeCache", true), v -> mowziesmobsRenderTypeCache = v);
         builder.pop();
 
         builder.comment("GeckoLib patches. These leave alone the parts GeckoLib Better FPS already changes.").push("geckolib");
