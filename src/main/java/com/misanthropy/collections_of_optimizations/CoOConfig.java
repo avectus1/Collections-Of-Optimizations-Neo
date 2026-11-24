@@ -32,6 +32,14 @@ public final class CoOConfig {
     public static int vanillaStructureTemplateSweepTicks = 1200;
     public static boolean stutterfixPriorityOnce = true;
     public static boolean tmrvSlotStackMemo = true;
+    public static boolean immediatelyfastLayerOrderCache = true;
+    public static boolean placeboHashComponents = true;
+    public static boolean konkreteDeferVolumeThread = true;
+    public static boolean soundphysicsFastRaycast = true;
+    public static boolean soundphysicsLastChunk = true;
+    public static boolean malumIdleLivingTick = true;
+    public static boolean eidolonThrallCheck = true;
+    public static boolean eidolonBoneArmorScan = true;
     public static boolean mowziesmobsIdleEntityData = true;
     public static boolean mowziesmobsRenderTypeCache = true;
     public static boolean emiLootServerData = true;
@@ -2710,6 +2718,40 @@ public final class CoOConfig {
         builder.comment("Too Many Recipe Viewers (client).").push("toomanyrecipeviewers");
         gate(builder.comment("Build each JEI-plugin recipe slot's item list once instead of several times per slot every frame; rebuilt when the slot's contents change.")
                 .define("slotStackMemo", true), v -> tmrvSlotStackMemo = v);
+        builder.pop();
+
+        builder.comment("ImmediatelyFast patches (client).").push("immediatelyfast");
+        gate(builder.comment("Work out each render layer's draw order once instead of on every comparison while sorting a batch. Same order.")
+                .define("layerOrderCache", true), v -> immediatelyfastLayerOrderCache = v);
+        builder.pop();
+
+        builder.comment("Placebo patches.").push("placebo");
+        gate(builder.comment("Hash item components for Placebo's item caches (used by Apotheosis affixes and others) without a stream and array per lookup. Same hash. Applies to caches built after startup.")
+                .define("hashComponents", true), v -> placeboHashComponents = v);
+        builder.pop();
+
+        builder.comment("Konkrete patches (client).").push("konkrete");
+        gate(builder.comment("Don't start Konkrete's volume watcher thread (wakes every 100 ms forever) until something actually registers a Konkrete sound.")
+                .define("deferVolumeThread", true), v -> konkreteDeferVolumeThread = v);
+        builder.pop();
+
+        builder.comment("Sound Physics Remastered patches (client).").push("soundphysics");
+        gate(builder.comment("Sound rays skip straight through air blocks and look each block up once instead of twice. Same results.")
+                .define("fastRaycast", true), v -> soundphysicsFastRaycast = v);
+        gate(builder.comment("Remember the last chunk a sound ray was in instead of building a key and hashing it for every block.")
+                .define("lastChunk", true), v -> soundphysicsLastChunk = v);
+        builder.pop();
+
+        builder.comment("Malum patches.").push("malum");
+        gate(builder.comment("Don't create, tick and save Malum's soul, curio, touch of darkness and geas data on every mob until it's actually used. Less memory, less ticking, smaller saves.")
+                .define("idleLivingTick", true), v -> malumIdleLivingTick = v);
+        builder.pop();
+
+        builder.comment("Eidolon: Repraised patches.").push("eidolon");
+        gate(builder.comment("Check whether a mob is a thrall without creating an empty data tag on every mob that gets targeted.")
+                .define("thrallCheck", true), v -> eidolonThrallCheck = v);
+        gate(builder.comment("Only scan armor for Bonelord armor on the ticks where Eidolon uses the result (every 120 ticks).")
+                .define("boneArmorScan", true), v -> eidolonBoneArmorScan = v);
         builder.pop();
 
         builder.comment("Mowzie's Mobs patches.").push("mowziesmobs");

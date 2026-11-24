@@ -20,6 +20,13 @@ By avectus1
 - Mowzie's Mobs: no longer creates, ticks and saves its data on every living entity until it's actually needed, and glow effects reuse their render types
 - Too Many Recipe Viewers: recipe slots from JEI plugins build their item list once instead of several times per frame
 - GeckoLib: easing curves are built once instead of per bone and frame, keyframe lookups skip throwaway objects (works alongside GeckoLib Better FPS)
+- CERBON's API: the multipart bounding box check is cached per entity instead of running on every bounding box call
+- ImmediatelyFast: render layer order is worked out once per layer instead of on every comparison while sorting
+- Placebo: item component hashing (used by Apotheosis affixes) no longer builds a stream and array per lookup
+- Sound Physics Remastered: sound rays skip through air and look up each block once, with no allocations per block
+- Malum: no longer creates, ticks and saves its soul, curio, touch of darkness and geas data on every mob
+- Eidolon: Repraised: thrall checks no longer create empty data tags on every mob, and the Bonelord armor scan only runs when it's used
+- Konkrete: the volume watcher thread only starts if something actually uses Konkrete sounds
 
 ### Memory
 - Unused structure templates are released after 5 minutes idle

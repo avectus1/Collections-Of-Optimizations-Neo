@@ -231,7 +231,12 @@
     "geckolib.MixinGeckoEasingType",
     "geckolib.MixinGeckoKeyframePoint",
     "mowziesmobs.MixinMowzieIdleEntityData",
-    "emiloot.EmiLootParserAccessor"
+    "emiloot.EmiLootParserAccessor",
+    "cerbonsapi.MixinEntityMultipartHooks",
+    "placebo.MixinPlaceboHashComponents",
+    "malum.MixinMalumIdleLivingTick",
+    "eidolon.MixinEidolonThrallCheck",
+    "eidolon.MixinEidolonBoneArmorScan"
   ],
   "client": [
     "alexscaves.MixinBiomeSamplerTickCache",
@@ -392,7 +397,12 @@
     "mowziesmobs.MixinMowzieRenderFrozenCheck",
     "mowziesmobs.MixinMowzieRenderTypeCache",
     "toomanyrecipeviewers.MixinTmrvSlotStackMemo",
-    "toomanyrecipeviewers.TmrvCollectorAccessor"
+    "toomanyrecipeviewers.TmrvCollectorAccessor",
+    "immediatelyfast.MixinBatchableLayerOrder",
+    "konkrete.MixinKonkreteSoundHandler",
+    "soundphysics.MixinSprRaycastAirSkip",
+    "soundphysics.MixinSprClonedChunkDirect",
+    "soundphysics.MixinSprClonedLevelLastChunk"
   ],
   "injectors": {
     "defaultRequire": 0

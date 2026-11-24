@@ -120,6 +120,11 @@ public class CoOMixinPlugin implements IMixinConfigPlugin {
             Map.entry("mowziesmobs", "mowziesmobs"),
             Map.entry("emiloot", "emi_loot"),
             Map.entry("toomanyrecipeviewers", "toomanyrecipeviewers"),
+            Map.entry("cerbonsapi", "cerbons_api"),
+            Map.entry("konkrete", "konkrete"),
+            Map.entry("soundphysics", "sound_physics_remastered"),
+            Map.entry("malum", "malum"),
+            Map.entry("eidolon", "eidolon_repraised"),
             Map.entry("stutterfix", "stutterfix"),
             Map.entry("morequesttypes", "more_quest_types"),
             Map.entry("dungeonnowloading", "dungeonnowloading"),
@@ -229,6 +234,15 @@ public class CoOMixinPlugin implements IMixinConfigPlugin {
     private static final Map<String, Boolean> LOADED_CACHE = new HashMap<>();
     private static final Map<String, Integer> MAJOR_CACHE = new HashMap<>();
     private static final Map<String, String> VERSION_CACHE = new HashMap<>();
+
+    /** Whether {@link #shouldApplyMixin} would let this CoO mixin through, for cancellers that swap a mod's mixin for ours. */
+    public static boolean wouldApply(String mixinClassName) {
+        try {
+            return new CoOMixinPlugin().shouldApplyMixin("", mixinClassName);
+        } catch (Throwable throwable) {
+            return false;
+        }
+    }
 
     @Override
     public void onLoad(String mixinPackage) {
