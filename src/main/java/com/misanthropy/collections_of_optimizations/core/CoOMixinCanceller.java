@@ -18,15 +18,17 @@ public final class CoOMixinCanceller implements MixinCanceller {
     private static final String P = "com.misanthropy.collections_of_optimizations.mixin.";
 
     /** mod mixin -> CoO mixin that replaces it (or a CoO group name for mixins that are simply dropped). */
-    private static final Map<String, String> REPLACEMENTS = Map.of(
-            "com.cerbon.cerbons_api.mixin.multipart_entities.EntityMixin", P + "cerbonsapi.MixinEntityMultipartHooks",
-            "dev.obscuria.aquamirae.integration.mixin.MixinLevel", P + "aquamirae.MixinAquamiraeShellbackParts",
-            "io.redspace.ironsspellbooks.mixin.NoiseChunkMixin", P + "ironsspellbooks.MixinIsbAquiferNuke",
-            "com.craisinlord.antarchy.mixins.NoiseChunkGeneratorProfilerMixin", P + "antarchy.Profilers",
-            "com.craisinlord.antarchy.mixins.ChunkGeneratorProfilerMixin", P + "antarchy.Profilers",
-            "com.craisinlord.antarchy.mixins.StructureProfilerMixin", P + "antarchy.Profilers",
-            "com.craisinlord.antarchy.mixins.PlacedFeatureProfilerMixin", P + "antarchy.Profilers",
-            "com.craisinlord.antarchy.mixins.LevelChunkProfilerMixin", P + "antarchy.Profilers"
+    private static final Map<String, String> REPLACEMENTS = Map.ofEntries(
+            Map.entry("com.cerbon.cerbons_api.mixin.multipart_entities.EntityMixin", P + "cerbonsapi.MixinEntityMultipartHooks"),
+            Map.entry("dev.obscuria.aquamirae.integration.mixin.MixinLevel", P + "aquamirae.MixinAquamiraeShellbackParts"),
+            Map.entry("io.redspace.ironsspellbooks.mixin.NoiseChunkMixin", P + "ironsspellbooks.MixinIsbAquiferNuke"),
+            Map.entry("com.craisinlord.antarchy.mixins.NoiseChunkGeneratorProfilerMixin", P + "antarchy.Profilers"),
+            Map.entry("com.craisinlord.antarchy.mixins.ChunkGeneratorProfilerMixin", P + "antarchy.Profilers"),
+            Map.entry("com.craisinlord.antarchy.mixins.StructureProfilerMixin", P + "antarchy.Profilers"),
+            Map.entry("com.craisinlord.antarchy.mixins.PlacedFeatureProfilerMixin", P + "antarchy.Profilers"),
+            Map.entry("com.craisinlord.antarchy.mixins.LevelChunkProfilerMixin", P + "antarchy.Profilers"),
+            Map.entry("com.moepus.gbf.mixin.RenderUtilsMixin", P + "species.MixinSpeciesGbfBoneRotation"),
+            Map.entry("com.ninni.species.mixin.client.geckolib.GeoBoneSurfingMixin", P + "species.MixinSpeciesGbfBoneRotation")
     );
 
     private static final Set<String> ACTIVE = ConcurrentHashMap.newKeySet();

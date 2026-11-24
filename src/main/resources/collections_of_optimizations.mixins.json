@@ -407,7 +407,8 @@
     "konkrete.MixinKonkreteSoundHandler",
     "soundphysics.MixinSprRaycastAirSkip",
     "soundphysics.MixinSprClonedChunkDirect",
-    "soundphysics.MixinSprClonedLevelLastChunk"
+    "soundphysics.MixinSprClonedLevelLastChunk",
+    "species.MixinSpeciesGbfBoneRotation"
   ],
   "injectors": {
     "defaultRequire": 0

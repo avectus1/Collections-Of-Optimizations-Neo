@@ -128,6 +128,7 @@ public class CoOMixinPlugin implements IMixinConfigPlugin {
             Map.entry("aquamirae", "aquamirae"),
             Map.entry("enderscape", "enderscape"),
             Map.entry("antarchy", "antarchy"),
+            Map.entry("species", "species"),
             Map.entry("stutterfix", "stutterfix"),
             Map.entry("morequesttypes", "more_quest_types"),
             Map.entry("dungeonnowloading", "dungeonnowloading"),
@@ -183,6 +184,7 @@ public class CoOMixinPlugin implements IMixinConfigPlugin {
 
     private static final Map<String, String[]> MIXIN_REQUIRES = Map.ofEntries(
             Map.entry("elysiumapi.MixinElysiumTerrablenderHelper", new String[]{"terrablender"}),
+            Map.entry("species.MixinSpeciesGbfBoneRotation", new String[]{"species", "gbf"}),
 
             Map.entry("goetyrevelation.MixinATAHelper", new String[]{"curios"}),
 
@@ -239,7 +241,8 @@ public class CoOMixinPlugin implements IMixinConfigPlugin {
             "ironsspellbooks.MixinIsbAquiferNuke",
             "aquamirae.MixinAquamiraeShellbackParts",
             "cerbonsapi.MixinEntityMultipartHooks",
-            "antarchy.Profilers"
+            "antarchy.Profilers",
+            "species.MixinSpeciesGbfBoneRotation"
     );
     private static Boolean squaredPresent;
 
