@@ -50,6 +50,7 @@ By avectus1
 - Fixed Undergarden Munchers breaking blocks with mobGriefing off
 - Fixed a server tick crash when every patch is switched off because of an incompatible mod (Tickweave)
 - Fixed the game getting stuck on the loading screen with Species and GeckoBetterFPS together
+- Fixed Lootr chests in new structures staying as normal chests until opened (double chests turned half Lootr, half normal)
 - Fixed a startup crash when MixinSquared is not installed (Moonlight, Alex's Caves, Cataclysm and others)
 
 Every change can be turned off in the config.
