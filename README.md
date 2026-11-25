@@ -105,6 +105,7 @@ NeoForge 1.21.1 port of Collections of Optimizations. It fixes lag, stutter and 
 
 - Original mod: Collections of Optimizations by Misanthropy (Forge 1.20.1)
 - NeoForge 1.21.1 port this is based on: GLDYM - https://github.com/GLDYM/Collections-Of-Optimizations-Neoforge
+- EMI Loot + LootJS fix: based on EMI Loot + LootJS Fix by momo (MIT) - https://github.com/mosharky/EMI_Loot_Fix
 
 ## Disclaimer
 

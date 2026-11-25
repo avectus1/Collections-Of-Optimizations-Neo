@@ -151,6 +151,7 @@ public class CoOMixinPlugin implements IMixinConfigPlugin {
     );
 
     private static final Map<String, String[]> MIXIN_CONFLICTS = Map.ofEntries(
+            Map.entry("emiloot.MixinEmiLootLootJsReparse", new String[]{"emi_loot_fix"}),
             Map.entry("vanilla.MixinBeardifierReach", new String[]{"generator_accelerator", "c2me_opts_worldgen_vanilla"}),
             Map.entry("immersiveweathering.MixinAreaCheck", new String[]{"iwt"}),
             Map.entry("immersiveweathering.MixinBlockGrowthHandler", new String[]{"iwt"}),
@@ -184,6 +185,7 @@ public class CoOMixinPlugin implements IMixinConfigPlugin {
     private static final String[] TAKES_EVERYTHING = {"tickweave"};
 
     private static final Map<String, String[]> MIXIN_REQUIRES = Map.ofEntries(
+            Map.entry("emiloot.MixinEmiLootLootJsReparse", new String[]{"lootjs"}),
             Map.entry("elysiumapi.MixinElysiumTerrablenderHelper", new String[]{"terrablender"}),
             Map.entry("species.MixinSpeciesGbfBoneRotation", new String[]{"species", "gbf"}),
 

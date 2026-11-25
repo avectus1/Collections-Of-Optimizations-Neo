@@ -47,6 +47,7 @@ public final class CoOConfig {
     public static boolean mowziesmobsIdleEntityData = true;
     public static boolean mowziesmobsRenderTypeCache = true;
     public static boolean emiLootServerData = true;
+    public static boolean emiLootReparseAfterLootJs = true;
     public static boolean isbSharedRecipeScrolls = true;
     public static boolean geckolibEasing = true;
     public static boolean geckolibKeyframeLookup = true;
@@ -1067,6 +1068,9 @@ public final class CoOConfig {
         gate(builder
                 .comment("Clear EMI's recipe screen back and forward history when you leave a world. That history holds the inventory and container screens you browsed from, which hold your player and through it the whole world you just left, so the old world could stay in memory on the title screen and after joining another world. Client.")
                 .define("releaseHistoryOnLeave", true), v -> emiReleaseHistoryOnLeave = v);
+        gate(builder
+                .comment("Make EMI Loot read the loot tables again after LootJS has changed them, so its loot pages show the drops LootJS added or removed instead of the stock ones. Only with LootJS installed, and off while the standalone EMI Loot + LootJS Fix mod is installed (based on that mod by momo, MIT).")
+                .define("emiLootShowLootJsChanges", true), v -> emiLootReparseAfterLootJs = v);
         builder.pop();
 
         builder.comment("Curios API patches.").push("curios");
