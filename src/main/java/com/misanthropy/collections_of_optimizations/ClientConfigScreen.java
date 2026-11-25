@@ -16,16 +16,28 @@ public final class ClientConfigScreen {
 
     public static void register(ModContainer modContainer) {
         modContainer.registerExtensionPoint(IConfigScreenFactory.class,
-                (container, parent) -> new ConfigurationScreen(container, parent, (context, key, original) -> {
-                    if (context.keylist().isEmpty() && !sectionApplies(key)) {
-                        return null;
-                    }
-                    return original;
-                }));
+                (container, parent) -> new ConfigurationScreen(container, parent));
+    }
+
+    private static java.util.Set<String> topLevel;
+
+    /** Names of the top-level sections of CoO's config, read from the spec once. */
+    public static boolean isTopLevelSection(String key) {
+        java.util.Set<String> names = topLevel;
+        if (names == null) {
+            names = new java.util.HashSet<>();
+            for (var entry : CoOConfig.SPEC.getValues().entrySet()) {
+                if (entry.getValue() instanceof com.electronwill.nightconfig.core.UnmodifiableConfig) {
+                    names.add(entry.getKey());
+                }
+            }
+            topLevel = names;
+        }
+        return names.contains(key);
     }
 
     /** False only for a top-level section that belongs to a mod which is not loaded. */
-    private static boolean sectionApplies(String section) {
+    public static boolean sectionApplies(String section) {
         String modId = CoOMixinPlugin.modIdForGroup(section);
         if (modId == null) {
             int underscore = section.indexOf('_');

@@ -385,6 +385,7 @@
     "vanilla.MixinClientLevelDoorHalves",
     "vanilla.MixinClientLevelSkyColour",
     "vanilla.MixinCompositeRenderTypeOrderIndependentSort",
+    "vanilla.MixinConfigScreenHideMissingMods",
     "vanilla.MixinEntityModelSetArmorBake",
     "vanilla.MixinFogRendererBiomeFog",
     "vanilla.MixinFontOutlineStyle",
