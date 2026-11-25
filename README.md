@@ -4,7 +4,7 @@ NeoForge 1.21.1 port of Collections of Optimizations. It fixes lag, stutter and 
 
 ## Covered mods
 
-96 mods plus vanilla Minecraft, with around 350 patches. Every patch has its own config option.
+95 mods plus vanilla Minecraft, with around 350 patches. Every patch has its own config option.
 
 - Ad Astra
 - Alex's Caves (Neo port)
@@ -25,7 +25,6 @@ NeoForge 1.21.1 port of Collections of Optimizations. It fixes lag, stutter and 
 - Biolith
 - Born in Chaos
 - Bosses of Mass Destruction
-- Brute Force Culling
 - Bye Pregen
 - Cable Facades
 - Caelus

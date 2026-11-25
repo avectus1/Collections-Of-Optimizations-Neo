@@ -33,7 +33,6 @@ public final class CoOConfig {
     public static boolean stutterfixPriorityOnce = true;
     public static boolean tmrvSlotStackMemo = true;
     public static int tmrvRebuiltRecipeCache = 256;
-    public static boolean bfcSkipRedundantBinds = true;
     public static boolean immediatelyfastLayerOrderCache = true;
     public static boolean placeboHashComponents = true;
     public static boolean konkreteDeferVolumeThread = true;
@@ -2791,11 +2790,6 @@ public final class CoOConfig {
                 .defineInRange("heightCacheSize", 4096, 0, 65536), 0, v -> structurifyHeightCacheSize = v);
         gate(builder.comment("Empty each thread's Structurify height cache after leaving a world, instead of keeping the old world's generator alive through it until that thread generates again.")
                 .define("heightCacheWorldReset", true), v -> structurifyHeightCacheWorldReset = v);
-        builder.pop();
-
-        builder.comment("Brute Force Culling patches (client).").push("brute_force_culling");
-        gate(builder.comment("Brute Force Culling clears each of its seven render targets and binds it again right after, and clearing binds the screen framebuffer in between, so each target costs three framebuffer switches instead of one. Let those clears leave the target bound and skip the bind right after. The GL state afterwards is the same; only the two extra switches go.")
-                .define("skipRedundantFramebufferBinds", true), v -> bfcSkipRedundantBinds = v);
         builder.pop();
 
         builder.comment("Mowzie's Mobs patches.").push("mowziesmobs");
