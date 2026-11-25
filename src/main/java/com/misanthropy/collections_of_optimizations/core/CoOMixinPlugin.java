@@ -33,6 +33,11 @@ public class CoOMixinPlugin implements IMixinConfigPlugin {
     private static final String ELYSIUM_DISPATCH_OWNER = "com/misanthropy/collections_of_optimizations/core/ElysiumSoundTransformers";
     private static final String MIXIN_MERGED_DESC = "Lorg/spongepowered/asm/mixin/transformer/meta/MixinMerged;";
 
+    /** Mod id a patch group (or config section of the same name) belongs to, or null when it is not tied to one mod. */
+    public static String modIdForGroup(String group) {
+        return GROUP_TO_MODID.get(group);
+    }
+
     private static final Map<String, String> GROUP_TO_MODID = Map.ofEntries(
             Map.entry("adastra", "ad_astra"),
             Map.entry("alexscaves", "alexscaves"),
@@ -130,6 +135,7 @@ public class CoOMixinPlugin implements IMixinConfigPlugin {
             Map.entry("antarchy", "antarchy"),
             Map.entry("species", "species"),
             Map.entry("blur", "blur"),
+            Map.entry("brutecull", "brute_force_culling"),
             Map.entry("stutterfix", "stutterfix"),
             Map.entry("morequesttypes", "more_quest_types"),
             Map.entry("dungeonnowloading", "dungeonnowloading"),

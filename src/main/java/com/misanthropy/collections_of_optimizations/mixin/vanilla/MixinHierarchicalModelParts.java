@@ -2,8 +2,6 @@ package com.misanthropy.collections_of_optimizations.mixin.vanilla;
 
 import com.misanthropy.collections_of_optimizations.CoOConfig;
 import com.misanthropy.collections_of_optimizations.core.ModelPartLookup;
-import com.mojang.blaze3d.systems.RenderSystem;
-import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import java.util.Map;
 import java.util.Optional;
 import net.minecraft.client.model.HierarchicalModel;
@@ -17,7 +15,9 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 /**
  * Stock getAnyDescendantWithName builds a stream over every part of the model on each call, and keyframe
- * animations call it for every animated bone every frame. Remember each answer per model root.
+ * animations call it for every animated bone every frame. Walk the tree directly instead, in the same order
+ * as the stream, without the stream objects. Nothing is cached: mods such as Entity Model Features swap
+ * parts of a model at runtime, and a remembered part could be one that is no longer drawn.
  */
 @Mixin(value = HierarchicalModel.class, remap = false)
 public abstract class MixinHierarchicalModelParts implements ModelPartLookup {
@@ -25,15 +25,9 @@ public abstract class MixinHierarchicalModelParts implements ModelPartLookup {
     @Shadow
     public abstract ModelPart root();
 
-    @Unique
-    private ModelPart coo$cachedRoot;
-
-    @Unique
-    private Map<String, Optional<ModelPart>> coo$partsByName;
-
     @Inject(method = "getAnyDescendantWithName", at = @At("HEAD"), cancellable = true, require = 0)
-    private void coo$cachePartLookup(String name, CallbackInfoReturnable<Optional<ModelPart>> cir) {
-        if (CoOConfig.vanillaCacheModelPartLookups && RenderSystem.isOnRenderThread()) {
+    private void coo$walkPartLookup(String name, CallbackInfoReturnable<Optional<ModelPart>> cir) {
+        if (CoOConfig.vanillaCacheModelPartLookups) {
             cir.setReturnValue(this.coo$cachedDescendant(name));
         }
     }
@@ -41,19 +35,26 @@ public abstract class MixinHierarchicalModelParts implements ModelPartLookup {
     @Override
     public Optional<ModelPart> coo$cachedDescendant(String name) {
         ModelPart root = this.root();
-        Map<String, Optional<ModelPart>> cache = this.coo$partsByName;
-        if (cache == null || this.coo$cachedRoot != root) {
-            cache = new Object2ObjectOpenHashMap<>(16);
-            this.coo$partsByName = cache;
-            this.coo$cachedRoot = root;
+        if (name.equals("root")) {
+            return Optional.of(root);
         }
-        Optional<ModelPart> hit = cache.get(name);
-        if (hit == null) {
-            hit = name.equals("root")
-                    ? Optional.of(root)
-                    : root.getAllParts().filter(part -> part.hasChild(name)).findFirst().map(part -> part.getChild(name));
-            cache.put(name, hit);
+        return Optional.ofNullable(coo$find(root, name));
+    }
+
+    /** Pre-order like ModelPart.getAllParts: a part first, then each child subtree in map order. */
+    @Unique
+    private static ModelPart coo$find(ModelPart part, String name) {
+        Map<String, ModelPart> children = ((ModelPartChildrenAccessor) (Object) part).coo$children();
+        ModelPart direct = children.get(name);
+        if (direct != null) {
+            return direct;
         }
-        return hit;
+        for (ModelPart child : children.values()) {
+            ModelPart found = coo$find(child, name);
+            if (found != null) {
+                return found;
+            }
+        }
+        return null;
     }
 }

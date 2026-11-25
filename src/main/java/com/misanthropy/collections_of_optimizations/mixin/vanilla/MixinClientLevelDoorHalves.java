@@ -1,14 +1,18 @@
 package com.misanthropy.collections_of_optimizations.mixin.vanilla;
 
 import com.misanthropy.collections_of_optimizations.CoOConfig;
+import it.unimi.dsi.fastutil.longs.Long2ObjectOpenHashMap;
 import net.minecraft.client.multiplayer.ClientLevel;
+import net.minecraft.client.multiplayer.prediction.BlockStatePredictionHandler;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.DoorBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.minecraft.world.phys.Vec3;
+import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -23,6 +27,10 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
  */
 @Mixin(value = ClientLevel.class, remap = false)
 public abstract class MixinClientLevelDoorHalves {
+    @Shadow
+    @Final
+    private BlockStatePredictionHandler blockStatePredictionHandler;
+
 
     @Inject(method = "setServerVerifiedBlockState", at = @At("TAIL"), require = 0)
     private void coo$syncDoorFromServer(BlockPos pos, BlockState state, int flags, CallbackInfo ci) {
@@ -40,9 +48,20 @@ public abstract class MixinClientLevelDoorHalves {
             return;
         }
         ClientLevel level = (ClientLevel) (Object) this;
+        // Never touch a door while the client is predicting a click on it: the shown state of a predicted
+        // block is the client's own guess until the server acknowledges it, and writing the other half
+        // in between would be undone (or recorded wrongly) when the acknowledgement arrives.
+        BlockStatePredictionHandler prediction = this.blockStatePredictionHandler;
+        if (prediction.isPredicting() || level.getBlockState(pos) != state) {
+            return;
+        }
+        Long2ObjectOpenHashMap<?> pending = ((PredictionHandlerAccessor) prediction).coo$serverVerifiedStates();
         boolean lower = state.getValue(DoorBlock.HALF) == DoubleBlockHalf.LOWER;
         BlockPos otherPos = lower ? pos.above() : pos.below();
         BlockState other = level.getBlockState(otherPos);
+        if (pending.containsKey(pos.asLong()) || pending.containsKey(otherPos.asLong())) {
+            return;
+        }
         if (other.getBlock() != state.getBlock() || other.getValue(DoorBlock.HALF) == state.getValue(DoorBlock.HALF)) {
             return;
         }

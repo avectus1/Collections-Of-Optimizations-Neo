@@ -46,6 +46,10 @@ By avectus1
 - Iron's Spellbooks: Arcane Anvil recipe pages share spell data instead of copying it for every weapon, spell and level
 
 ### Fixes
+- Fixed some mobs (like the Netherite Monstrosity) disappearing or animating wrong when another mod changes their model
+- Fixed the door fix making doors flicker or half open while clicking them
+- Brute Force Culling no longer hides chunks and mobs around glowing entities
+- The in-game config screen has readable names and only shows mods you have installed
 - Fixed a crash with Create when ComputerCraft is not installed
 - Fixed Ars Elemental spell entities (dripstone spike, water jet, magnet) crashing after a reload
 - Fixed Undergarden Munchers breaking blocks with mobGriefing off

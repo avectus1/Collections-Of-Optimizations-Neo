@@ -33,6 +33,7 @@ public final class CoOConfig {
     public static boolean stutterfixPriorityOnce = true;
     public static boolean tmrvSlotStackMemo = true;
     public static int tmrvRebuiltRecipeCache = 256;
+    public static boolean bfcNoCullWhileGlowing = true;
     public static boolean immediatelyfastLayerOrderCache = true;
     public static boolean placeboHashComponents = true;
     public static boolean konkreteDeferVolumeThread = true;
@@ -2081,7 +2082,7 @@ public final class CoOConfig {
                 .comment("Every five seconds, drop dead player copies that another mod left registered as chunk loaders. Such ghosts keep hundreds of chunks loaded and spawning mobs at wherever they died until restart.")
                 .define("purgeGhostPlayers", true), v -> vanillaPurgeGhostPlayers = v);
         gate(builder
-                .comment("Remember which bone of a model a given name belongs to instead of walking the whole model tree again for every bone of every keyframe animation. Vanilla answers that question with a recursive stream over every part of the model, once per animated bone per entity per frame, and every walk allocates a few objects per part it visits. Result is identical.")
+                .comment("Find animated bones by walking the model tree directly instead of through a stream. Vanilla builds a recursive stream over every part of the model once per animated bone per entity per frame, allocating a few objects per part it visits. Nothing is remembered between frames, so models that other mods change at runtime still animate correctly. Result is identical.")
                 .define("cacheModelPartLookups", true), v -> vanillaCacheModelPartLookups = v);
         gate(builder
                 .comment("Run keyframe animations with plain loops. Vanilla allocates two capturing lambdas per animated bone and one more per animation channel, every entity every frame, which is a large part of the garbage the render thread produces. Output is identical, but a mod injecting into the middle of KeyframeAnimations.animate will not run while this is on.")
@@ -2790,6 +2791,11 @@ public final class CoOConfig {
                 .defineInRange("heightCacheSize", 4096, 0, 65536), 0, v -> structurifyHeightCacheSize = v);
         gate(builder.comment("Empty each thread's Structurify height cache after leaving a world, instead of keeping the old world's generator alive through it until that thread generates again.")
                 .define("heightCacheWorldReset", true), v -> structurifyHeightCacheWorldReset = v);
+        builder.pop();
+
+        builder.comment("Brute Force Culling patches (client).").push("brute_force_culling");
+        gate(builder.comment("In some packs Brute Force Culling hides chunks and mobs around an entity with the Glowing effect. While glowing outlines are on screen, and for a moment after, skip its chunk and entity culling so everything is drawn. Culling works as normal the rest of the time.")
+                .define("noCullingWhileGlowing", true), v -> bfcNoCullWhileGlowing = v);
         builder.pop();
 
         builder.comment("Mowzie's Mobs patches.").push("mowziesmobs");
