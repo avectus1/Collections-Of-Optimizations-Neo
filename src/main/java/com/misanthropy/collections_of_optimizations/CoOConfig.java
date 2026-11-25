@@ -655,6 +655,7 @@ public final class CoOConfig {
     public static boolean vanillaCacheModelPartLookups = true;
     public static boolean vanillaLeanKeyframeAnimation = true;
     public static boolean vanillaUniformSectionLookup = true;
+    public static boolean vanillaClientDoorHalfSync = true;
     public static boolean vanillaAxisAlignedRotation = true;
     public static boolean vanillaLeanBlockPosRange = true;
     public static boolean createsolarMemoGogglesLookup = true;
@@ -2081,6 +2082,9 @@ public final class CoOConfig {
         gate(builder
                 .comment("Answer block and biome lookups in a chunk section that holds a single value with one type check and a field read instead of two interface calls through the palette and the bit storage. Air, deep stone and open water sections are all single value sections and they are the most common kind, so a large share of the lookups world generation, lighting, pathfinding and mob spawning make land here. Output is identical.")
                 .define("uniformSectionLookup", true), v -> vanillaUniformSectionLookup = v);
+        gate(builder
+                .comment("When the server sends the client one half of a door, set the other half to match. Fixes doors where only the top or bottom half opens until you relog, which happens when one of the two block updates of a click is lost on the client. Client.")
+                .define("clientDoorHalfSync", true), v -> vanillaClientDoorHalfSync = v);
         gate(builder
                 .comment("Rotate a pose stack around a single axis with the short form of the multiplication instead of the general quaternion product. Nearly every rotation an entity, item or model part applies is around X, Y or Z alone, and JOML does about three times the arithmetic for those. Same result up to floating point rounding. Client.")
                 .define("axisAlignedRotation", true), v -> vanillaAxisAlignedRotation = v);
