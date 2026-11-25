@@ -33,6 +33,7 @@ public final class CoOConfig {
     public static boolean stutterfixPriorityOnce = true;
     public static boolean tmrvSlotStackMemo = true;
     public static int tmrvRebuiltRecipeCache = 256;
+    public static boolean bfcSkipRedundantBinds = true;
     public static boolean immediatelyfastLayerOrderCache = true;
     public static boolean placeboHashComponents = true;
     public static boolean konkreteDeferVolumeThread = true;
@@ -369,6 +370,8 @@ public final class CoOConfig {
     public static boolean structurifyLeanOverlapSections = true;
     public static boolean structurifyCacheStructureSetEntries = true;
     public static boolean structurifySkipStartCheckWrap = true;
+    public static int structurifyHeightCacheSize = 4096;
+    public static boolean structurifyHeightCacheWorldReset = true;
 
     public static boolean lithostitchedFastTemplateShuffle = true;
     public static boolean lithostitchedCacheBiomeModifierList = true;
@@ -2781,6 +2784,18 @@ public final class CoOConfig {
         builder.comment("Blur+ patches (client).").push("blur");
         gate(builder.comment("Stop Blur+ from writing several debug log lines on every frame.")
                 .define("frameLogging", true), v -> blurFrameLogging = v);
+        builder.pop();
+
+        builder.comment("Structurify patches.").push("structurify");
+        gate(builder.comment("Entries in Structurify's terrain height cache per world generation thread. Structurify keeps 16384 on every thread, which with C2ME's many workers adds up to tens of megabytes. 0 keeps Structurify's size.")
+                .defineInRange("heightCacheSize", 4096, 0, 65536), 0, v -> structurifyHeightCacheSize = v);
+        gate(builder.comment("Empty each thread's Structurify height cache after leaving a world, instead of keeping the old world's generator alive through it until that thread generates again.")
+                .define("heightCacheWorldReset", true), v -> structurifyHeightCacheWorldReset = v);
+        builder.pop();
+
+        builder.comment("Brute Force Culling patches (client).").push("brute_force_culling");
+        gate(builder.comment("Brute Force Culling clears each of its seven render targets and binds it again right after, and clearing binds the screen framebuffer in between, so each target costs three framebuffer switches instead of one. Let those clears leave the target bound and skip the bind right after. The GL state afterwards is the same; only the two extra switches go.")
+                .define("skipRedundantFramebufferBinds", true), v -> bfcSkipRedundantBinds = v);
         builder.pop();
 
         builder.comment("Mowzie's Mobs patches.").push("mowziesmobs");

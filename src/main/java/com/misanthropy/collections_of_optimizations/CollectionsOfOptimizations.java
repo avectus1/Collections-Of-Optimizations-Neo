@@ -70,6 +70,9 @@ public final class CollectionsOfOptimizations {
         if (ModList.get().isLoaded("aquamirae")) {
             com.misanthropy.collections_of_optimizations.core.AquamiraeMultipartCount.register();
         }
+        if (ModList.get().isLoaded("structurify")) {
+            com.misanthropy.collections_of_optimizations.core.StructurifyHeightCacheEpoch.register();
+        }
         if (ModList.get().isLoaded("enderscape")) {
             com.misanthropy.collections_of_optimizations.core.EnderscapeMusicLeakGuard.register();
         }
