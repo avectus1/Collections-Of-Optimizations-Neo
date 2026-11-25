@@ -245,6 +245,18 @@ public class CoOMixinPlugin implements IMixinConfigPlugin {
             "antarchy.Profilers",
             "species.MixinSpeciesGbfBoneRotation"
     );
+    /** CoO mixins that target another mod's mixin handler through MixinSquared's @MixinSquared:Handler selector. */
+    private static final Set<String> NEEDS_MIXIN_SQUARED = Set.of(
+            "cataclysm.MixinCataclysmArmPoseEvent",
+            "alexscaves.MixinACSkipDisabledCaveBiomes",
+            "alexscaves.MixinAlexsCavesCollideEntities",
+            "subtleeffects.MixinSeCoveredLava",
+            "supplementaries.MixinBlockEntityInfoCapSync",
+            "fancymenu.MixinPoseStackTrackingGate",
+            "bettercombat.MixinOffhandOnlyTwoHandedCheck",
+            "iceberg.MixinIcebergArmorClassLookup",
+            "moonlight.MixinMapItemSavedData"
+    );
     private static Boolean squaredPresent;
 
     private static synchronized boolean mixinSquaredPresent() {
@@ -380,7 +392,7 @@ public class CoOMixinPlugin implements IMixinConfigPlugin {
         if (pinned != null && !pinned[1].equals(modVersion(pinned[0]))) {
             return false;
         }
-        if (NEEDS_MIXIN_CANCELLER.contains(remainder) && !mixinSquaredPresent()) {
+        if ((NEEDS_MIXIN_CANCELLER.contains(remainder) || NEEDS_MIXIN_SQUARED.contains(remainder)) && !mixinSquaredPresent()) {
             return false;
         }
         String[] required = MIXIN_REQUIRES.get(remainder);
