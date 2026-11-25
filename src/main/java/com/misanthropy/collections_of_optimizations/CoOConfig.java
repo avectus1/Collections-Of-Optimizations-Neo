@@ -32,6 +32,7 @@ public final class CoOConfig {
     public static int vanillaStructureTemplateSweepTicks = 1200;
     public static boolean stutterfixPriorityOnce = true;
     public static boolean tmrvSlotStackMemo = true;
+    public static int tmrvRebuiltRecipeCache = 256;
     public static boolean immediatelyfastLayerOrderCache = true;
     public static boolean placeboHashComponents = true;
     public static boolean konkreteDeferVolumeThread = true;
@@ -2732,6 +2733,8 @@ public final class CoOConfig {
         builder.comment("Too Many Recipe Viewers (client).").push("toomanyrecipeviewers");
         gate(builder.comment("Build each JEI-plugin recipe slot's item list once instead of several times per slot every frame; rebuilt when the slot's contents change.")
                 .define("slotStackMemo", true), v -> tmrvSlotStackMemo = v);
+        gate(builder.comment("After EMI's recipe bake, TMRV keeps a rebuilt copy of every JEI recipe's inputs and outputs behind soft references, which with a large heap are never cleared (over 100 MB in big packs). Keep only this many recently used copies and rebuild the rest when they are needed again. 0 keeps TMRV's own cache.")
+                .defineInRange("rebuiltRecipeCache", 256, 0, 65536), 0, v -> tmrvRebuiltRecipeCache = v);
         builder.pop();
 
         builder.comment("ImmediatelyFast patches (client).").push("immediatelyfast");

@@ -34,6 +34,7 @@ By avectus1
 - Blur+: no longer writes several debug log lines on every frame
 
 ### Memory
+- Too Many Recipe Viewers no longer keeps a rebuilt copy of every JEI recipe in memory (over 100 MB in big packs)
 - Unused structure templates are released after 5 minutes idle
 - Fixed old worlds staying in memory after leaving, from Citadel models, Bosses of Mass Destruction and Corpse renderers
 - Fixed leaks in Alex's Mobs (world maps), Citadel (book entities), Alex's Caves (cave maps), Xaero's Minimap (slime chunk tiles) and Dungeon Now Loading

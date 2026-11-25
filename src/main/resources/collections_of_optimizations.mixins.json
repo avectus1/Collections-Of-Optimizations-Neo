@@ -371,6 +371,7 @@
     "subtleeffects.MixinSeGeyserRandom",
     "subtleeffects.MixinSeHeatedWaterIdle",
     "subtleeffects.MixinSeTickerRemoval",
+    "toomanyrecipeviewers.MixinTmrvRebuiltRecipeCache",
     "toomanyrecipeviewers.MixinTmrvSlotStackMemo",
     "toomanyrecipeviewers.TmrvCollectorAccessor",
     "vanilla.BiomeManagerSeedAccessor",
