@@ -48,7 +48,7 @@ By avectus1
 ### Fixes
 - Fixed some mobs (like the Netherite Monstrosity) disappearing or animating wrong when another mod changes their model
 - Fixed the door fix making doors flicker or half open while clicking them
-- Brute Force Culling no longer hides chunks and mobs around glowing entities
+- Brute Force Culling no longer hides chunks and mobs around glowing entities: the glowing outline left GL blending on right before its depth copy, which corrupted the copied depth. Blending is now off for that copy, so culling keeps working while things glow
 - The in-game config screen has readable names and only shows mods you have installed
 - Fixed a crash with Create when ComputerCraft is not installed
 - Fixed Ars Elemental spell entities (dripstone spike, water jet, magnet) crashing after a reload

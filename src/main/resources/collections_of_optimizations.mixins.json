@@ -265,6 +265,7 @@
     "bmd.MixinObsidilithBoneLightRelease",
     "bmd.MixinVoidBlossomBoneLightRelease",
     "borninchaos.MixinBicGeoModelLocations",
+    "brutecull.MixinBfcBlendState",
     "brutecull.MixinBfcGlowNoCull",
     "brutecull.MixinBfcGlowOutlineFrame",
     "cablefacades.MixinClientFacadeManager",

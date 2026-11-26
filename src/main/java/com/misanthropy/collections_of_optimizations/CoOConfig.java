@@ -33,7 +33,8 @@ public final class CoOConfig {
     public static boolean stutterfixPriorityOnce = true;
     public static boolean tmrvSlotStackMemo = true;
     public static int tmrvRebuiltRecipeCache = 256;
-    public static boolean bfcNoCullWhileGlowing = true;
+    public static boolean bfcNoCullWhileGlowing = false;
+    public static boolean bfcFixBlendState = true;
     public static boolean immediatelyfastLayerOrderCache = true;
     public static boolean placeboHashComponents = true;
     public static boolean konkreteDeferVolumeThread = true;
@@ -2794,8 +2795,10 @@ public final class CoOConfig {
         builder.pop();
 
         builder.comment("Brute Force Culling patches (client).").push("brute_force_culling");
-        gate(builder.comment("In some packs Brute Force Culling hides chunks and mobs around an entity with the Glowing effect. While glowing outlines are on screen, and for a moment after, skip its chunk and entity culling so everything is drawn. Culling works as normal the rest of the time.")
-                .define("noCullingWhileGlowing", true), v -> bfcNoCullWhileGlowing = v);
+        gate(builder.comment("Fixes Brute Force Culling hiding chunks and mobs while an entity with the Glowing effect is on screen. The glowing outline effect leaves GL blending on right before BFC copies the depth buffer, which corrupts the copied depth. This turns blending off for BFC's copy and puts it back after. Culling keeps working while things glow.")
+                .define("fixGlowingDepthCopy", true), v -> bfcFixBlendState = v);
+        gate(builder.comment("Older workaround for the same bug: skip BFC's chunk and entity culling while glowing outlines are on screen, and for a moment after. Only needed if the fix above is turned off and the bug still shows.")
+                .define("noCullingWhileGlowing", false), v -> bfcNoCullWhileGlowing = v);
         builder.pop();
 
         builder.comment("Mowzie's Mobs patches.").push("mowziesmobs");
