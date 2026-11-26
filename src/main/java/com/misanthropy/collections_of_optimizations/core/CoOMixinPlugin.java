@@ -87,7 +87,6 @@ public class CoOMixinPlugin implements IMixinConfigPlugin {
             Map.entry("lionfishapi", "lionfishapi"),
             Map.entry("lithostitched", "lithostitched"),
             Map.entry("lootr", "lootr"),
-            Map.entry("modernfix", "modernfix"),
             Map.entry("netherexp", "netherexp"),
             Map.entry("notenoughanimations", "notenoughanimations"),
             Map.entry("patchouli", "patchouli"),
@@ -135,7 +134,6 @@ public class CoOMixinPlugin implements IMixinConfigPlugin {
             Map.entry("antarchy", "antarchy"),
             Map.entry("species", "species"),
             Map.entry("blur", "blur"),
-            Map.entry("stutterfix", "stutterfix"),
             Map.entry("morequesttypes", "more_quest_types"),
             Map.entry("dungeonnowloading", "dungeonnowloading"),
             Map.entry("redomesticate", "redomesticate"),
@@ -202,7 +200,6 @@ public class CoOMixinPlugin implements IMixinConfigPlugin {
 
             Map.entry("morerelics.MixinMoreRelicsUtil", new String[]{"curios", "relics"}),
 
-            Map.entry("modernfix.MixinJEIRuntimeCapturer", new String[]{"jei"}),
 
             Map.entry("w2w2.MixinXaeronCompatibility", new String[]{"xaerominimap"}),
 

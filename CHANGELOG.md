@@ -5,10 +5,10 @@ By avectus1
 ## 0.1.0
 
 ### Performance
+- Aquamirae: lakes placed during world generation no longer fail with "Requested chunk unavailable" because of Aquamirae's ice check (empty chunks in Alex's Caves' Primordial Caves)
 - Faster natural mob spawning: chunk, biome and spawn rule lookups are reused within each spawn attempt (same spawns as vanilla)
 - Majrusz's Difficulty: mob cap limits are cached and the spawn rate check no longer scans every player
 - Redomesticate: faster tameable checks
-- StutterFix: thread priority is only set once
 - Citadel: stops resending the tick rate packet every tick
 - Elysium API: faster block property lookups
 - More Quest Types: lighter summoned mob scan
