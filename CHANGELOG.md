@@ -4,17 +4,30 @@ By avectus1
 
 ## 1.0.5
 
+Changes since 1.0.0.
+
+### Performance
+- Too Many Recipe Viewers no longer keeps a rebuilt copy of every JEI recipe in memory (over 100 MB in big packs)
+- Structurify: smaller terrain height cache per world generation thread, and it's emptied after leaving a world
+- Structure template position tables are built per height layer only when needed, instead of one large table
+
 ### Fixes
+- Fixed a startup crash when MixinSquared is not installed (Moonlight, Alex's Caves, Cataclysm and others)
+- Fixed Lootr chests in new structures staying as normal chests until opened (double chests turned half Lootr, half normal)
+- Fixed doors where only the top or bottom half opened until you relogged, without making doors flicker while clicking them
+- Fixed some mobs (like the Netherite Monstrosity) disappearing or animating wrong when another mod changes their model
 - Aquamirae: lakes placed during world generation no longer fail with "Requested chunk unavailable" because of Aquamirae's ice check (empty chunks in Alex's Caves' Primordial Caves)
-- The config screen only shows sections for mods that are installed
+- EMI Loot now shows loot table changes made with LootJS (built in from EMI Loot + LootJS Fix by momo)
+
+### Config
+- The in-game config screen has readable names and only shows sections for mods you have installed
 
 ### Removed
 - StutterFix thread priority patch, at the request of its author
 - ModernFix patches (model location order, creative tab indexing)
 - Async Particles sampler name patch
-- Brute Force Culling glowing fix (fixed in Brute Force Culling itself)
 
-## 0.1.0
+## 1.0.0
 
 ### Performance
 - Faster natural mob spawning: chunk, biome and spawn rule lookups are reused within each spawn attempt (same spawns as vanilla)
@@ -45,7 +58,6 @@ By avectus1
 - Blur+: no longer writes several debug log lines on every frame
 
 ### Memory
-- Too Many Recipe Viewers no longer keeps a rebuilt copy of every JEI recipe in memory (over 100 MB in big packs)
 - Unused structure templates are released after 5 minutes idle
 - Fixed old worlds staying in memory after leaving, from Citadel models, Bosses of Mass Destruction and Corpse renderers
 - Fixed leaks in Alex's Mobs (world maps), Citadel (book entities), Alex's Caves (cave maps), Xaero's Minimap (slime chunk tiles) and Dungeon Now Loading
@@ -57,18 +69,11 @@ By avectus1
 - Iron's Spellbooks: Arcane Anvil recipe pages share spell data instead of copying it for every weapon, spell and level
 
 ### Fixes
-- Fixed some mobs (like the Netherite Monstrosity) disappearing or animating wrong when another mod changes their model
-- Fixed the door fix making doors flicker or half open while clicking them
-- The in-game config screen has readable names and only shows mods you have installed
 - Fixed a crash with Create when ComputerCraft is not installed
 - Fixed Ars Elemental spell entities (dripstone spike, water jet, magnet) crashing after a reload
 - Fixed Undergarden Munchers breaking blocks with mobGriefing off
 - Fixed a server tick crash when every patch is switched off because of an incompatible mod (Tickweave)
 - Fixed the game getting stuck on the loading screen with Species and GeckoBetterFPS together
-- EMI Loot now shows loot table changes made with LootJS (built in from EMI Loot + LootJS Fix by momo)
-- Fixed doors where only the top or bottom half opened until you relogged
-- Fixed Lootr chests in new structures staying as normal chests until opened (double chests turned half Lootr, half normal)
-- Fixed a startup crash when MixinSquared is not installed (Moonlight, Alex's Caves, Cataclysm and others)
 
 Every change can be turned off in the config.
 
