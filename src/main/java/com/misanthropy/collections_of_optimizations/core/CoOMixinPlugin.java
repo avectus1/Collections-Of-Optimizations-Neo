@@ -134,6 +134,7 @@ public class CoOMixinPlugin implements IMixinConfigPlugin {
             Map.entry("antarchy", "antarchy"),
             Map.entry("species", "species"),
             Map.entry("blur", "blur"),
+            Map.entry("obscuretooltips", "obscure_tooltips"),
             Map.entry("morequesttypes", "more_quest_types"),
             Map.entry("dungeonnowloading", "dungeonnowloading"),
             Map.entry("redomesticate", "redomesticate"),
@@ -189,6 +190,7 @@ public class CoOMixinPlugin implements IMixinConfigPlugin {
 
     private static final Map<String, String[]> MIXIN_REQUIRES = Map.ofEntries(
             Map.entry("emiloot.MixinEmiLootLootJsReparse", new String[]{"lootjs"}),
+            Map.entry("obscuretooltips.MixinLodestoneTooltipIconParticles", new String[]{"lodestone"}),
             Map.entry("elysiumapi.MixinElysiumTerrablenderHelper", new String[]{"terrablender"}),
             Map.entry("species.MixinSpeciesGbfBoneRotation", new String[]{"species", "gbf"}),
 

@@ -9,6 +9,7 @@ import java.util.function.DoubleConsumer;
 import java.util.function.IntConsumer;
 
 public final class CoOConfig {
+    public static boolean obscureTooltipsNoIconParticles = true;
     public static boolean aquamiraeLakeIceRegionFix = true;
     public static boolean xaerolibFrameConfigMemo = true;
     public static int guardvillagersShieldFollowInterval = 10;
@@ -2623,6 +2624,11 @@ public final class CoOConfig {
         builder.comment("Aquamirae patches.").push("aquamirae");
         gate(builder.comment("Fixes empty chunks in world generation (for example in the middle of Alex's Caves' Primordial Caves) when Aquamirae is installed. Aquamirae's lake ice check looks up the biome in a way that can reach a chunk that isn't generated yet; the region throws and the whole chunk's features fail. If that happens, the check is redone with a biome lookup that doesn't need neighbouring chunks.")
                 .define("lakeIceWorldgenFix", true), v -> aquamiraeLakeIceRegionFix = v);
+        builder.pop();
+
+        builder.comment("Obscure Tooltips patches (client).").push("obscure_tooltips");
+        gate(builder.comment("With Lodestone mods (like Malum), glowing items leave their purple sparkles stuck far away from an Obscure tooltip, usually at the bottom right of the screen. This skips those item particles for icons inside the tooltip. Items in slots keep them.")
+                .define("noMisplacedIconParticles", true), v -> obscureTooltipsNoIconParticles = v);
         builder.pop();
 
         builder.comment("Mowzie's Mobs patches.").push("mowziesmobs");

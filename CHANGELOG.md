@@ -18,6 +18,7 @@ Changes since 1.0.0.
 - Fixed some mobs (like the Netherite Monstrosity) disappearing or animating wrong when another mod changes their model
 - Aquamirae: lakes placed during world generation no longer fail with "Requested chunk unavailable" because of Aquamirae's ice check (empty chunks in Alex's Caves' Primordial Caves)
 - EMI Loot now shows loot table changes made with LootJS (built in from EMI Loot + LootJS Fix by momo)
+- Obscure Tooltips + Lodestone mods (like Malum): glowing items no longer leave their purple sparkles stuck far away from the tooltip
 
 ### Config
 - The in-game config screen has readable names and only shows sections for mods you have installed

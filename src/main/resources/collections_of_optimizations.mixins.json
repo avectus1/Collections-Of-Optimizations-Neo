@@ -351,6 +351,8 @@
     "notenoughanimations.MixinNeaPetAnimation",
     "notenoughanimations.MixinNeaSwordRenderLayer",
     "notenoughanimations.MixinPlayerFreezeMemoSlot",
+    "obscuretooltips.MixinLodestoneTooltipIconParticles",
+    "obscuretooltips.MixinObscureTooltipRenderGuard",
     "perception.MixinPerceptionTrailWrapper",
     "shouldersurfing.MixinCrosshairRenderer",
     "shouldersurfing.MixinDynamicOffsets",
