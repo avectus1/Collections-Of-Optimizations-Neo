@@ -2,10 +2,21 @@
 
 By avectus1
 
+## 1.0.5
+
+### Fixes
+- Aquamirae: lakes placed during world generation no longer fail with "Requested chunk unavailable" because of Aquamirae's ice check (empty chunks in Alex's Caves' Primordial Caves)
+- The config screen only shows sections for mods that are installed
+
+### Removed
+- StutterFix thread priority patch, at the request of its author
+- ModernFix patches (model location order, creative tab indexing)
+- Async Particles sampler name patch
+- Brute Force Culling glowing fix (fixed in Brute Force Culling itself)
+
 ## 0.1.0
 
 ### Performance
-- Aquamirae: lakes placed during world generation no longer fail with "Requested chunk unavailable" because of Aquamirae's ice check (empty chunks in Alex's Caves' Primordial Caves)
 - Faster natural mob spawning: chunk, biome and spawn rule lookups are reused within each spawn attempt (same spawns as vanilla)
 - Majrusz's Difficulty: mob cap limits are cached and the spawn rate check no longer scans every player
 - Redomesticate: faster tameable checks
