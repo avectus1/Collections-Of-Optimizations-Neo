@@ -481,8 +481,5 @@
   "collections_of_optimizations.configuration.vramPollInterval": "Vram Poll Interval",
   "collections_of_optimizations.configuration.warmPrograms": "Warm Programs",
   "collections_of_optimizations.configuration.weakBiomeSearchSlot": "Weak Biome Search Slot",
-  "collections_of_optimizations.configuration.xaeroSlimeChunkTiles": "Xaero Slime Chunk Tiles",
-  "collections_of_optimizations.configuration.brute_force_culling": "Brute Force Culling",
-  "collections_of_optimizations.configuration.noCullingWhileGlowing": "No Culling While Glowing",
-  "collections_of_optimizations.configuration.fixGlowingDepthCopy": "Fix Glowing Depth Copy"
+  "collections_of_optimizations.configuration.xaeroSlimeChunkTiles": "Xaero Slime Chunk Tiles"
 }
