@@ -13,7 +13,7 @@ import org.spongepowered.asm.mixin.injection.At;
 public abstract class MixinCataclysmTidalTentacleTarget {
 
     @WrapOperation(
-            method = "m_8119_",
+            method = "tick",
             at = @At(value = "INVOKE", target = "Lcom/github/L_Ender/cataclysm/entity/projectile/Tidal_Tentacle_Entity;hasLineOfSight(Lnet/minecraft/world/entity/Entity;)Z"),
             require = 0
     )

@@ -21,10 +21,8 @@ public abstract class MixinIsbCurioEquipCheck {
         if (!CoOConfig.ironsspellbooksLeanCurioEquipCheck || entity == null) {
             return;
         }
-        Set<Item> equipped = CurioPresenceCache.equippedItems(entity);
-        if (equipped == null) {
-            return;
+        if (!CurioPresenceCache.mayHaveEquipped(entity, (Item) (Object) this)) {
+            cir.setReturnValue(false);
         }
-        cir.setReturnValue(equipped.contains((Item) (Object) this));
     }
 }

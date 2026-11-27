@@ -20,7 +20,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
-@Mixin(FilePackResources.class)
+@Mixin(value = FilePackResources.class, remap = false)
 public abstract class MixinFilePackResourcesIndex {
 
     @Unique
@@ -30,9 +30,12 @@ public abstract class MixinFilePackResourcesIndex {
     private volatile ZipPackGroups coo$groups;
 
     @Shadow
-    @Nullable
-    private ZipFile getOrCreateZipFile() {
-        return null;
+    @org.spongepowered.asm.mixin.Final
+    private FilePackResources.SharedZipFileAccess zipFileAccess;
+
+    @Shadow
+    private String addPrefix(String path) {
+        throw new AssertionError();
     }
 
     @Inject(method = "listResources", at = @At("HEAD"), cancellable = true, require = 0)
@@ -40,7 +43,7 @@ public abstract class MixinFilePackResourcesIndex {
         if (!CoOConfig.vanillaIndexZipPacks || path.isEmpty()) {
             return;
         }
-        ZipFile zip = getOrCreateZipFile();
+        ZipFile zip = this.zipFileAccess.getOrCreateZipFile();
         if (zip == null) {
             return;
         }
@@ -55,7 +58,7 @@ public abstract class MixinFilePackResourcesIndex {
             }
         }
         ci.cancel();
-        String root = type.getDirectory() + "/" + namespace + "/";
+        String root = this.addPrefix(type.getDirectory() + "/" + namespace + "/");
         String prefix = root + path + "/";
         for (ZipEntry entry : groups.entriesUnder(prefix)) {
             String name = entry.getName();

@@ -20,16 +20,16 @@ import java.util.List;
 public abstract class MixinCataclysmMonstrousHelm {
 
     @WrapOperation(
-            method = "onArmorTick",
+            method = "inventoryTick",
             at = @At(
                     value = "INVOKE",
-                    target = "Lnet/minecraft/world/level/Level;m_45933_(Lnet/minecraft/world/entity/Entity;Lnet/minecraft/world/phys/AABB;)Ljava/util/List;"
+                    target = "Lnet/minecraft/world/level/Level;getEntities(Lnet/minecraft/world/entity/Entity;Lnet/minecraft/world/phys/AABB;)Ljava/util/List;"
             ),
             require = 0
     )
     private List<Entity> coo$scanOnlyWhenBerserk(Level level, Entity except, AABB box, Operation<List<Entity>> original,
-                                                ItemStack stack, Level world, Player player) {
-        if (CoOConfig.cataclysmLazyMonstrousHelmScan
+                                                ItemStack stack, Level world, Entity holder, int slot, boolean selected) {
+        if (CoOConfig.cataclysmLazyMonstrousHelmScan && holder instanceof Player player
                 && !(player.getMaxHealth() * 1.0F / 2.0F >= player.getHealth()
                 && !player.getCooldowns().isOnCooldown((Item) (Object) this))) {
             return Collections.emptyList();

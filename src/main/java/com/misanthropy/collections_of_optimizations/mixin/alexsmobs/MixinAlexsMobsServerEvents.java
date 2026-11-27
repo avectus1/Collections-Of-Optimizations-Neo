@@ -3,7 +3,7 @@ package com.misanthropy.collections_of_optimizations.mixin.alexsmobs;
 import com.github.alexthe666.alexsmobs.event.ServerEvents;
 import com.misanthropy.collections_of_optimizations.CoOConfig;
 import net.minecraft.world.entity.monster.Creeper;
-import net.minecraftforge.event.entity.living.MobSpawnEvent;
+import net.neoforged.neoforge.event.entity.living.FinalizeSpawnEvent;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -19,7 +19,7 @@ public abstract class MixinAlexsMobsServerEvents {
             cancellable = true,
             require = 0
     )
-    private void coo$skipCreeperAvoidGoals(MobSpawnEvent.FinalizeSpawn event, CallbackInfo ci) {
+    private static void coo$skipCreeperAvoidGoals(FinalizeSpawnEvent event, CallbackInfo ci) {
         if (CoOConfig.alexsmobsSkipCreeperAvoidGoals && event.getEntity() instanceof Creeper) {
             ci.cancel();
         }
@@ -34,7 +34,7 @@ public abstract class MixinAlexsMobsServerEvents {
             index = 2,
             require = 0
     )
-    private int coo$throttleSpiderFlyScan(int randomInterval) {
+    private static int coo$throttleSpiderFlyScan(int randomInterval) {
         if (randomInterval != 1) {
             return randomInterval;
         }

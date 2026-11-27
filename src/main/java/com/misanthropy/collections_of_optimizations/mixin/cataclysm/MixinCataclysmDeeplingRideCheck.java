@@ -17,7 +17,7 @@ public abstract class MixinCataclysmDeeplingRideCheck {
     @Final
     private AbstractDeepling drowned;
 
-    @WrapMethod(method = "m_8036_", require = 0)
+    @WrapMethod(method = "canUse", require = 0)
     private boolean coo$cheapChecksFirst(Operation<Boolean> original) {
         if (CoOConfig.cataclysmDeeplingRideCheckFirst
                 && (this.drowned.isPassenger() || this.drowned.getMoistness() <= 300)) {

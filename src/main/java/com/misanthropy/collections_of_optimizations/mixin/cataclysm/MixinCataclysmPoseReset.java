@@ -43,7 +43,7 @@ import java.util.stream.Stream;
 public abstract class MixinCataclysmPoseReset {
 
     @WrapOperation(
-            method = {"setupAnim", "m_6973_"},
+            method = {"setupAnim", "setupAnim"},
             at = @At(value = "INVOKE", target = "Ljava/util/stream/Stream;forEach(Ljava/util/function/Consumer;)V", ordinal = 0),
             require = 0
     )

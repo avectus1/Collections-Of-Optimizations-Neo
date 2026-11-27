@@ -6,7 +6,7 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 
 import java.util.Map;
 
-@Mixin(ModelPart.class)
+@Mixin(value = ModelPart.class, remap = false)
 public interface CataclysmModelPartAccessor {
 
     @Accessor("children")

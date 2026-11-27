@@ -14,7 +14,7 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 
-@Mixin(Beardifier.class)
+@Mixin(value = Beardifier.class, remap = false)
 public abstract class MixinBeardifierReach {
 
     @Shadow

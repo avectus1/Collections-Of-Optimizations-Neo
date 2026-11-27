@@ -7,7 +7,7 @@ import net.minecraft.world.level.levelgen.placement.PlacementFilter;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Invoker;
 
-@Mixin(PlacementFilter.class)
+@Mixin(value = PlacementFilter.class, remap = false)
 public interface PlacementFilterInvoker {
 
     @Invoker("shouldPlace")

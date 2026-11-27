@@ -12,14 +12,13 @@ import org.spongepowered.asm.mixin.injection.At;
 
 @Pseudo
 @Mixin(targets = {
-        "com.github.L_Ender.cataclysm.entity.AnimationMonster.BossMonsters.Ancient_Ancient_Remnant_Entity",
         "com.github.L_Ender.cataclysm.entity.InternalAnimationMonster.IABossMonsters.Ancient_Remnant.Ancient_Remnant_Entity",
         "com.github.L_Ender.cataclysm.entity.InternalAnimationMonster.AcropolisMonsters.Clawdian_Entity"
 }, remap = false)
 public abstract class MixinCataclysmServerLegSolver {
 
     @WrapOperation(
-            method = "m_8119_",
+            method = "tick",
             at = @At(value = "INVOKE",
                     target = "Lcom/github/L_Ender/lionfishapi/server/animation/LegSolver;update(Lnet/minecraft/world/entity/LivingEntity;FF)V"),
             require = 0
@@ -32,7 +31,7 @@ public abstract class MixinCataclysmServerLegSolver {
     }
 
     @WrapOperation(
-            method = "m_8119_",
+            method = "tick",
             at = @At(value = "INVOKE",
                     target = "Lcom/github/L_Ender/lionfishapi/server/animation/LegSolverQuadruped;update(Lnet/minecraft/world/entity/LivingEntity;FF)V"),
             require = 0

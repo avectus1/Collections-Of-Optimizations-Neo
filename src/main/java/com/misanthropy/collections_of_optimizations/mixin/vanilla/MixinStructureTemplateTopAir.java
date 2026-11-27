@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-@Mixin(value = StructureTemplateManager.class, priority = 1500)
+@Mixin(value = StructureTemplateManager.class, priority = 1500, remap = false)
 public abstract class MixinStructureTemplateTopAir {
 
     @Inject(method = "loadFromResource", at = @At("RETURN"))

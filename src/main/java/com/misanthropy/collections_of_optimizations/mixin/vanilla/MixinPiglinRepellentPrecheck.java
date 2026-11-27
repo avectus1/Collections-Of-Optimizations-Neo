@@ -12,7 +12,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.sensing.PiglinSpecificSensor;
 import org.spongepowered.asm.mixin.Mixin;
 
-@Mixin(PiglinSpecificSensor.class)
+@Mixin(value = PiglinSpecificSensor.class, remap = false)
 public abstract class MixinPiglinRepellentPrecheck {
 
     @WrapMethod(method = "findNearestRepellent", require = 0)

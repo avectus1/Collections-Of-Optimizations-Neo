@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 
 import java.util.Set;
 
-@Mixin(Holder.Reference.class)
+@Mixin(value = Holder.Reference.class, remap = false)
 public abstract class MixinHolderReferenceTagNumbers {
 
     @Unique

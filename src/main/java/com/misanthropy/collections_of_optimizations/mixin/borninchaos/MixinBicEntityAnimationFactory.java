@@ -3,7 +3,7 @@ package com.misanthropy.collections_of_optimizations.mixin.borninchaos;
 import com.misanthropy.collections_of_optimizations.CoOConfig;
 import com.misanthropy.collections_of_optimizations.core.ModEntityFilter;
 import net.mcreator.borninchaosv.init.EntityAnimationFactory;
-import net.minecraftforge.event.entity.living.LivingEvent;
+import net.neoforged.neoforge.event.tick.EntityTickEvent;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -18,7 +18,7 @@ public abstract class MixinBicEntityAnimationFactory {
             cancellable = true,
             require = 0
     )
-    private static void coo$skipForeignEntities(LivingEvent.LivingTickEvent event, CallbackInfo ci) {
+    private static void coo$skipForeignEntities(EntityTickEvent.Pre event, CallbackInfo ci) {
         if (!CoOConfig.borninchaosSkipForeignEntityAnimations || event == null) {
             return;
         }

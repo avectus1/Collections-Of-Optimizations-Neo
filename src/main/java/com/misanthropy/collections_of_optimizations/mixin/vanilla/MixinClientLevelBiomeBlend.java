@@ -14,7 +14,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Mixin(ClientLevel.class)
+@Mixin(value = ClientLevel.class, remap = false)
 public abstract class MixinClientLevelBiomeBlend {
 
     @WrapMethod(method = "calculateBlockTint(Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/ColorResolver;)I", require = 0)

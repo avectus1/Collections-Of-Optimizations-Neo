@@ -6,7 +6,7 @@ import net.minecraft.world.level.gameevent.GameEventListenerRegistry;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Accessor;
 
-@Mixin(LevelChunk.class)
+@Mixin(value = LevelChunk.class, remap = false)
 public interface LevelChunkGameEventAccessor {
 
     @Accessor("gameEventListenerRegistrySections")

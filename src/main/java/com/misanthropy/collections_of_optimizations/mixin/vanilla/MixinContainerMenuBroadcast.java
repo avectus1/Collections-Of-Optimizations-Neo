@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 
-@Mixin(AbstractContainerMenu.class)
+@Mixin(value = AbstractContainerMenu.class, remap = false)
 public abstract class MixinContainerMenuBroadcast {
 
     @Unique

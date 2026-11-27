@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 
-@Mixin(FogRenderer.class)
+@Mixin(value = FogRenderer.class, remap = false)
 public abstract class MixinFogRendererBiomeFog {
 
     @Unique

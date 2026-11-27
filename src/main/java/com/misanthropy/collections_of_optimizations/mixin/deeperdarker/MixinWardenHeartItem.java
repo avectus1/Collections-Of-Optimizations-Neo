@@ -12,8 +12,8 @@ import org.spongepowered.asm.mixin.injection.At;
 public abstract class MixinWardenHeartItem {
 
     @WrapOperation(
-            method = "m_6883_(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/level/Level;Lnet/minecraft/world/entity/Entity;IZ)V",
-            at = @At(value = "INVOKE", target = "Lnet/minecraft/util/RandomSource;m_216327_()Lnet/minecraft/util/RandomSource;"),
+            method = "inventoryTick(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/level/Level;Lnet/minecraft/world/entity/Entity;IZ)V",
+            at = @At(value = "INVOKE", target = "Lnet/minecraft/util/RandomSource;create()Lnet/minecraft/util/RandomSource;"),
             require = 0
     )
     private RandomSource coo$reuseHeartRandom(Operation<RandomSource> original) {

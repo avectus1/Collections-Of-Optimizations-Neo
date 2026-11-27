@@ -1,7 +1,6 @@
 package com.misanthropy.collections_of_optimizations.mixin.cataclysm;
 
 import com.github.L_Ender.cataclysm.client.model.entity.Amethyst_Crab_Model;
-import com.github.L_Ender.cataclysm.client.model.entity.Ancient_Remnant_Model;
 import com.github.L_Ender.cataclysm.client.model.entity.Ender_Guardian_Model;
 import com.github.L_Ender.cataclysm.client.model.entity.Ignis_Model;
 import com.github.L_Ender.cataclysm.client.model.entity.The_Leviathan_Model;
@@ -14,7 +13,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Mixin(value = {Ignis_Model.class, The_Leviathan_Model.class, Ancient_Remnant_Model.class, Ender_Guardian_Model.class, Amethyst_Crab_Model.class}, remap = false)
+@Mixin(value = {Ignis_Model.class, The_Leviathan_Model.class, Ender_Guardian_Model.class, Amethyst_Crab_Model.class}, remap = false)
 public abstract class MixinCataclysmIdleAnimate {
 
     @Shadow(remap = false)

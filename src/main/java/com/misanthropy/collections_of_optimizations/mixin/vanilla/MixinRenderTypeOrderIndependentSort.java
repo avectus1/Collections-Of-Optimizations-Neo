@@ -7,7 +7,7 @@ import net.minecraft.client.renderer.RenderType;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
-@Mixin(RenderType.class)
+@Mixin(value = RenderType.class, remap = false)
 public abstract class MixinRenderTypeOrderIndependentSort implements OrderIndependentSort {
 
     @Override
@@ -15,11 +15,7 @@ public abstract class MixinRenderTypeOrderIndependentSort implements OrderIndepe
         return false;
     }
 
-    @ModifyExpressionValue(
-            method = "end",
-            at = @At(value = "FIELD", target = "Lnet/minecraft/client/renderer/RenderType;sortOnUpload:Z"),
-            require = 0
-    )
+    @com.llamalad7.mixinextras.injector.ModifyReturnValue(method = "sortOnUpload", at = @At("RETURN"), require = 0)
     private boolean coo$skipOrderIndependentSort(boolean sortOnUpload) {
         return sortOnUpload && !(CoOConfig.vanillaSkipOrderIndependentSort && this.coo$orderIndependent());
     }

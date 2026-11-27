@@ -6,7 +6,7 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 
 import java.util.List;
 
-@Mixin(StructureTemplate.class)
+@Mixin(value = StructureTemplate.class, remap = false)
 public interface StructureTemplateAccessor {
 
     @Accessor("palettes")

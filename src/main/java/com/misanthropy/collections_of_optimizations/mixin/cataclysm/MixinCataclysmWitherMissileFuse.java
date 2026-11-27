@@ -17,7 +17,7 @@ public abstract class MixinCataclysmWitherMissileFuse {
     @Shadow @Final private static EntityDataAccessor<Integer> FUSE;
 
     @WrapOperation(
-            method = "m_8119_",
+            method = "tick",
             at = @At(value = "INVOKE", target = "Lcom/github/L_Ender/cataclysm/entity/projectile/Wither_Homing_Missile_Entity;setFuse(I)V"),
             require = 0
     )

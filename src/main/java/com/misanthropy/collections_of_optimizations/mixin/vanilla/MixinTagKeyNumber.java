@@ -5,7 +5,7 @@ import net.minecraft.tags.TagKey;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 
-@Mixin(TagKey.class)
+@Mixin(value = TagKey.class, remap = false)
 public abstract class MixinTagKeyNumber implements TagKeyNumber {
 
     @Unique

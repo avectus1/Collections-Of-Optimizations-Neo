@@ -6,11 +6,11 @@ import net.minecraft.client.renderer.entity.ItemEntityRenderer;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
-@Mixin(ItemEntityRenderer.class)
+@Mixin(value = ItemEntityRenderer.class, remap = false)
 public abstract class MixinItemEntityRenderer {
 
-    @ModifyReturnValue(method = "getRenderAmount", at = @At("RETURN"), require = 0)
-    private int coo$capRenderAmount(int original) {
+    @ModifyReturnValue(method = "getRenderedAmount", at = @At("RETURN"), require = 0)
+    private static int coo$capRenderAmount(int original) {
         int cap = CoOConfig.itemEntityRenderCap;
         return cap > 0 ? Math.min(original, cap) : original;
     }

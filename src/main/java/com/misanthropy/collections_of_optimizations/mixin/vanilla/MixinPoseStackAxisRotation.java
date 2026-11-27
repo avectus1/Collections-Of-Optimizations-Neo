@@ -1,7 +1,6 @@
 package com.misanthropy.collections_of_optimizations.mixin.vanilla;
 
-import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
-import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
+import org.spongepowered.asm.mixin.injection.Redirect;
 import com.misanthropy.collections_of_optimizations.CoOConfig;
 import com.mojang.blaze3d.vertex.PoseStack;
 import org.joml.Matrix3f;
@@ -11,14 +10,14 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 
-@Mixin(PoseStack.class)
+@Mixin(value = PoseStack.class, remap = false)
 public abstract class MixinPoseStackAxisRotation {
 
-    @WrapOperation(method = "mulPose", at = @At(value = "INVOKE", target = "Lorg/joml/Matrix4f;rotate(Lorg/joml/Quaternionfc;)Lorg/joml/Matrix4f;"), require = 0)
-    private Matrix4f coo$rotatePose(Matrix4f m, Quaternionfc q, Operation<Matrix4f> original) {
+    @Redirect(method = "mulPose", at = @At(value = "INVOKE", target = "Lorg/joml/Matrix4f;rotate(Lorg/joml/Quaternionfc;)Lorg/joml/Matrix4f;"), require = 0)
+    private Matrix4f coo$rotatePose(Matrix4f m, Quaternionfc q) {
         int axis = coo$axis(q);
         if (axis < 0) {
-            return original.call(m, q);
+            return m.rotate(q);
         }
         float v = coo$component(q, axis), w = q.w(), s = 2.0F * v * w, c = w * w - v * v;
         switch (axis) {
@@ -41,11 +40,11 @@ public abstract class MixinPoseStackAxisRotation {
         return m;
     }
 
-    @WrapOperation(method = "mulPose", at = @At(value = "INVOKE", target = "Lorg/joml/Matrix3f;rotate(Lorg/joml/Quaternionfc;)Lorg/joml/Matrix3f;"), require = 0)
-    private Matrix3f coo$rotateNormal(Matrix3f n, Quaternionfc q, Operation<Matrix3f> original) {
+    @Redirect(method = "mulPose", at = @At(value = "INVOKE", target = "Lorg/joml/Matrix3f;rotate(Lorg/joml/Quaternionfc;)Lorg/joml/Matrix3f;"), require = 0)
+    private Matrix3f coo$rotateNormal(Matrix3f n, Quaternionfc q) {
         int axis = coo$axis(q);
         if (axis < 0) {
-            return original.call(n, q);
+            return n.rotate(q);
         }
         float v = coo$component(q, axis), w = q.w(), s = 2.0F * v * w, c = w * w - v * v;
         switch (axis) {

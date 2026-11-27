@@ -10,7 +10,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import top.theillusivec4.curios.client.render.CuriosLayer;
 
-@Mixin(LivingEntityRenderer.class)
+@Mixin(value = LivingEntityRenderer.class, remap = false)
 public abstract class MixinLivingEntityRenderer {
 
     @Inject(method = "addLayer", at = @At("HEAD"), cancellable = true, require = 0)

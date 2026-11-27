@@ -3,10 +3,10 @@ package com.misanthropy.collections_of_optimizations.mixin.asyncparticles;
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
-import forge.fun.qu_an.minecraft.asyncparticles.client.config.MixinConfigHelper;
-import forge.fun.qu_an.minecraft.asyncparticles.client.core.Diagnostic;
-import forge.fun.qu_an.minecraft.asyncparticles.client.util.ThreadUtil;
-import forge.fun.qu_an.minecraft.asyncparticles.client.util.TrackedWriteMap;
+import neoforge.fun.qu_an.minecraft.asyncparticles.client.config.MixinConfigHelper;
+import neoforge.fun.qu_an.minecraft.asyncparticles.client.core.Diagnostic;
+import neoforge.fun.qu_an.minecraft.asyncparticles.client.util.ThreadUtil;
+import neoforge.fun.qu_an.minecraft.asyncparticles.client.util.TrackedWriteMap;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.level.Level;
@@ -22,7 +22,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.Map;
 
-@Mixin(LevelChunk.class)
+@Mixin(value = LevelChunk.class, remap = false)
 public abstract class MixinLevelChunkParticleThreadBlockEntity {
 
     @Shadow

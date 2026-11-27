@@ -7,7 +7,7 @@ import net.minecraft.nbt.Tag;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.event.entity.living.LivingEvent;
+import net.neoforged.neoforge.event.tick.EntityTickEvent;
 import net.p3pp3rf1y.sophisticatedbackpacks.common.EntityBackpackAdditionHandler;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
@@ -25,12 +25,11 @@ public abstract class MixinSbpEntityBackpackAdditions {
     }
 
     @Inject(method = "onLivingUpdate", at = @At("HEAD"), cancellable = true, require = 0)
-    private static void coo$skipEntitiesWithoutBackpackData(LivingEvent.LivingTickEvent event, CallbackInfo ci) {
+    private static void coo$skipEntitiesWithoutBackpackData(EntityTickEvent.Post event, CallbackInfo ci) {
         if (!CoOConfig.sophisticatedbackpacksSkipEntityDataChecks) {
             return;
         }
-        LivingEntity entity = event.getEntity();
-        if (entity != null && !coo$hasBackpackData(entity)) {
+        if (event.getEntity() instanceof LivingEntity entity && !coo$hasBackpackData(entity)) {
             ci.cancel();
         }
     }

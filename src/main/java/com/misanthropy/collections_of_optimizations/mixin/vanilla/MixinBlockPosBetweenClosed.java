@@ -10,7 +10,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.List;
 
-@Mixin(BlockPos.class)
+@Mixin(value = BlockPos.class, remap = false)
 public abstract class MixinBlockPosBetweenClosed {
 
     @Inject(method = "betweenClosed(IIIIII)Ljava/lang/Iterable;", at = @At("HEAD"), cancellable = true, require = 0)

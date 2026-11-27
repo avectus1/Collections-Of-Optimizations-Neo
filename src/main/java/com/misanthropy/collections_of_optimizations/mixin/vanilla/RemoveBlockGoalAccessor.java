@@ -5,7 +5,7 @@ import net.minecraft.world.level.block.Block;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Accessor;
 
-@Mixin(RemoveBlockGoal.class)
+@Mixin(value = RemoveBlockGoal.class, remap = false)
 public interface RemoveBlockGoalAccessor {
 
     @Accessor("blockToRemove")

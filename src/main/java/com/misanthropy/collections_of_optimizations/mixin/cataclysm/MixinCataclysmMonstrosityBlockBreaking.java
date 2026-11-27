@@ -9,7 +9,7 @@ import net.minecraft.world.entity.Mob;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.event.ForgeEventFactory;
+import net.neoforged.neoforge.event.EventHooks;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Pseudo;
 import org.spongepowered.asm.mixin.Shadow;
@@ -35,7 +35,7 @@ public abstract class MixinCataclysmMonstrosityBlockBreaking {
         Mob self = (Mob) (Object) this;
         Level level = self.level();
         if (!self.isNoAi() && !level.isClientSide && this.blockBreakCounter == 0
-                && ForgeEventFactory.getMobGriefingEvent(level, self)) {
+                && EventHooks.canEntityGrief(level, self)) {
             BlockPos.MutableBlockPos cursor = new BlockPos.MutableBlockPos();
             for (int a = (int) Math.round(self.getBoundingBox().minX); a <= (int) Math.round(self.getBoundingBox().maxX); a++) {
                 for (int b = (int) Math.round(self.getBoundingBox().minY); b <= (int) Math.round(self.getBoundingBox().maxY) + 1 && b <= 127; b++) {
