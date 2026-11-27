@@ -9,6 +9,7 @@ import java.util.function.DoubleConsumer;
 import java.util.function.IntConsumer;
 
 public final class CoOConfig {
+    public static boolean isbAffinityRingGuiLight = true;
     public static boolean obscureTooltipsNoIconParticles = true;
     public static boolean aquamiraeLakeIceRegionFix = true;
     public static boolean xaerolibFrameConfigMemo = true;
@@ -2094,6 +2095,8 @@ public final class CoOConfig {
         builder.pop();
 
         builder.comment("Iron's Spells 'n Spellbooks patches.").push("ironsspellbooks");
+        gate(builder.comment("Affinity rings (Ring of Fire Affinity and so on) look about half as bright as they should in slots and tooltips. This draws them with the same flat lighting as other items.")
+                .define("affinityRingGuiLight", true), v -> isbAffinityRingGuiLight = v);
         gate(builder
                 .comment("Answer \"is this curio worn\" out of the shared per tick curio contents cache instead of walking the whole curio inventory every time. The mod's curio items answer that question by asking the curios api for the wearer's inventory, handing it a lambda and letting it walk every slot of every curio type until it finds a match, allocating a lazy optional, a slot context, a slot result and a java optional along the way, and it asks from places that run constantly: the invisibility ring is checked from the entity invisibility hook, which fires for every entity anything asks about on every frame on the client and again from mob targeting on the server, and the summon and spell paths ask again on top of that. The answer only changes when someone actually equips or unequips something. With this on the question is answered from the set of worn items this mod already keeps per entity, which is rebuilt at most once per entity tick and thrown away the moment a curio change, equip or unequip event fires, so a repeat question is one set lookup with no allocation. A curio swapped by something that never fires a curios event can read one tick stale. Turn it off for stock behaviour.")
                 .define("leanCurioEquipCheck", true), v -> ironsspellbooksLeanCurioEquipCheck = v);

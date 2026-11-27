@@ -6,7 +6,7 @@ import net.minecraft.world.level.levelgen.structure.pools.JigsawJunction;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Accessor;
 
-@Mixin(value = Beardifier.class, remap = false)
+@Mixin(Beardifier.class)
 public interface BeardifierAccessor {
 
     @Accessor("pieceIterator")

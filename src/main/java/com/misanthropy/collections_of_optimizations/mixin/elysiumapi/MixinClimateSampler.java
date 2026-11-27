@@ -8,7 +8,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-@Mixin(value = Climate.Sampler.class, remap = false)
+@Mixin(Climate.Sampler.class)
 public abstract class MixinClimateSampler {
 
     @Inject(

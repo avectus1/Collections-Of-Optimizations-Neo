@@ -5,7 +5,7 @@ import net.minecraft.network.syncher.SynchedEntityData;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Invoker;
 
-@Mixin(value = SynchedEntityData.class, remap = false)
+@Mixin(SynchedEntityData.class)
 public interface CataclysmSynchedEntityDataInvoker {
 
     @Invoker("getItem")

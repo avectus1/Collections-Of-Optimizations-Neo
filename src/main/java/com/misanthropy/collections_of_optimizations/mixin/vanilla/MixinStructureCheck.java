@@ -22,12 +22,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-@Mixin(value = StructureCheck.class, remap = false)
+@Mixin(StructureCheck.class)
 public abstract class MixinStructureCheck implements StructureStateHolder {
 
     @Shadow
     @Final
-    private net.minecraft.core.RegistryAccess registryAccess;
+    private Registry<Structure> structureConfigs;
 
     @Unique
     private ChunkGeneratorStructureState coo$structureState;
@@ -76,7 +76,7 @@ public abstract class MixinStructureCheck implements StructureStateHolder {
         }
         List<StructurePlacement> placements = cache.get(structure);
         if (placements == null) {
-            Holder<Structure> holder = this.registryAccess.registryOrThrow(net.minecraft.core.registries.Registries.STRUCTURE).wrapAsHolder(structure);
+            Holder<Structure> holder = this.structureConfigs.wrapAsHolder(structure);
             placements = state.getPlacementsForStructure(holder);
             cache.put(structure, placements);
         }

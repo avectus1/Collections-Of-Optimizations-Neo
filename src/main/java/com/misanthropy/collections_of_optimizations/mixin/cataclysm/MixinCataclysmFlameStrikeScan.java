@@ -23,8 +23,8 @@ public abstract class MixinCataclysmFlameStrikeScan {
     @Shadow private UUID ownerUUID;
 
     @WrapOperation(
-            method = "tick",
-            at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/Level;getEntitiesOfClass(Ljava/lang/Class;Lnet/minecraft/world/phys/AABB;)Ljava/util/List;"),
+            method = "m_8119_",
+            at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/Level;m_45976_(Ljava/lang/Class;Lnet/minecraft/world/phys/AABB;)Ljava/util/List;"),
             require = 0
     )
     private List<LivingEntity> coo$scanOnDamageTicks(Level level, Class<LivingEntity> type, AABB box,

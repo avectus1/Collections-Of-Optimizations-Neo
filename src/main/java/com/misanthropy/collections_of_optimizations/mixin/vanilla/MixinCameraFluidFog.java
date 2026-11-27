@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Mixin(value = Camera.class, remap = false)
+@Mixin(Camera.class)
 public abstract class MixinCameraFluidFog {
 
     @Unique

@@ -11,7 +11,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import org.spongepowered.asm.mixin.Mixin;
 
-@Mixin(value = HumanoidArmorLayer.class, remap = false)
+@Mixin(HumanoidArmorLayer.class)
 public abstract class MixinHumanoidArmorLayerBake {
 
     @WrapMethod(

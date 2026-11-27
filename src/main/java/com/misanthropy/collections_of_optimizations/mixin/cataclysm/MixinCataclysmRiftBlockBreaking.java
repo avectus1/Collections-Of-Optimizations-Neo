@@ -14,7 +14,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.chunk.LevelChunk;
-import net.neoforged.neoforge.event.EventHooks;
+import net.minecraftforge.event.ForgeEventFactory;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Pseudo;
 
@@ -33,7 +33,7 @@ public abstract class MixinCataclysmRiftBlockBreaking {
         int mthX = Mth.floor(self.getX());
         int mthY = Mth.floor(self.getY());
         int mthZ = Mth.floor(self.getZ());
-        if (!EventHooks.canEntityGrief(level, self)) {
+        if (!ForgeEventFactory.getMobGriefingEvent(level, self)) {
             return;
         }
         BlockState air = Blocks.AIR.defaultBlockState();

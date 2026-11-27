@@ -478,5 +478,6 @@
   "collections_of_optimizations.configuration.aquamirae": "Aquamirae",
   "collections_of_optimizations.configuration.lakeIceWorldgenFix": "Lake Ice Worldgen Fix",
   "collections_of_optimizations.configuration.obscure_tooltips": "Obscure Tooltips",
-  "collections_of_optimizations.configuration.noMisplacedIconParticles": "No Misplaced Icon Particles"
+  "collections_of_optimizations.configuration.noMisplacedIconParticles": "No Misplaced Icon Particles",
+  "collections_of_optimizations.configuration.affinityRingGuiLight": "Affinity Ring GUI Light"
 }

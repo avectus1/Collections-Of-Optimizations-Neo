@@ -10,7 +10,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.UUID;
 
-@Mixin(value = OldUsersConverter.class, remap = false)
+@Mixin(OldUsersConverter.class)
 public abstract class MixinOldUsersConverterEmptyOwner {
 
     @Inject(

@@ -9,7 +9,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
 
-@Mixin(value = NoiseBasedChunkGenerator.class, remap = false)
+@Mixin(NoiseBasedChunkGenerator.class)
 public abstract class MixinNoiseBasedChunkGeneratorBeardifier {
 
     @ModifyArg(

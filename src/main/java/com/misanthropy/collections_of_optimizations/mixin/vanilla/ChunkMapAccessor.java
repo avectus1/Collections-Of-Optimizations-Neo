@@ -7,7 +7,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Accessor;
 import org.spongepowered.asm.mixin.gen.Invoker;
 
-@Mixin(value = ChunkMap.class, remap = false)
+@Mixin(ChunkMap.class)
 public interface ChunkMapAccessor {
 
     @Accessor("playerMap")

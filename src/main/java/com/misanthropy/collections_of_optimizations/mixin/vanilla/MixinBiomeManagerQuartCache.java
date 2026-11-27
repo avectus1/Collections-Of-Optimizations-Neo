@@ -15,7 +15,7 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 
 import java.util.Arrays;
 
-@Mixin(value = BiomeManager.class, remap = false)
+@Mixin(BiomeManager.class)
 public abstract class MixinBiomeManagerQuartCache {
 
     @Unique

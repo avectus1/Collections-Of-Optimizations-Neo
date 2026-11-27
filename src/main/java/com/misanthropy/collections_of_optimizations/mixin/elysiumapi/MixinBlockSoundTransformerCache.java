@@ -5,7 +5,7 @@ import net.minecraft.world.level.block.Block;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 
-@Mixin(value = Block.class, remap = false)
+@Mixin(Block.class)
 public abstract class MixinBlockSoundTransformerCache implements ElysiumSoundHolder {
 
     @Unique

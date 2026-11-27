@@ -12,7 +12,7 @@ import net.minecraft.world.entity.ai.sensing.HoglinSpecificSensor;
 import net.minecraft.world.entity.monster.hoglin.Hoglin;
 import org.spongepowered.asm.mixin.Mixin;
 
-@Mixin(value = HoglinSpecificSensor.class, remap = false)
+@Mixin(HoglinSpecificSensor.class)
 public abstract class MixinHoglinRepellentPrecheck {
 
     @WrapMethod(method = "findNearestRepellent", require = 0)

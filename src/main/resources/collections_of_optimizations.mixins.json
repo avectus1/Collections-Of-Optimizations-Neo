@@ -329,6 +329,8 @@
     "iceberg.MixinIcebergArmorClassLookup",
     "immediatelyfast.MixinBatchableLayerOrder",
     "ironslib.MixinTransmogOuterLayerBake",
+    "ironsspellbooks.MixinIsbAffinityRingGuiLight",
+    "ironsspellbooks.MixinIsbAffinityRingRendererLight",
     "ironsspellbooks.MixinIsbAnvilRecipeSharedScrolls",
     "ironsspellbooks.MixinIsbArmorModelLocations",
     "ironsspellbooks.MixinIsbSpellcasterScan",

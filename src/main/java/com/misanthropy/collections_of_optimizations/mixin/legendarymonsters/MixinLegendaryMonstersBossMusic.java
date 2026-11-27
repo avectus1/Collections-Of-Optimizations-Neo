@@ -20,14 +20,14 @@ public abstract class MixinLegendaryMonstersBossMusic {
     private int coo$lastMusicTick = Integer.MIN_VALUE;
 
     @WrapWithCondition(
-            method = "tick",
+            method = "m_8119_",
             at = @At(
                     value = "INVOKE",
-                    target = "Lnet/miauczel/legendary_monsters/LegendaryMonsters;sendMSGToAll(Lnet/minecraft/network/protocol/common/custom/CustomPacketPayload;)V"
+                    target = "Lnet/miauczel/legendary_monsters/LegendaryMonsters;sendMSGToAll(Ljava/lang/Object;)V"
             ),
             require = 0
     )
-    private boolean coo$throttleBossMusicBroadcast(net.minecraft.network.protocol.common.custom.CustomPacketPayload message) {
+    private boolean coo$throttleBossMusicBroadcast(Object message) {
         int interval = CoOConfig.legendarymonstersBossMusicInterval;
         if (interval <= 1) {
             return true;

@@ -18,7 +18,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.List;
 
-@Mixin(value = PlacedFeature.class, remap = false)
+@Mixin(PlacedFeature.class)
 public abstract class MixinPlacedFeatureNoStreams {
 
     @Shadow

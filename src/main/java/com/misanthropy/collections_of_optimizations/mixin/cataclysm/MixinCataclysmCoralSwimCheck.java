@@ -22,9 +22,9 @@ public abstract class MixinCataclysmCoralSwimCheck {
     public abstract boolean getSwim();
 
     @WrapOperation(
-            method = "tick",
+            method = "m_8119_",
             at = @At(value = "INVOKE",
-                    target = "Lnet/minecraft/world/level/Level;noCollision(Lnet/minecraft/world/entity/Entity;Lnet/minecraft/world/phys/AABB;)Z",
+                    target = "Lnet/minecraft/world/level/Level;m_45756_(Lnet/minecraft/world/entity/Entity;Lnet/minecraft/world/phys/AABB;)Z",
                     ordinal = 0),
             require = 0
     )
@@ -36,9 +36,9 @@ public abstract class MixinCataclysmCoralSwimCheck {
     }
 
     @WrapOperation(
-            method = "tick",
+            method = "m_8119_",
             at = @At(value = "INVOKE",
-                    target = "Lnet/minecraft/world/level/Level;noCollision(Lnet/minecraft/world/entity/Entity;Lnet/minecraft/world/phys/AABB;)Z",
+                    target = "Lnet/minecraft/world/level/Level;m_45756_(Lnet/minecraft/world/entity/Entity;Lnet/minecraft/world/phys/AABB;)Z",
                     ordinal = 1),
             require = 0
     )

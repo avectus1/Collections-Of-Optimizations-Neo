@@ -4,7 +4,7 @@ import net.minecraft.world.level.ClipContext;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Accessor;
 
-@Mixin(value = ClipContext.class, remap = false)
+@Mixin(ClipContext.class)
 public interface ClipContextFluidAccessor {
 
     @Accessor("fluid")

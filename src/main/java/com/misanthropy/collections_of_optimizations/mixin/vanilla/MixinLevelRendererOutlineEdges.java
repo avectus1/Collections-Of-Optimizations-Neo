@@ -10,7 +10,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
-@Mixin(value = LevelRenderer.class, remap = false)
+@Mixin(LevelRenderer.class)
 public abstract class MixinLevelRendererOutlineEdges {
 
     @WrapOperation(

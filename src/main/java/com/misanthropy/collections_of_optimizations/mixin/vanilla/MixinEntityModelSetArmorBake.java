@@ -13,7 +13,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Mixin(value = EntityModelSet.class, remap = false)
+@Mixin(EntityModelSet.class)
 public abstract class MixinEntityModelSetArmorBake {
 
     @WrapMethod(method = "bakeLayer", require = 0)

@@ -9,7 +9,7 @@ import net.minecraft.world.phys.Vec3;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 
-@Mixin(value = ClientLevel.class, remap = false)
+@Mixin(ClientLevel.class)
 public abstract class MixinClientLevelSkyColour {
 
     @Unique

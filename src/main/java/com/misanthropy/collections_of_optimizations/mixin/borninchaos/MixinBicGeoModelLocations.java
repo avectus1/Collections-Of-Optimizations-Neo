@@ -98,12 +98,12 @@ public abstract class MixinBicGeoModelLocations {
 
     @Redirect(
             method = {"getModelResource", "getTextureResource", "getAnimationResource"},
-            at = @At(value = "INVOKE", target = "Lnet/minecraft/resources/ResourceLocation;parse(Ljava/lang/String;)Lnet/minecraft/resources/ResourceLocation;"),
+            at = @At(value = "NEW", target = "(Ljava/lang/String;Ljava/lang/String;)Lnet/minecraft/resources/ResourceLocation;"),
             require = 0
     )
-    private ResourceLocation coo$reuseLocation(String location) {
+    private ResourceLocation coo$reuseLocation(String namespace, String path) {
         return CoOConfig.borninchaosReuseModelLocations
-                ? ConstantLocations.parse(location)
-                : ResourceLocation.parse(location);
+                ? ConstantLocations.of(namespace, path)
+                : new ResourceLocation(namespace, path);
     }
 }

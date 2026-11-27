@@ -5,7 +5,7 @@ import net.minecraft.world.level.levelgen.RandomState;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 
-@Mixin(value = RandomState.class, remap = false)
+@Mixin(RandomState.class)
 public abstract class MixinRandomStateDensityPlan implements DensityGraphReuse.PlanHolder {
 
     @Unique

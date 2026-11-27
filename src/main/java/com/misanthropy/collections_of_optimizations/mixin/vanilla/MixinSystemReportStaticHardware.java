@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.Shadow;
 
 import java.util.Map;
 
-@Mixin(value = SystemReport.class, remap = false)
+@Mixin(SystemReport.class)
 public abstract class MixinSystemReportStaticHardware {
 
     @Shadow

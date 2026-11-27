@@ -5,7 +5,7 @@ import net.minecraft.client.renderer.RenderStateShard;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Accessor;
 
-@Mixin(targets = "net.minecraft.client.renderer.RenderType$CompositeState", remap = false)
+@Mixin(targets = "net.minecraft.client.renderer.RenderType$CompositeState")
 public interface RenderTypeCompositeStateAccessor {
 
     @Accessor("states")

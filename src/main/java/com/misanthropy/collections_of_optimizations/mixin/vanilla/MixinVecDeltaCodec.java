@@ -1,25 +1,27 @@
 package com.misanthropy.collections_of_optimizations.mixin.vanilla;
 
+import com.llamalad7.mixinextras.injector.wrapmethod.WrapMethod;
+import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.misanthropy.collections_of_optimizations.CoOConfig;
 import net.minecraft.network.protocol.game.VecDeltaCodec;
 import net.minecraft.world.phys.Vec3;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Redirect;
+import org.spongepowered.asm.mixin.Shadow;
 
-@Mixin(value = VecDeltaCodec.class, remap = false)
+@Mixin(VecDeltaCodec.class)
 public abstract class MixinVecDeltaCodec {
 
-    // Entities that have not moved return the shared zero vector instead of a fresh subtraction result.
-    @Redirect(
-            method = "delta",
-            at = @At(value = "INVOKE", target = "Lnet/minecraft/world/phys/Vec3;subtract(Lnet/minecraft/world/phys/Vec3;)Lnet/minecraft/world/phys/Vec3;"),
-            require = 0
-    )
-    private Vec3 coo$skipZeroDelta(Vec3 position, Vec3 base) {
-        if (CoOConfig.vanillaLeanTrackerDelta && position.x == base.x && position.y == base.y && position.z == base.z) {
-            return Vec3.ZERO;
+    @Shadow
+    private Vec3 base;
+
+    @WrapMethod(method = "delta", require = 0)
+    private Vec3 coo$skipZeroDelta(Vec3 position, Operation<Vec3> original) {
+        if (CoOConfig.vanillaLeanTrackerDelta) {
+            Vec3 base = this.base;
+            if (position.x == base.x && position.y == base.y && position.z == base.z) {
+                return Vec3.ZERO;
+            }
         }
-        return position.subtract(base);
+        return original.call(position);
     }
 }

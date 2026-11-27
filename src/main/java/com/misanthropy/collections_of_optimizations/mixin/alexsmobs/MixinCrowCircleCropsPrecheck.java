@@ -14,7 +14,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-@Mixin(value = MoveToBlockGoal.class, remap = false)
+@Mixin(MoveToBlockGoal.class)
 public abstract class MixinCrowCircleCropsPrecheck {
 
     @Shadow

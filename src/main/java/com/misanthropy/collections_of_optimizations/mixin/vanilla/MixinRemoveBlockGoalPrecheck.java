@@ -15,7 +15,7 @@ import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 
-@Mixin(value = MoveToBlockGoal.class, remap = false)
+@Mixin(MoveToBlockGoal.class)
 public abstract class MixinRemoveBlockGoalPrecheck {
 
     @Shadow

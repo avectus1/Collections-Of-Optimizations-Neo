@@ -12,22 +12,22 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Mixin(value = Font.class, remap = false)
+@Mixin(Font.class)
 public abstract class MixinFontOutlineStyle {
 
     @Unique
     private OutlineStyleMemo coo$outlineStyle;
 
-    @Inject(method = "drawInBatch8xOutline", at = @At("HEAD"), remap = false, require = 0)
+    @Inject(method = "m_168645_", at = @At("HEAD"), remap = false, require = 0)
     private void coo$resetOutlineStyle(CallbackInfo ci) {
         this.coo$outlineStyle = null;
     }
 
     @WrapOperation(
-            method = "lambda$drawInBatch8xOutline$1",
+            method = "m_168654_",
             at = @At(
                     value = "INVOKE",
-                    target = "Lnet/minecraft/network/chat/Style;withColor(I)Lnet/minecraft/network/chat/Style;"
+                    target = "Lnet/minecraft/network/chat/Style;m_178520_(I)Lnet/minecraft/network/chat/Style;"
             ),
             remap = false,
             require = 0

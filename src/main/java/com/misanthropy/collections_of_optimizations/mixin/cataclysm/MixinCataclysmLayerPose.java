@@ -50,7 +50,7 @@ public abstract class MixinCataclysmLayerPose {
 
     @WrapOperation(
             method = "render",
-            at = @At(value = "INVOKE", target = "Lnet/minecraft/client/model/EntityModel;setupAnim(Lnet/minecraft/world/entity/Entity;FFFFF)V"),
+            at = @At(value = "INVOKE", target = "Lnet/minecraft/client/model/EntityModel;m_6973_(Lnet/minecraft/world/entity/Entity;FFFFF)V"),
             require = 0
     )
     private void coo$skipHarbingerRerun(EntityModel<Entity> model, Entity entity, float limbSwing, float limbSwingAmount, float ageInTicks,

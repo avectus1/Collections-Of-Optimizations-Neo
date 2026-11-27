@@ -11,7 +11,7 @@ import net.minecraft.world.level.levelgen.RandomState;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 
-@Mixin(value = NoiseBasedChunkGenerator.class, remap = false)
+@Mixin(NoiseBasedChunkGenerator.class)
 public abstract class MixinNoiseBasedChunkGeneratorColumnHeights {
 
     @Unique

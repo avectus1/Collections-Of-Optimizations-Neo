@@ -19,6 +19,7 @@ Changes since 1.0.0.
 - Aquamirae: lakes placed during world generation no longer fail with "Requested chunk unavailable" because of Aquamirae's ice check (empty chunks in Alex's Caves' Primordial Caves)
 - EMI Loot now shows loot table changes made with LootJS (built in from EMI Loot + LootJS Fix by momo)
 - Obscure Tooltips + Lodestone mods (like Malum): glowing items no longer leave their purple sparkles stuck far away from the tooltip
+- Iron's Spells 'n Spellbooks: affinity rings (Ring of Fire Affinity and so on) are no longer drawn at half brightness in slots and tooltips
 
 ### Config
 - The in-game config screen has readable names and only shows sections for mods you have installed

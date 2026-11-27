@@ -10,7 +10,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 
-@Mixin(targets = "net.minecraft.client.gui.Font$StringRenderOutput", remap = false)
+@Mixin(targets = "net.minecraft.client.gui.Font$StringRenderOutput")
 public abstract class MixinStringRenderOutputFontSet {
 
     @Unique
