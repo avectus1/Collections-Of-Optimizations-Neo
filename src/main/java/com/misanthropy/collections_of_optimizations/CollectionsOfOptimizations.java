@@ -60,6 +60,9 @@ public final class CollectionsOfOptimizations {
             if (ModList.get().isLoaded("emi")) {
                 EmiHistoryRelease.register();
             }
+            if (ModList.get().isLoaded("betterfpsdist") && ModList.get().isLoaded("sodium")) {
+                com.misanthropy.collections_of_optimizations.core.SodiumVideoScreenRedirect.register();
+            }
         }
         GhostPlayerPurge.register();
         com.misanthropy.collections_of_optimizations.core.StructureTemplateRelease.register();
