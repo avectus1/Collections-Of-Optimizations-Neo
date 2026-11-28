@@ -17,6 +17,8 @@
     "alexsmobs.AMWorldDataLeakAccessor",
     "alexsmobs.AlexsMobsLeakAccessor",
     "alexsmobs.MixinAMWorldData",
+    "alexsmobs.MixinRhinocerosStrollGoal",
+    "alexsmobs.RhinocerosTrustAccessor",
     "alexsmobs.MixinAMWorldDataOverworldKey",
     "alexsmobs.MixinAlexsMobsServerEvents",
     "alexsmobs.MixinCrowAvoidPumpkinsPrecheck",

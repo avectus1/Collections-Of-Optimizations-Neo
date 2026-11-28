@@ -247,6 +247,7 @@ public final class CoOConfig {
     public static boolean lootrSkipIdleTileTicker = true;
     public static boolean lootrKeepFreshChunks = true;
     public static boolean servercoreBroadcastRetry = true;
+    public static boolean alexsmobsRhinoStrollTrustFirst = true;
     public static boolean betterFpsDistSodiumVideoScreen = true;
 
     public static boolean naturesauraFastAuraChunkSweep = true;
@@ -1665,6 +1666,9 @@ public final class CoOConfig {
         builder.pop();
 
         builder.comment("Alex's Mobs patches.").push("alexsmobs");
+        gate(builder
+                .comment("Wild rhinos (that trust no player) skip their village stroll goal before it searches a path. Stock searched a full path on the server thread near villages every time, then threw it away because the rhino trusts nobody.")
+                .define("rhinoStrollTrustFirst", true), v -> alexsmobsRhinoStrollTrustFirst = v);
         gate(builder
                 .comment("Ticks between an idle raccoon's checks for a nearby player holding food. Stock checks every tick. 1 restores stock behaviour.")
                 .defineInRange("raccoonBegInterval", 4, 1, 40), 1, v -> alexsmobsRaccoonBegInterval = v);

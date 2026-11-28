@@ -166,6 +166,7 @@
   "collections_of_optimizations.configuration.serverDoorResync": "Server Door Resync",
   "collections_of_optimizations.configuration.keepFreshChunks": "Keep Fresh Chunks",
   "collections_of_optimizations.configuration.broadcastRetry": "Broadcast Retry",
+  "collections_of_optimizations.configuration.rhinoStrollTrustFirst": "Rhino Stroll Trust First",
   "collections_of_optimizations.configuration.servercore": "ServerCore",
   "collections_of_optimizations.configuration.betterfpsdist": "Better FPS Dist",
   "collections_of_optimizations.configuration.sodiumVideoScreen": "Sodium Video Screen",
