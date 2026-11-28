@@ -165,6 +165,8 @@
   "collections_of_optimizations.configuration.clientDoorHalfSync": "Client Door Half Sync",
   "collections_of_optimizations.configuration.serverDoorResync": "Server Door Resync",
   "collections_of_optimizations.configuration.keepFreshChunks": "Keep Fresh Chunks",
+  "collections_of_optimizations.configuration.broadcastRetry": "Broadcast Retry",
+  "collections_of_optimizations.configuration.servercore": "ServerCore",
   "collections_of_optimizations.configuration.clientFireImmuneMemo": "Client Fire Immune Memo",
   "collections_of_optimizations.configuration.coalesceMinimapUploads": "Coalesce Minimap Uploads",
   "collections_of_optimizations.configuration.compiledPatterns": "Compiled Patterns",

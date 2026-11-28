@@ -246,6 +246,7 @@ public final class CoOConfig {
 
     public static boolean lootrSkipIdleTileTicker = true;
     public static boolean lootrKeepFreshChunks = true;
+    public static boolean servercoreBroadcastRetry = true;
 
     public static boolean naturesauraFastAuraChunkSweep = true;
     public static boolean naturesauraResolveWatchedChunks = true;
@@ -1299,6 +1300,12 @@ public final class CoOConfig {
         gate(builder
                 .comment("Stop the animation expression parser throwing a stack trace for every variable name it reads. Each piece of an animation expression in a model file, a bone angle formula, a condition, a variable, is first handed to the number parser, and anything that is not a number, which is nearly every name like head_rx or is_hurt, makes it throw a NumberFormatException that the parser catches to learn that the piece is a variable. A model pack with a few hundred animated models builds hundreds of thousands of those at launch, each one copying the loading thread's deep call stack. With this on a piece is only handed to the real number parser when its first character, after any spaces and sign, could start a number at all, which are a digit, a dot, or the N and I of NaN and Infinity, and everything else gets one shared exception with no stack that the same catch block handles in the same way. Every number the real parser accepts, including 1f, .5, hex floats, NaN and Infinity, still goes through it unchanged. Client.")
                 .define("parseTokensWithoutExceptions", true), v -> emfParseTokensWithoutExceptions = v);
+        builder.pop();
+
+        builder.comment("ServerCore patches.").push("servercore");
+        gate(builder
+                .comment("Keep resending a chunk's block changes until they actually reach players. ServerCore's broadcast optimization can drop a chunk that was not ticking at the moment it sent changes (C2ME's no-tick view distance makes that common), and after that every change in that part of the chunk is lost until you relog: doors stuck half open or snapping back after a click, Lootr chests that still look like normal chests. Only chunks with unsent changes are checked.")
+                .define("broadcastRetry", true), v -> servercoreBroadcastRetry = v);
         builder.pop();
 
         builder.comment("Lootr patches.").push("lootr");

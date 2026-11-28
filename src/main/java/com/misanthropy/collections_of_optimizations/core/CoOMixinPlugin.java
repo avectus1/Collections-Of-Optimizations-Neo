@@ -87,6 +87,7 @@ public class CoOMixinPlugin implements IMixinConfigPlugin {
             Map.entry("lionfishapi", "lionfishapi"),
             Map.entry("lithostitched", "lithostitched"),
             Map.entry("lootr", "lootr"),
+            Map.entry("servercore", "servercore"),
             Map.entry("netherexp", "netherexp"),
             Map.entry("notenoughanimations", "notenoughanimations"),
             Map.entry("patchouli", "patchouli"),
