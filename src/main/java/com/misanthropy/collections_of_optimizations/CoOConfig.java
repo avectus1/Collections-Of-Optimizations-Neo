@@ -245,8 +245,6 @@ public final class CoOConfig {
     public static boolean vanillaCacheOutlineEdges = true;
 
     public static boolean lootrSkipIdleTileTicker = true;
-    public static int lootrTileTickerBudget = 512;
-    public static int lootrTileTickerInterval = 5;
 
     public static boolean naturesauraFastAuraChunkSweep = true;
     public static boolean naturesauraResolveWatchedChunks = true;
@@ -1305,12 +1303,6 @@ public final class CoOConfig {
         gate(builder
                 .comment("Skip Lootr's per-server-tick container conversion pass while its queues are empty.")
                 .define("skipIdleTileTicker", true), v -> lootrSkipIdleTileTicker = v);
-        gate(builder
-                .comment("Maximum container conversion candidates Lootr may examine per server tick.")
-                .defineInRange("tileTickerBudget", 512, 0, 65536), 0, v -> lootrTileTickerBudget = v);
-        gate(builder
-                .comment("Run Lootr's container conversion pass every this many server ticks instead of every tick. Each pass rechecks every waiting chest against the 25 chunks around it, and chests at the edge of a large view distance wait there for minutes. New loot chests still turn into Lootr chests, at most this many ticks later. 1 is stock behaviour.")
-                .defineInRange("tileTickerInterval", 5, 1, 100), 1, v -> lootrTileTickerInterval = v);
         builder.pop();
 
         builder.comment("Xaero's Minimap patches.").push("xaerominimap");

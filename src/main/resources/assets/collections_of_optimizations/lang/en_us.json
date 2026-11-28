@@ -462,8 +462,6 @@
   "collections_of_optimizations.configuration.threadSafeCaches": "Thread Safe Caches",
   "collections_of_optimizations.configuration.tickerRemoval": "Ticker Removal",
   "collections_of_optimizations.configuration.tickingLevelMemo": "Ticking Level Memo",
-  "collections_of_optimizations.configuration.tileTickerBudget": "Tile Ticker Budget",
-  "collections_of_optimizations.configuration.tileTickerInterval": "Tile Ticker Interval",
   "collections_of_optimizations.configuration.tolerateUnregisteredDamageTypes": "Tolerate Unregistered Damage Types",
   "collections_of_optimizations.configuration.trackPoseStackOnlyInScreens": "Track Pose Stack Only In Screens",
   "collections_of_optimizations.configuration.trailWork": "Trail Work",
