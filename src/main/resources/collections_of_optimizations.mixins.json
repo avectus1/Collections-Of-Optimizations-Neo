@@ -202,6 +202,8 @@
     "vanilla.MixinHolderHolderReuse",
     "vanilla.MixinHolderReferenceTagNumbers",
     "vanilla.MixinLevelBlockTickChunkMemo",
+    "vanilla.MixinLevelDoorResync",
+    "vanilla.MixinServerLevelDoorResync",
     "vanilla.MixinLevelChunkPostProcessingRelease",
     "vanilla.MixinLevelDryRaycast",
     "vanilla.MixinLevelTicksBlockedContainers",

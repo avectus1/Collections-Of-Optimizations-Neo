@@ -14,6 +14,8 @@ Changes since 1.0.0.
 ### Fixes
 - Fixed a startup crash when MixinSquared is not installed (Moonlight, Alex's Caves, Cataclysm and others)
 - Fixed Lootr chests in new structures staying as normal chests until opened: the Lootr patch no longer caps or delays its conversion pass, it only skips it when nothing is waiting
+- Fixed double chests in villages (CTOV) where one half became a Lootr chest and the other stayed a normal chest: the second half is now converted together with the first, and freshly generated chunks are no longer dropped by Lootr before they finish loading
+- Doors that ended up half open on the client, or snapped back after a click, are now sent to nearby players again a few ticks after they change
 - Fixed doors where only the top or bottom half opened until you relogged, without making doors flicker or snap back closed while clicking them
 - Fixed some mobs (like the Netherite Monstrosity) disappearing or animating wrong when another mod changes their model
 - Aquamirae: lakes placed during world generation no longer fail with "Requested chunk unavailable" because of Aquamirae's ice check (empty chunks in Alex's Caves' Primordial Caves)

@@ -245,6 +245,7 @@ public final class CoOConfig {
     public static boolean vanillaCacheOutlineEdges = true;
 
     public static boolean lootrSkipIdleTileTicker = true;
+    public static boolean lootrKeepFreshChunks = true;
 
     public static boolean naturesauraFastAuraChunkSweep = true;
     public static boolean naturesauraResolveWatchedChunks = true;
@@ -658,6 +659,7 @@ public final class CoOConfig {
     public static boolean vanillaLeanKeyframeAnimation = true;
     public static boolean vanillaUniformSectionLookup = true;
     public static boolean vanillaClientDoorHalfSync = true;
+    public static boolean vanillaServerDoorResync = true;
     public static boolean vanillaAxisAlignedRotation = true;
     public static boolean vanillaLeanBlockPosRange = true;
     public static boolean createsolarMemoGogglesLookup = true;
@@ -1303,6 +1305,9 @@ public final class CoOConfig {
         gate(builder
                 .comment("Skip Lootr's per-server-tick container conversion pass while its queues are empty.")
                 .define("skipIdleTileTicker", true), v -> lootrSkipIdleTileTicker = v);
+        gate(builder
+                .comment("Give a chunk a few seconds to finish loading before Lootr gives up on its loot chests. Lootr drops a waiting chunk for good the first time the server reports it as not loaded, which happens right after a chunk is generated, more often with C2ME. Its chests then stay normal chests (or one half of a double chest stays normal) until you open them or reload the area.")
+                .define("keepFreshChunks", true), v -> lootrKeepFreshChunks = v);
         builder.pop();
 
         builder.comment("Xaero's Minimap patches.").push("xaerominimap");
@@ -1991,6 +1996,9 @@ public final class CoOConfig {
         gate(builder
                 .comment("When the server sends the client one half of a door, set the other half to match. Fixes doors where only the top or bottom half opens until you relog, which happens when one of the two block updates of a click is lost on the client. Client.")
                 .define("clientDoorHalfSync", true), v -> vanillaClientDoorHalfSync = v);
+        gate(builder
+                .comment("A few ticks after a door opens or closes, send both of its halves to nearby players again. A client that missed one of the two updates (half open door, or a door that snaps back after a click) is corrected right away instead of on relog. Server.")
+                .define("serverDoorResync", true), v -> vanillaServerDoorResync = v);
         gate(builder
                 .comment("Rotate a pose stack around a single axis with the short form of the multiplication instead of the general quaternion product. Nearly every rotation an entity, item or model part applies is around X, Y or Z alone, and JOML does about three times the arithmetic for those. Same result up to floating point rounding. Client.")
                 .define("axisAlignedRotation", true), v -> vanillaAxisAlignedRotation = v);
