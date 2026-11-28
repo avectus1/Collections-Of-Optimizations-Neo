@@ -4,5 +4,5 @@ import net.minecraft.server.level.ChunkHolder;
 
 /** Implemented on ServerChunkCache when ServerCore is installed. */
 public interface BroadcastRetryQueue {
-    void coo$retryBroadcast(ChunkHolder holder);
+    void coo$retryBroadcast(ChunkHolder holder, boolean serverThread);
 }

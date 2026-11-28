@@ -35,7 +35,9 @@ public abstract class MixinLevelDoorResync implements DoorResyncQueue {
             return;
         }
         Level level = (Level) (Object) this;
-        if (!(level instanceof ServerLevel)) {
+        // Only doors changed by the game itself; structure placement on worldgen threads needs no resend, and the
+        // queue is not thread safe.
+        if (!(level instanceof ServerLevel serverLevel) || !serverLevel.getServer().isSameThread()) {
             return;
         }
         if (this.coo$doorResync == null) {
@@ -61,8 +63,10 @@ public abstract class MixinLevelDoorResync implements DoorResyncQueue {
             if (e.getLongValue() > now) {
                 continue;
             }
+            // Read the key before removing: the iterator's entry is a view that removal shifts.
+            long key = e.getLongKey();
             it.remove();
-            pos.set(e.getLongKey());
+            pos.set(key);
             if (level.isLoaded(pos)) {
                 level.getChunkSource().blockChanged(pos);
             }

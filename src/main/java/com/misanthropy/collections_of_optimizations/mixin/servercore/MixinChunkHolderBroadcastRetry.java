@@ -33,7 +33,7 @@ public abstract class MixinChunkHolderBroadcastRetry {
     private void coo$rememberUnsent(BlockPos pos, CallbackInfo ci) {
         if (CoOConfig.servercoreBroadcastRetry && this.hasChangedSections
                 && this.levelHeightAccessor instanceof ServerLevel level) {
-            ((BroadcastRetryQueue) level.getChunkSource()).coo$retryBroadcast((ChunkHolder) (Object) this);
+            ((BroadcastRetryQueue) level.getChunkSource()).coo$retryBroadcast((ChunkHolder) (Object) this, level.getServer().isSameThread());
         }
     }
 }
